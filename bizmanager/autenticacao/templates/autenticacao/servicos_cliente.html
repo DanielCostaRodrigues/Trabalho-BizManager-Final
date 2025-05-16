@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Serviços Disponíveis{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Sidebar/Navegação lateral -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if request.user.perfil.foto %}
+            <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">
+              {% if user_type == 'freelancer' %}
+                Mostra o teu talento, conquista mais clientes!
+              {% else %}
+                Encontra os melhores profissionais para o teu projeto!
+              {% endif %}
+            </p>
+            
+          </div>
+        </div>
+        
+        <!-- Menu de navegação -->
+        <div class="d-grid gap-3">
+          <a href="{% url 'perfil' %}" class="btn btn-outline-primary">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-success">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      <div class="px-4 py-5">
+        <!-- Cabeçalho e filtros -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4>Serviços Disponíveis</h4>
+          
+          <!-- Filtros e busca -->
+          <div class="d-flex">
+            <form class="d-flex me-2" method="GET" action="{% url 'servicos' %}">
+              <input 
+                class="form-control me-2" 
+                type="search" 
+                placeholder="Procurar serviços..." 
+                aria-label="Procurar"
+                name="q"
+                value="{{ request.GET.q|default:'' }}"
+              >
+              <button class="btn btn-outline-primary" type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </form>
+            
+            <!-- Botão para filtros (pode ser expandido no futuro) -->
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#filtrosCollapse">
+              <i class="bi bi-funnel"></i> Filtros
+            </button>
+          </div>
+        </div>
+        
+        <!-- Filtros colapsáveis (opcional) -->
+        <div class="collapse mb-4" id="filtrosCollapse">
+          <div class="card card-body border-0 shadow-sm">
+            <form method="GET" action="{% url 'servicos' %}">
+              <div class="row g-3">
+                <!-- Área de atuação -->
+                <div class="col-md-4">
+                  <label class="form-label">Área de Atuação</label>
+                  <select class="form-select" name="area">
+                    <option value="">Todas as áreas</option>
+                    {% for area in areas %}
+                      <option value="{{ area.id }}" {% if request.GET.area == area.id|stringformat:"i" %}selected{% endif %}>
+                        {{ area.nome }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                
+                <!-- Preço -->
+                <div class="col-md-4">
+                  <label class="form-label">Preço Máximo (€)</label>
+                  <input type="number" class="form-control" name="preco_max" min="0" value="{{ request.GET.preco_max|default:'' }}">
+                </div>
+                
+                <!-- Ordenação -->
+                <div class="col-md-4">
+                  <label class="form-label">Ordenar por</label>
+                  <select class="form-select" name="ordem">
+                    <option value="recentes" {% if request.GET.ordem == 'recentes' %}selected{% endif %}>Mais recentes</option>
+                    <option value="preco_asc" {% if request.GET.ordem == 'preco_asc' %}selected{% endif %}>Menor preço</option>
+                    <option value="preco_desc" {% if request.GET.ordem == 'preco_desc' %}selected{% endif %}>Maior preço</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- Botões do filtro -->
+              <div class="d-flex justify-content-end mt-3">
+                <a href="{% url 'servicos' %}" class="btn btn-outline-secondary me-2">Limpar Filtros</a>
+                <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        
+        <!-- Lista de serviços disponíveis -->
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          {% if servicos %}
+            {% for servico in servicos %}
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                  <!-- Informação do freelancer -->
+                  <div class="card-header bg-transparent border-0 d-flex align-items-center pt-3">
+                    {% if servico.freelancer.perfil.foto %}
+                      <img src="{{ servico.freelancer.perfil.foto.url }}" alt="Foto do freelancer" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
+                    {% else %}
+                      <img src="{% static 'images/profile-placeholder.png' %}" alt="Foto do freelancer" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
+                    {% endif %}
+                    <span>{{ servico.freelancer.get_full_name }}</span>
+                  </div>
+                  
+                  <div class="card-body p-4">
+                    <h5 class="card-title fw-bold">{{ servico.nome }}</h5>
+                    <div class="small mb-3">
+                      <span class="badge bg-light text-dark">{{ servico.area }}</span>
+                    </div>
+                    <p class="card-text text-muted mb-3">{{ servico.descricao|truncatechars:100 }}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <div>
+                        <p class="mb-0 fw-bold text-success">{{ servico.orcamento }}€</p>
+                        <p class="small text-muted mb-0">{{ servico.prazo }}</p>
+                      </div>
+                      <a href="{% url 'ver_servico' servico.id %}" class="btn btn-outline-primary">
+                        <i class="bi bi-info-circle me-1"></i> Ver detalhes
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="col-12 text-center py-5">
+              <div class="py-4">
+                <i class="bi bi-search display-4 text-muted"></i>
+                <h5 class="mt-3">Nenhum serviço encontrado</h5>
+                <p class="text-muted">Tenta ajustar os filtros ou fazer uma nova pesquisa.</p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        
+        <!-- Paginação (se necessário) -->
+        {% if servicos.has_other_pages %}
+          <nav aria-label="Navegação de páginas" class="mt-5">
+            <ul class="pagination justify-content-center">
+              {% if servicos.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Primeira">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ servicos.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Primeira">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+              {% endif %}
+              
+              {% for num in servicos.paginator.page_range %}
+                {% if servicos.number == num %}
+                  <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                {% elif num > servicos.number|add:'-3' and num < servicos.number|add:'3' %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ num }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              
+              {% if servicos.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ servicos.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Próxima">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ servicos.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Última">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                  </a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Próxima">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Última">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

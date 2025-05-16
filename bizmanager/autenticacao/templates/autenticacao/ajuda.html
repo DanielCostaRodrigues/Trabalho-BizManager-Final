@@ -1,0 +1,638 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ajuda{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Barra lateral de navegação -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Categorias</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="#inicio" class="list-group-item list-group-item-action">Início</a>
+                    <a href="#conta" class="list-group-item list-group-item-action">Conta e Perfil</a>
+                    <a href="#servicos" class="list-group-item list-group-item-action">Serviços</a>
+                    <a href="#pedidos" class="list-group-item list-group-item-action">Pedidos</a>
+                    <a href="#pagamentos" class="list-group-item list-group-item-action">Pagamentos e Faturas</a>
+                    <a href="#calendario" class="list-group-item list-group-item-action">Calendário</a>
+                    <a href="#faq" class="list-group-item list-group-item-action">Perguntas Frequentes</a>
+                    <a href="#contacto" class="list-group-item list-group-item-action">Contactar Suporte</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="col-md-9">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2 class="text-primary mb-4" id="inicio">Centro de Ajuda BizManager</h2>
+                    <p class="lead">Bem-vindo(a) ao Centro de Ajuda do BizManager. Aqui encontrará todas as informações necessárias para utilizar a nossa plataforma de forma eficaz.</p>
+                    <p>Selecione uma das categorias à esquerda ou procure informações específicas na nossa lista de perguntas frequentes.</p>
+                </div>
+            </div>
+
+            <!-- Secção: Conta e Perfil -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0" id="conta">Conta e Perfil</h3>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="contaAccordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingCriarConta">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCriarConta" aria-expanded="true" aria-controls="collapseCriarConta">
+                                    Como criar uma conta no BizManager?
+                                </button>
+                            </h4>
+                            <div id="collapseCriarConta" class="accordion-collapse collapse show" aria-labelledby="headingCriarConta" data-bs-parent="#contaAccordion">
+                                <div class="accordion-body">
+                                    <p>Para criar uma conta no BizManager:</p>
+                                    <ol>
+                                        <li>Clique no botão <strong>"Criar conta"</strong> na página inicial</li>
+                                        <li>Escolha o tipo de conta: <strong>Cliente</strong> ou <strong>Freelancer</strong></li>
+                                        <li>Preencha o formulário com os seus dados pessoais</li>
+                                        <li>Aceite os termos de utilização</li>
+                                        <li>Clique em <strong>"Registar"</strong></li>
+                                        <li>Confirme a sua conta através do e-mail de verificação que lhe será enviado</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingEditarPerfil">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEditarPerfil" aria-expanded="false" aria-controls="collapseEditarPerfil">
+                                    Como editar o meu perfil?
+                                </button>
+                            </h4>
+                            <div id="collapseEditarPerfil" class="accordion-collapse collapse" aria-labelledby="headingEditarPerfil" data-bs-parent="#contaAccordion">
+                                <div class="accordion-body">
+                                    <p>Para editar o seu perfil:</p>
+                                    <ol>
+                                        <li>Inicie sessão na sua conta</li>
+                                        <li>Clique na sua foto de perfil no canto superior direito</li>
+                                        <li>Selecione <strong>"Perfil"</strong> no menu</li>
+                                        <li>Clique no botão <strong>"Editar Perfil"</strong></li>
+                                        <li>Atualize as informações pretendidas</li>
+                                        <li>Clique em <strong>"Guardar Alterações"</strong></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingRecuperarPassword">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRecuperarPassword" aria-expanded="false" aria-controls="collapseRecuperarPassword">
+                                    Esqueci-me da minha password. Como posso recuperá-la?
+                                </button>
+                            </h4>
+                            <div id="collapseRecuperarPassword" class="accordion-collapse collapse" aria-labelledby="headingRecuperarPassword" data-bs-parent="#contaAccordion">
+                                <div class="accordion-body">
+                                    <p>Para recuperar a sua password:</p>
+                                    <ol>
+                                        <li>Na página de login, clique em <strong>"Esqueceu-se da password?"</strong></li>
+                                        <li>Introduza o e-mail associado à sua conta</li>
+                                        <li>Clique em <strong>"Enviar link de recuperação"</strong></li>
+                                        <li>Verifique o seu e-mail e siga as instruções no link de recuperação</li>
+                                        <li>Defina uma nova password</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Secção: Serviços -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0" id="servicos">Serviços</h3>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="servicosAccordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingCriarServico">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCriarServico" aria-expanded="true" aria-controls="collapseCriarServico">
+                                    Como criar um novo serviço (para Freelancers)?
+                                </button>
+                            </h4>
+                            <div id="collapseCriarServico" class="accordion-collapse collapse show" aria-labelledby="headingCriarServico" data-bs-parent="#servicosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para criar um novo serviço como Freelancer:</p>
+                                    <ol>
+                                        <li>Inicie sessão na sua conta de Freelancer</li>
+                                        <li>Clique no botão <strong>"Anunciar"</strong> no menu superior</li>
+                                        <li>Preencha todos os campos do formulário de criação de serviço:</li>
+                                        <ul>
+                                            <li>Título do serviço</li>
+                                            <li>Descrição detalhada</li>
+                                            <li>Categoria e subcategoria</li>
+                                            <li>Preço e duração estimada</li>
+                                            <li>Imagens representativas (opcional)</li>
+                                        </ul>
+                                        <li>Clique em <strong>"Publicar Serviço"</strong></li>
+                                    </ol>
+                                    <p>O seu serviço ficará disponível na plataforma assim que for aprovado pela nossa equipa de moderação.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingProcurarServico">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProcurarServico" aria-expanded="false" aria-controls="collapseProcurarServico">
+                                    Como procurar serviços na plataforma?
+                                </button>
+                            </h4>
+                            <div id="collapseProcurarServico" class="accordion-collapse collapse" aria-labelledby="headingProcurarServico" data-bs-parent="#servicosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para procurar serviços disponíveis:</p>
+                                    <ol>
+                                        <li>Clique em <strong>"Serviços"</strong> na barra de navegação principal</li>
+                                        <li>Utilize os filtros disponíveis para refinar a sua pesquisa:</li>
+                                        <ul>
+                                            <li>Categoria</li>
+                                            <li>Preço (mínimo e máximo)</li>
+                                            <li>Classificação</li>
+                                            <li>Localização</li>
+                                        </ul>
+                                        <li>Utilize a barra de pesquisa para procurar palavras-chave específicas</li>
+                                        <li>Clique num serviço para ver os detalhes e o perfil do freelancer</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingEditarServico">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEditarServico" aria-expanded="false" aria-controls="collapseEditarServico">
+                                    Como editar ou desativar um serviço?
+                                </button>
+                            </h4>
+                            <div id="collapseEditarServico" class="accordion-collapse collapse" aria-labelledby="headingEditarServico" data-bs-parent="#servicosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para editar ou desativar um serviço que publicou:</p>
+                                    <ol>
+                                        <li>Inicie sessão na sua conta de Freelancer</li>
+                                        <li>Clique no menu de perfil e selecione <strong>"Serviços"</strong></li>
+                                        <li>Localize o serviço que deseja editar</li>
+                                        <li>Clique no botão <strong>"Editar"</strong> para modificar os detalhes do serviço</li>
+                                        <li>Ou clique no botão <strong>"Desativar"</strong> para tornar o serviço indisponível temporariamente</li>
+                                        <li>Após editar, clique em <strong>"Guardar Alterações"</strong></li>
+                                    </ol>
+                                    <p>Nota: A desativação de um serviço não afeta os pedidos em curso.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Secção: Pedidos -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0" id="pedidos">Pedidos</h3>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="pedidosAccordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingSolicitarServico">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolicitarServico" aria-expanded="true" aria-controls="collapseSolicitarServico">
+                                    Como solicitar um serviço (para Clientes)?
+                                </button>
+                            </h4>
+                            <div id="collapseSolicitarServico" class="accordion-collapse collapse show" aria-labelledby="headingSolicitarServico" data-bs-parent="#pedidosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para solicitar um serviço como Cliente:</p>
+                                    <ol>
+                                        <li>Procure e selecione o serviço desejado</li>
+                                        <li>Clique no botão <strong>"Solicitar Serviço"</strong></li>
+                                        <li>Preencha o formulário de solicitação:</li>
+                                        <ul>
+                                            <li>Detalhes específicos do seu projeto</li>
+                                            <li>Data de início pretendida</li>
+                                            <li>Prazo desejado</li>
+                                            <li>Anexos relevantes (opcional)</li>
+                                        </ul>
+                                        <li>Clique em <strong>"Enviar Solicitação"</strong></li>
+                                    </ol>
+                                    <p>O freelancer receberá a sua solicitação e poderá aceitá-la, rejeitá-la ou propor alterações.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingAcompanharPedido">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAcompanharPedido" aria-expanded="false" aria-controls="collapseAcompanharPedido">
+                                    Como acompanhar o estado dos meus pedidos?
+                                </button>
+                            </h4>
+                            <div id="collapseAcompanharPedido" class="accordion-collapse collapse" aria-labelledby="headingAcompanharPedido" data-bs-parent="#pedidosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para acompanhar os seus pedidos:</p>
+                                    <ol>
+                                        <li>Inicie sessão na sua conta</li>
+                                        <li>Clique no menu de perfil e selecione <strong>"Pedidos"</strong></li>
+                                        <li>Verá uma lista de todos os seus pedidos organizados por estado:</li>
+                                        <ul>
+                                            <li><span class="badge bg-warning">Pendente</span> - Aguarda resposta do freelancer</li>
+                                            <li><span class="badge bg-primary">Em Progresso</span> - Pedido aceite e em execução</li>
+                                            <li><span class="badge bg-success">Concluído</span> - Serviço entregue e finalizado</li>
+                                            <li><span class="badge bg-danger">Cancelado</span> - Pedido cancelado</li>
+                                            <li><span class="badge bg-secondary">Rejeitado</span> - Pedido rejeitado pelo freelancer</li>
+                                        </ul>
+                                        <li>Clique num pedido específico para ver detalhes e histórico de comunicação</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingCancelarPedido">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCancelarPedido" aria-expanded="false" aria-controls="collapseCancelarPedido">
+                                    Como cancelar um pedido?
+                                </button>
+                            </h4>
+                            <div id="collapseCancelarPedido" class="accordion-collapse collapse" aria-labelledby="headingCancelarPedido" data-bs-parent="#pedidosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para cancelar um pedido:</p>
+                                    <ol>
+                                        <li>Aceda à secção <strong>"Pedidos"</strong> no menu de perfil</li>
+                                        <li>Localize o pedido que deseja cancelar</li>
+                                        <li>Clique no botão <strong>"Ver Detalhes"</strong></li>
+                                        <li>Clique no botão <strong>"Cancelar Pedido"</strong></li>
+                                        <li>Indique o motivo do cancelamento</li>
+                                        <li>Confirme o cancelamento</li>
+                                    </ol>
+                                    <p><strong>Importante:</strong> As políticas de cancelamento variam conforme o estado do pedido:</p>
+                                    <ul>
+                                        <li>Pedidos pendentes podem ser cancelados sem custos</li>
+                                        <li>Pedidos em progresso podem estar sujeitos a taxas de cancelamento, dependendo do avanço do trabalho</li>
+                                        <li>Pedidos concluídos não podem ser cancelados</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Secção: Pagamentos e Faturas -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0" id="pagamentos">Pagamentos e Faturas</h3>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="pagamentosAccordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingMetodosPagamento">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMetodosPagamento" aria-expanded="true" aria-controls="collapseMetodosPagamento">
+                                    Que métodos de pagamento são aceites?
+                                </button>
+                            </h4>
+                            <div id="collapseMetodosPagamento" class="accordion-collapse collapse show" aria-labelledby="headingMetodosPagamento" data-bs-parent="#pagamentosAccordion">
+                                <div class="accordion-body">
+                                    <p>O BizManager aceita os seguintes métodos de pagamento:</p>
+                                    <ul>
+                                        <li>Cartões de crédito/débito (Visa, Mastercard, American Express)</li>
+                                        <li>Transferência bancária</li>
+                                        <li>MBWay</li>
+                                        <li>PayPal</li>
+                                        <li>Multibanco (apenas para utilizadores em Portugal)</li>
+                                    </ul>
+                                    <p>Para adicionar ou gerir os seus métodos de pagamento:</p>
+                                    <ol>
+                                        <li>Aceda ao seu perfil</li>
+                                        <li>Selecione <strong>"Métodos de Pagamento"</strong></li>
+                                        <li>Clique em <strong>"Adicionar Novo Método"</strong></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingFaturas">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaturas" aria-expanded="false" aria-controls="collapseFaturas">
+                                    Como aceder às minhas faturas?
+                                </button>
+                            </h4>
+                            <div id="collapseFaturas" class="accordion-collapse collapse" aria-labelledby="headingFaturas" data-bs-parent="#pagamentosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para aceder às suas faturas:</p>
+                                    <ol>
+                                        <li>Inicie sessão na sua conta</li>
+                                        <li>Clique no menu de perfil e selecione <strong>"Faturas"</strong></li>
+                                        <li>Verá uma lista de todas as suas faturas organizadas por data</li>
+                                        <li>Clique no botão <strong>"Ver"</strong> para visualizar os detalhes de uma fatura específica</li>
+                                        <li>Utilize o botão <strong>"Descarregar PDF"</strong> para guardar ou imprimir a fatura</li>
+                                    </ol>
+                                    <p>Todas as faturas são armazenadas no sistema durante 10 anos, em conformidade com a legislação fiscal portuguesa.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingPagamentosPendentes">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePagamentosPendentes" aria-expanded="false" aria-controls="collapsePagamentosPendentes">
+                                    Como efetuar o pagamento de faturas pendentes?
+                                </button>
+                            </h4>
+                            <div id="collapsePagamentosPendentes" class="accordion-collapse collapse" aria-labelledby="headingPagamentosPendentes" data-bs-parent="#pagamentosAccordion">
+                                <div class="accordion-body">
+                                    <p>Para efetuar o pagamento de faturas pendentes:</p>
+                                    <ol>
+                                        <li>Aceda à secção <strong>"Faturas"</strong> no menu de perfil</li>
+                                        <li>Localize a fatura com estado <span class="badge bg-warning">Pendente</span></li>
+                                        <li>Clique no botão <strong>"Pagar Agora"</strong></li>
+                                        <li>Selecione o método de pagamento pretendido</li>
+                                        <li>Siga as instruções para concluir o pagamento</li>
+                                    </ol>
+                                    <p><strong>Nota:</strong> As faturas devem ser pagas dentro do prazo estabelecido para evitar a suspensão do serviço.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingComissoes">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComissoes" aria-expanded="false" aria-controls="collapseComissoes">
+                                    Quais são as comissões da plataforma?
+                                </button>
+                            </h4>
+                            <div id="collapseComissoes" class="accordion-collapse collapse" aria-labelledby="headingComissoes" data-bs-parent="#pagamentosAccordion">
+                                <div class="accordion-body">
+                                    <p>O BizManager aplica as seguintes comissões:</p>
+                                    <ul>
+                                        <li><strong>Para Freelancers:</strong> 10% do valor total de cada serviço concluído</li>
+                                        <li><strong>Para Clientes:</strong> Sem comissões adicionais</li>
+                                    </ul>
+                                    <p>Condições especiais:</p>
+                                    <ul>
+                                        <li>Freelancers com estatuto "Premium" beneficiam de uma comissão reduzida de 5%</li>
+                                        <li>Serviços recorrentes beneficiam de taxas reduzidas após o 3º mês consecutivo</li>
+                                    </ul>
+                                    <p>Todas as comissões são automaticamente deduzidas antes da transferência do pagamento para o freelancer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Secção: Calendário -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0" id="calendario">Calendário</h3>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="calendarioAccordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingSincronizarGoogle">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSincronizarGoogle" aria-expanded="true" aria-controls="collapseSincronizarGoogle">
+                                    Como sincronizar com o Google Calendar?
+                                </button>
+                            </h4>
+                            <div id="collapseSincronizarGoogle" class="accordion-collapse collapse show" aria-labelledby="headingSincronizarGoogle" data-bs-parent="#calendarioAccordion">
+                                <div class="accordion-body">
+                                    <p>Para sincronizar os seus pedidos com o Google Calendar:</p>
+                                    <ol>
+                                        <li>Inicie sessão na sua conta</li>
+                                        <li>Aceda ao menu de perfil e selecione <strong>"Perfil"</strong></li>
+                                        <li>Desloque-se até à secção <strong>"Integrações"</strong></li>
+                                        <li>Clique no botão <strong>"Conectar Google Calendar"</strong></li>
+                                        <li>Autorize o BizManager a aceder ao seu calendário Google</li>
+                                        <li>Selecione as preferências de sincronização</li>
+                                    </ol>
+                                    <p>Após a sincronização, todos os seus pedidos serão automaticamente adicionados ao seu calendário Google com lembretes configuráveis.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingGerirDisponibilidade">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGerirDisponibilidade" aria-expanded="false" aria-controls="collapseGerirDisponibilidade">
+                                    Como gerir a minha disponibilidade (para Freelancers)?
+                                </button>
+                            </h4>
+                            <div id="collapseGerirDisponibilidade" class="accordion-collapse collapse" aria-labelledby="headingGerirDisponibilidade" data-bs-parent="#calendarioAccordion">
+                                <div class="accordion-body">
+                                    <p>Para gerir a sua disponibilidade como Freelancer:</p>
+                                    <ol>
+                                        <li>Aceda ao menu de perfil e selecione <strong>"Calendário"</strong></li>
+                                        <li>Utilize o calendário interativo para:</li>
+                                        <ul>
+                                            <li>Definir horários de disponibilidade geral</li>
+                                            <li>Bloquear dias específicos (férias, compromissos, etc.)</li>
+                                            <li>Definir horas de trabalho diárias</li>
+                                        </ul>
+                                        <li>Clique em <strong>"Guardar Alterações"</strong> após definir a sua disponibilidade</li>
+                                    </ol>
+                                    <p>Os clientes só poderão solicitar os seus serviços nos períodos em que estiver disponível, evitando conflitos de agenda.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingLembretes">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLembretes" aria-expanded="false" aria-controls="collapseLembretes">
+                                    Como configurar lembretes para os meus pedidos?
+                                </button>
+                            </h4>
+                            <div id="collapseLembretes" class="accordion-collapse collapse" aria-labelledby="headingLembretes" data-bs-parent="#calendarioAccordion">
+                                <div class="accordion-body">
+                                    <p>Para configurar lembretes para os seus pedidos:</p>
+                                    <ol>
+                                        <li>Aceda às <strong>"Definições"</strong> no menu de perfil</li>
+                                        <li>Selecione a opção <strong>"Notificações"</strong></li>
+                                        <li>Na secção <strong>"Lembretes de Calendário"</strong>, configure:</li>
+                                        <ul>
+                                            <li>Antecedência dos lembretes (30min, 1h, 1 dia, etc.)</li>
+                                            <li>Método de receber lembretes (e-mail, notificação no navegador, SMS)</li>
+                                            <li>Tipos de eventos para receber lembretes</li>
+                                        </ul>
+                                        <li>Clique em <strong>"Guardar Preferências"</strong></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secção: Perguntas Frequentes -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0" id="faq">Perguntas Frequentes</h3>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingFaq1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq1" aria-expanded="true" aria-controls="collapseFaq1">
+                                    Posso ter as duas contas - Cliente e Freelancer?
+                                </button>
+                            </h4>
+                            <div id="collapseFaq1" class="accordion-collapse collapse show" aria-labelledby="headingFaq1" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Não, atualmente o BizManager não permite que um mesmo utilizador possua ambos os tipos de conta simultaneamente. Deverá escolher registar-se como Cliente ou como Freelancer.</p>
+                                    <p>No entanto, poderá contactar o nosso suporte para avaliar situações específicas em que necessite de alternar entre os dois tipos de conta.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingFaq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq2" aria-expanded="false" aria-controls="collapseFaq2">
+                                    O que fazer se um freelancer não cumprir o prazo?
+                                </button>
+                            </h4>
+                            <div id="collapseFaq2" class="accordion-collapse collapse" aria-labelledby="headingFaq2" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Se um freelancer não cumprir o prazo acordado:</p>
+                                    <ol>
+                                        <li>Tente primeiro contactar o freelancer através do chat da plataforma</li>
+                                        <li>Se não obtiver resposta, pode reportar o atraso clicando no botão <strong>"Reportar Problema"</strong> na página do pedido</li>
+                                        <li>A nossa equipa de suporte irá mediar a situação e trabalhar para encontrar uma solução adequada</li>
+                                        <li>Dependendo da situação, poderá ser elegível para um reembolso parcial ou total</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingFaq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq3" aria-expanded="false" aria-controls="collapseFaq3">
+                                    Como funciona o sistema de avaliações?
+                                </button>
+                            </h4>
+                            <div id="collapseFaq3" class="accordion-collapse collapse" aria-labelledby="headingFaq3" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>O sistema de avaliações do BizManager funciona da seguinte forma:</p>
+                                    <ul>
+                                        <li>Após a conclusão de um pedido, ambas as partes (cliente e freelancer) podem avaliar-se mutuamente</li>
+                                        <li>As avaliações são baseadas numa escala de 1 a 5 estrelas</li>
+                                        <li>É possível deixar um comentário detalhado sobre a experiência</li>
+                                        <li>As avaliações são publicadas simultaneamente após ambas as partes submeterem a sua avaliação, ou após 7 dias da conclusão do pedido</li>
+                                        <li>A classificação média é exibida no perfil de cada utilizador</li>
+                                    </ul>
+                                    <p>As avaliações não podem ser removidas, exceto em casos de violação dos termos de utilização ou linguagem abusiva.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingFaq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq4" aria-expanded="false" aria-controls="collapseFaq4">
+                                    Quais são as taxas de IVA aplicadas?
+                                </button>
+                            </h4>
+                            <div id="collapseFaq4" class="accordion-collapse collapse" aria-labelledby="headingFaq4" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>O BizManager aplica as taxas de IVA de acordo com a legislação portuguesa em vigor:</p>
+                                    <ul>
+                                        <li>Taxa normal: 23% (aplicável à maioria dos serviços)</li>
+                                        <li>Taxa intermédia: 13% (aplicável a serviços específicos)</li>
+                                        <li>Taxa reduzida: 6% (aplicável a serviços específicos)</li>
+                                    </ul>
+                                    <p>Para utilizadores empresariais com número de contribuinte válido de outro país da UE, pode ser aplicada a regra de reverse charge, em conformidade com a diretiva europeia do IVA.</p>
+                                    <p>O IVA aparece discriminado em todas as faturas emitidas pela plataforma.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="headingFaq5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq5" aria-expanded="false" aria-controls="collapseFaq5">
+                                    Como posso alterar o meu plano de subscrição?
+                                </button>
+                            </h4>
+                            <div id="collapseFaq5" class="accordion-collapse collapse" aria-labelledby="headingFaq5" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Para alterar o seu plano de subscrição:</p>
+                                    <ol>
+                                        <li>Aceda ao menu de perfil e selecione <strong>"Subscrição"</strong></li>
+                                        <li>Clique em <strong>"Ver Planos Disponíveis"</strong></li>
+                                        <li>Compare os diferentes planos e suas vantagens</li>
+                                        <li>Selecione o plano pretendido e clique em <strong>"Atualizar"</strong></li>
+                                        <li>Confirme a alteração e, se aplicável, conclua o pagamento da diferença</li>
+                                    </ol>
+                                    <p><strong>Nota:</strong> A mudança para um plano superior é imediata. A mudança para um plano inferior só ocorrerá no final do período de faturação atual.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Secção: Contactar Suporte -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0" id="contacto">Contactar Suporte</h3>
+                </div>
+                <div class="card-body">
+                    <p>Não encontrou resposta para a sua dúvida? Entre em contacto com o nosso suporte:</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="card-body text-center">
+                                <i class="bi bi-envelope-fill text-primary fs-1 mb-3"></i>
+                                <h4>E-mail</h4>
+                                <p>Resposta em até 24 horas</p>
+                                <a href="mailto:suporte@bizmanager.pt" class="btn btn-outline-primary">suporte@bizmanager.pt</a>    
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card-body text-center">
+                                <i class="bi bi-chat-dots-fill text-success fs-1 mb-3"></i>
+                                <h4>Chat ao Vivo</h4>
+                                <p>Disponível nos dias úteis das 9h às 18h</p>
+                                <a href="{% url 'chat:index' %}">
+                                    <button class="btn btn-outline-success">Iniciar Chat</button>
+                                  </a> 
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-telephone-fill text-warning fs-1 mb-3"></i>
+                                    <h4>Telefone</h4>
+                                    <p>Ligação gratuita para Portugal</p>
+                                    <a href="tel:+351800123456" class="btn btn-outline-warning">+351 800 123 456</a>
+                                </div>
+                        </div>
+                        <div class="col-md-6 mb-4">       
+                                <div class="card-body text-center">
+                                    <i class="bi bi-question-circle-fill text-info fs-1 mb-3"></i>
+                                    <h4>Base de Conhecimento</h4>
+                                    <p>Tutoriais e guias detalhados</p>
+                                    <a href="#" class="btn btn-outline-info">Explorar Artigos</a>
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4>Formulário de Contacto</h4>
+                        <form class="mt-3" action="{% url 'enviar_suporte' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="assunto" class="form-label">Assunto</label>
+                                <select class="form-select" id="assunto" name="assunto" required>
+                                    <option value="" selected disabled>Selecione o assunto</option>
+                                    <option value="conta">Problemas com a conta</option>
+                                    <option value="pagamento">Pagamentos e faturas</option>
+                                    <option value="pedido">Problema com um pedido</option>
+                                    <option value="servico">Dúvidas sobre serviços</option>
+                                    <option value="sugestao">Sugestões</option>
+                                    <option value="outro">Outro assunto</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensagem" class="form-label">Mensagem</label>
+                                <textarea class="form-control" id="mensagem" name="mensagem" rows="5" placeholder="Descreva detalhadamente a sua questão..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="anexo" class="form-label">Anexar ficheiro (opcional)</label>
+                                <input class="form-control" type="file" id="anexo" name="anexo">
+                                <div class="form-text">Máximo 5MB (formatos: jpg, png, pdf)</div>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,406 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Sidebar/Navegação lateral -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if user.perfil.foto %}
+            <img src="{{ user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/profile-placeholder.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">
+              {% if user_type == 'freelancer' %}
+                Mostra o teu talento, conquista mais clientes!
+              {% else %}
+                Encontra os melhores profissionais para o teu projeto!
+              {% endif %}
+            </p>
+            
+          </div>
+        </div>
+        
+        <!-- Links de navegação -->
+        <div class="d-grid gap-2">
+          <a href="{% url 'perfil' %}" class="btn btn-success text-white">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-outline-primary">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+          {% if user_type == 'freelancer' %}
+          <a href="{% url 'listar_clientes' %}" class="btn btn-outline-primary">Clientes</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      <div class="card shadow-sm rounded">
+        <div class="card-header bg-transparent border-0 py-3">
+          <h5 class="card-title mb-0">Editar Perfil</h5>
+        </div>
+        
+        <div class="card-body">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+          
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="row g-4">
+              <!-- Área de upload de foto -->
+              <div class="col-lg-4">
+                <div class="card shadow-sm border-0">
+                  <div class="card-body text-center">
+                    <div class="mb-3">
+                      <label for="profile-image-upload" class="form-label">Foto de Perfil</label>
+                      <div class="position-relative d-inline-block">
+                        {% if user.perfil.foto %}
+                          <img src="{{ user.perfil.foto.url }}" id="profile-image-preview" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% else %}
+                          <img src="{% static 'images/profile-placeholder.png' %}" id="profile-image-preview" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% endif %}
+                        <div class="mt-2">
+                          <label for="profile-image-upload" class="btn btn-primary">
+                            <i class="bi bi-camera-fill me-2"></i>Alterar Foto
+                            <input type="file" id="profile-image-upload" name="foto" class="d-none" accept="image/*">
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                      <p class="text-muted small">
+                        Tamanho recomendado: 300x300 pixels
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Formulário de informações -->
+              <div class="col-lg-8">
+                <div class="card shadow-sm border-0">
+                  <div class="card-body">
+                    <!-- Abas de navegação para as diferentes secções -->
+                    <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info-content" type="button" role="tab" aria-controls="info-content" aria-selected="true">Informações Pessoais</button>
+                      </li>
+                      {% if not has_social_auth %}
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-content" type="button" role="tab" aria-controls="password-content" aria-selected="false">Alterar Palavra-passe</button>
+                      </li>
+                      {% endif %}
+                      {% if user_type == 'freelancer' %}
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="professional-tab" data-bs-toggle="tab" data-bs-target="#professional-content" type="button" role="tab" aria-controls="professional-content" aria-selected="false">Informações Profissionais</button>
+                      </li>
+                      {% elif user_type == 'cliente' %}
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#business-content" type="button" role="tab" aria-controls="business-content" aria-selected="false">Informações Empresariais</button>
+                      </li>
+                      {% endif %}
+                    </ul>
+                    
+                    <!-- Conteúdo das abas -->
+                    <div class="tab-content p-3 border border-top-0 rounded-bottom" id="profileTabsContent">
+                      <!-- Aba de Informações Pessoais -->
+                      <div class="tab-pane fade show active" id="info-content" role="tabpanel" aria-labelledby="info-tab">
+                        <div class="row g-3">
+                          <div class="col-md-6">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" name="nome" id="nome" class="form-control" value="{{ user.first_name }}" required>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="sobrenome" class="form-label">Apelido</label>
+                            <input type="text" name="sobrenome" id="sobrenome" class="form-control" value="{{ user.last_name }}" required>
+                          </div>
+                        </div>
+                        
+                        <div class="mb-3 mt-3">
+                          <label for="email" class="form-label">E-mail</label>
+                          <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label for="morada" class="form-label">Morada</label>
+                          <input type="text" name="morada" id="morada" class="form-control" value="{{ perfil.morada|default:'' }}">
+                        </div>
+                      </div>
+                      
+                      <!-- Aba de Alteração de Palavra-passe -->
+                      {% if not has_social_auth %}
+                      <div class="tab-pane fade" id="password-content" role="tabpanel" aria-labelledby="password-tab">
+                        <div class="px-1 py-2">
+                          <div class="mb-3">
+                            <label for="senha_atual" class="form-label">Palavra-passe Atual</label>
+                            <input type="password" name="senha_atual" id="senha_atual" class="form-control">
+                          </div>
+                          
+                          <div class="row g-3">
+                            <div class="col-md-6">
+                              <label for="nova_senha" class="form-label">Nova Palavra-passe</label>
+                              <input type="password" name="nova_senha" id="nova_senha" class="form-control">
+                              <div id="nova-senha-feedback"></div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="confirmar_senha" class="form-label">Confirmar Nova Palavra-passe</label>
+                              <input type="password" name="confirmar_senha" id="confirmar_senha" class="form-control">
+                              <div id="confirmar-senha-feedback"></div>
+                            </div>
+                          </div>
+                          <div class="form-text mt-2">
+                            <p class="mb-0">A palavra-passe deve conter:</p>
+                            <ul class="ps-3 mt-1 mb-0">
+                              <li>Pelo menos 8 caracteres</li>
+                              <li>Pelo menos uma letra</li>
+                              <li>Pelo menos um número</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      {% endif %}
+                      
+                      <!-- Aba de Informações Profissionais (Freelancer) -->
+                      {% if user_type == 'freelancer' %}
+                      <div class="tab-pane fade" id="professional-content" role="tabpanel" aria-labelledby="professional-tab">
+                        <div class="mb-3">
+                          <label for="bio" class="form-label">Biografia</label>
+                          <textarea name="bio" id="bio" rows="4" class="form-control" placeholder="Descreve as tuas competências e experiência...">{{ perfil.bio }}</textarea>
+                          <div class="form-text">Uma boa biografia ajuda a atrair mais clientes.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <label class="form-label">Áreas de Atuação</label>
+                          <div class="card bg-light">
+                            <div class="card-body py-2">
+                              {% for area in perfil.freelancer_detalhe.areas_atuacao.all %}
+                                <span class="badge bg-primary me-2 mb-2 p-2">{{ area.get_nome_display }}</span>
+                              {% empty %}
+                                <p class="text-muted mb-0">Nenhuma área definida</p>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                          <div class="alert alert-info">
+                            <h6 class="mb-1"><i class="bi bi-credit-card me-2"></i>Recebe os pagamentos diretamente!</h6>
+                            <p class="mb-2">Configura as tuas contas de pagamento para receberes diretamente dos clientes.</p>
+                            <a href="{% url 'metodos_pagamento_freelancer' %}" class="btn btn-sm btn-primary">
+                              Configurar Métodos de Pagamento
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      {% elif user_type == 'cliente' %}
+                      <!-- Aba de Informações Empresariais (Cliente) -->
+                      <div class="tab-pane fade" id="business-content" role="tabpanel" aria-labelledby="business-tab">
+                        <div class="mb-3">
+                          <label for="empresa" class="form-label">Empresa</label>
+                          <input type="text" name="empresa" id="empresa" class="form-control" value="{{ perfil.cliente_detalhe.empresa|default:'' }}">
+                        </div>
+                      </div>
+                      {% endif %}
+                    </div>
+                    
+                    <div class="mt-4 d-grid">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save me-2"></i>Guardar Alterações
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.getElementById('profile-image-upload').addEventListener('change', function(e) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById('profile-image-preview').src = e.target.result;
+    };
+    reader.readAsDataURL(this.files[0]);
+  });
+  
+  // Validação de palavra-passe
+  document.addEventListener('DOMContentLoaded', function() {
+    // Verificar se os elementos de palavra-passe existem na página
+    const novaSenha = document.getElementById('nova_senha');
+    const confirmarSenha = document.getElementById('confirmar_senha');
+    const senhaAtual = document.getElementById('senha_atual');
+    
+    // Se não existirem, não adicionar os eventos de validação
+    if (!novaSenha || !confirmarSenha || !senhaAtual) return;
+    
+    const form = document.querySelector('form');
+    const novaFeedback = document.getElementById('nova-senha-feedback');
+    const confirmarFeedback = document.getElementById('confirmar-senha-feedback');
+    
+    // Adicionar validação antes do envio do formulário
+    form.addEventListener('submit', function(e) {
+      // Verificar se todos os campos de palavra-passe estão preenchidos ou todos estão vazios
+      const temSenhaAtual = senhaAtual.value.trim() !== '';
+      const temNovaSenha = novaSenha.value.trim() !== '';
+      const temConfirmacao = confirmarSenha.value.trim() !== '';
+      
+      // Se apenas alguns campos de palavra-passe estiverem preenchidos, impedir o envio
+      if ((temSenhaAtual || temNovaSenha || temConfirmacao) && 
+          !(temSenhaAtual && temNovaSenha && temConfirmacao)) {
+        e.preventDefault();
+        alert('Para alterar a palavra-passe, preencha todos os campos de palavra-passe.');
+        return false;
+      }
+      
+      // Se estiver tentando alterar a palavra-passe
+      if (temSenhaAtual && temNovaSenha && temConfirmacao) {
+        // Verificar se as palavras-passe coincidem
+        if (novaSenha.value !== confirmarSenha.value) {
+          e.preventDefault();
+          alert('As novas palavras-passe não coincidem.');
+          return false;
+        }
+        
+        // Verificar tamanho mínimo
+        if (novaSenha.value.length < 8) {
+          e.preventDefault();
+          alert('A nova palavra-passe deve ter pelo menos 8 caracteres.');
+          return false;
+        }
+        
+        // Verificar se contém pelo menos um número
+        if (!/\d/.test(novaSenha.value)) {
+          e.preventDefault();
+          alert('A nova palavra-passe deve conter pelo menos um número.');
+          return false;
+        }
+        
+        // Verificar se contém pelo menos uma letra
+        if (!/[a-zA-Z]/.test(novaSenha.value)) {
+          e.preventDefault();
+          alert('A nova palavra-passe deve conter pelo menos uma letra.');
+          return false;
+        }
+      }
+    });
+    
+    // Feedback em tempo real para a nova palavra-passe
+    novaSenha.addEventListener('input', function() {
+      const valor = this.value;
+      let mensagens = [];
+      
+      if (valor.length > 0) {
+        if (valor.length < 8) {
+          mensagens.push('Mínimo de 8 caracteres');
+        }
+        
+        if (!/\d/.test(valor)) {
+          mensagens.push('Inclua pelo menos um número');
+        }
+        
+        if (!/[a-zA-Z]/.test(valor)) {
+          mensagens.push('Inclua pelo menos uma letra');
+        }
+      }
+      
+      if (mensagens.length > 0) {
+        novaFeedback.className = 'text-danger small mt-1';
+        novaFeedback.innerHTML = mensagens.map(msg => `<div>• ${msg}</div>`).join('');
+      } else if (valor.length > 0) {
+        novaFeedback.className = 'text-success small mt-1';
+        novaFeedback.innerHTML = '• Palavra-passe válida';
+      } else {
+        novaFeedback.innerHTML = '';
+      }
+    });
+    
+    // Verificar se as palavras-passe coincidem em tempo real
+    confirmarSenha.addEventListener('input', function() {
+      const valor = this.value;
+      
+      if (valor.length > 0) {
+        if (novaSenha.value !== valor) {
+          confirmarFeedback.className = 'text-danger small mt-1';
+          confirmarFeedback.textContent = '• As palavras-passe não coincidem';
+        } else {
+          confirmarFeedback.className = 'text-success small mt-1';
+          confirmarFeedback.textContent = '• Palavras-passe coincidem';
+        }
+      } else {
+        confirmarFeedback.textContent = '';
+      }
+    });
+    
+    // Também atualizar feedback da confirmação quando a nova senha é alterada
+    novaSenha.addEventListener('input', function() {
+      if (confirmarSenha.value.length > 0) {
+        if (this.value !== confirmarSenha.value) {
+          confirmarFeedback.className = 'text-danger small mt-1';
+          confirmarFeedback.textContent = '• As palavras-passe não coincidem';
+        } else {
+          confirmarFeedback.className = 'text-success small mt-1';
+          confirmarFeedback.textContent = '• Palavras-passe coincidem';
+        }
+      }
+    });
+    
+    // Manter a aba ativa após o envio do formulário, se houver erros
+    if (document.querySelectorAll('.alert-danger').length > 0) {
+      // Lista de mensagens de erro relacionadas a palavras-passe
+      const mensagensErroSenha = [
+        "Palavra-passe atual incorreta",
+        "As novas palavras-passe não coincidem",
+        "A nova palavra-passe deve"
+      ];
+      
+      // Buscar todas as mensagens de erro
+      const alertas = document.querySelectorAll('.alert-danger');
+      let temErroSenha = false;
+      
+      // Verificar se alguma mensagem está relacionada a palavra-passe
+      alertas.forEach(function(alerta) {
+        const textoAlerta = alerta.textContent || alerta.innerText;
+        
+        mensagensErroSenha.forEach(function(mensagemErro) {
+          if (textoAlerta.indexOf(mensagemErro) !== -1) {
+            temErroSenha = true;
+          }
+        });
+      });
+      
+      // Se houver erro de palavra-passe e a aba de palavra-passe existir, ativar a aba
+      if (temErroSenha && document.getElementById('password-tab')) {
+        // Criar e acionar um evento de clique na aba de palavra-passe
+        const passwordTab = document.getElementById('password-tab');
+        passwordTab.click();
+      }
+    }
+  });
+</script>
+{% endblock %}

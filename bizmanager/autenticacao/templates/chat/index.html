@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="card-title">Conversas</h4>
+                        <div>
+                            <a href="{% url 'chat:contacts' %}" class="btn-cta-modern btn-sm">
+                                <i class="bi bi-plus-lg me-1"></i> Nova conversa
+                            </a>
+                        </div>
+                    </div>
+                    
+                    {% if rooms_with_info %}
+                        <div class="list-group">
+                            {% for item in rooms_with_info %}
+                                <a href="{% url 'chat:room' room_name=item.room.name %}" class="category-card-modern mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3">
+                                            {% if item.other_participants.first.perfil.foto %}
+                                                <img src="{{ item.other_participants.first.perfil.foto.url }}" alt="Avatar" class="avatar">
+                                            {% else %}
+                                                <img src="{% static 'images/profile-placeholder.png' %}" alt="Avatar" class="avatar">
+                                            {% endif %}
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5 class="mb-0">
+                                                    {% if item.other_participants.count == 1 %}
+                                                        {{ item.other_participants.first.get_full_name|default:item.other_participants.first.email }}
+                                                    {% else %}
+                                                        {{ item.room.name }}
+                                                    {% endif %}
+                                                </h5>
+                                                <div class="d-flex align-items-center">
+                                                    {% if item.unread_count > 0 %}
+                                                        <span class="badge status-pendente rounded-pill me-2">{{ item.unread_count }}</span>
+                                                    {% endif %}
+                                                    <small class="text-muted">
+                                                        {% if item.last_message %}
+                                                            {{ item.last_message.timestamp|date:"d/m" }} {{ item.last_message.timestamp|time:"H:i" }}
+                                                        {% endif %}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="mt-1">
+                                                {% if item.last_message %}
+                                                    {% if item.last_message.sender == request.user %}
+                                                        <i class="bi bi-check-all me-1"></i>
+                                                    {% endif %}
+                                                    {{ item.last_message.content }}
+                                                {% else %}
+                                                    <em>Nenhuma mensagem</em>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="bi bi-chat-dots empty-state-icon"></i>
+                            <h4 class="empty-title">Nenhuma conversa iniciada.</h4>
+                            <p class="empty-description">Comece a comunicar com utilizadores do BizManager.</p>
+                            <a href="{% url 'chat:contacts' %}" class="btn-cta-modern mt-2">
+                                <i class="bi bi-plus-lg me-1"></i> Iniciar conversa
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+// JavaScript para atualizar a contagem de mensagens não lidas
+function fetchUnreadCount() {
+    fetch('/chat/unread-count/')
+        .then(response => response.json())
+        .then(data => {
+            const unreadCountElement = document.getElementById('unread-chat-count');
+            if (unreadCountElement) {
+                if (data.unread_count > 0) {
+                    unreadCountElement.innerHTML = `<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">${data.unread_count}</span>`;
+                } else {
+                    unreadCountElement.innerHTML = '';
+                }
+            }
+        })
+        .catch(error => console.error('Erro ao buscar contagem de mensagens não lidas:', error));
+}
+
+// Chamar a função quando a página carrega
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('unread-chat-count')) {
+        fetchUnreadCount();
+        // Atualizar a cada 30 segundos
+        setInterval(fetchUnreadCount, 30000);
+    }
+});
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section-modern text-white mb-5">
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-lg-6 text-center text-lg-start hero-content">
+        <h1>BizManager</h1>
+        <p>Encontra o serviço ideal ou oferece o teu — simples, rápido e eficaz!</p>
+        
+        <!-- Search Box -->
+<div class="search-container-modern">
+  <form action="{% url 'servicos_publicos' %}" method="GET">
+    <div class="input-group d-flex flex-row">
+      <input type="text" class="form-control flex-grow-1" placeholder="do que estás à procura?" name="q" aria-label="procurar serviços" style="border-radius: var(--border-radius-md) 0 0 var(--border-radius-md); width: auto;">
+      <button class="btn btn-primary" type="submit" style="border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; white-space: nowrap; width: auto;">
+        <i class="bi bi-search"></i> pesquisar
+      </button>
+    </div>
+  </form>
+</div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h2 class="section-title-modern">Áreas de atuação</h2>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="category-card-modern">
+          <div class="category-icon-modern">
+            <i class="bi bi-code-slash"></i>
+          </div>
+          <h5>Desenvolvimento</h5>
+          <p>Aplicações, sites e sistemas personalizados para o teu negócio.</p>
+          <a href="{% url 'servicos_publicos' %}?area=programacao" class="btn btn-outline-light">Explorar</a>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="category-card-modern">
+          <div class="category-icon-modern">
+            <i class="bi bi-palette"></i>
+          </div>
+          <h5>Design</h5>
+          <p>Identidade visual, logótipos, UI/UX e materiais gráficos.</p>
+          <a href="{% url 'servicos_publicos' %}?area=design" class="btn btn-outline-light">Explorar</a>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="category-card-modern">
+          <div class="category-icon-modern">
+            <i class="bi bi-megaphone"></i>
+          </div>
+          <h5>Marketing</h5>
+          <p>Estratégias digitais, SEO, redes sociais e anúncios.</p>
+          <a href="{% url 'servicos_publicos' %}?area=marketing" class="btn btn-outline-light">Explorar</a>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="category-card-modern">
+          <div class="category-icon-modern">
+            <i class="bi bi-pen"></i>
+          </div>
+          <h5>Redação</h5>
+          <p>Conteúdo para blogues, sites e redes sociais.</p>
+          <a href="{% url 'servicos_publicos' %}?area=redacao" class="btn btn-outline-light">Explorar</a>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="category-card-modern">
+          <div class="category-icon-modern">
+            <i class="bi bi-translate"></i>
+          </div>
+          <h5>Tradução</h5>
+          <p>Traduções profissionais em diversos idiomas.</p>
+          <a href="{% url 'servicos_publicos' %}?area=traducao" class="btn btn-outline-light">Explorar</a>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="category-card-modern">
+          <div class="category-icon-modern">
+            <i class="bi bi-briefcase"></i>
+          </div>
+          <h5>Consultoria</h5>
+          <p>Assessoria especializada para o teu negócio.</p>
+          <a href="{% url 'servicos_publicos' %}?area=consultoria" class="btn btn-outline-light">Explorar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section-modern my-5">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h2 class="section-title-modern">Como funciona</h2>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="feature-item-modern">
+          <div class="feature-icon-modern">
+            <i class="bi bi-search"></i>
+          </div>
+          <h4>Encontra</h4>
+          <p>Pesquisa entre milhares de serviços de qualidade.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="feature-item-modern">
+          <div class="feature-icon-modern">
+            <i class="bi bi-chat-dots"></i>
+          </div>
+          <h4>Comunica</h4>
+          <p>Conversa diretamente com o freelancer.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="feature-item-modern">
+          <div class="feature-icon-modern">
+            <i class="bi bi-currency-exchange"></i>
+          </div>
+          <h4>Contrata</h4>
+          <p>Faz pagamentos seguros pela plataforma.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="feature-item-modern">
+          <div class="feature-icon-modern">
+            <i class="bi bi-star"></i>
+          </div>
+          <h4>Avalia</h4>
+          <p>Deixa a tua avaliação no final do projeto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Showcase -->
+<section class="services-showcase my-5">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h2 class="section-title-modern">Serviços em destaque</h2>
+      </div>
+      <div class="col-md-6 text-end">
+        <a href="{% url 'servicos_publicos' %}" class="btn btn-outline-light">Ver todos os serviços</a>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      {% if servicos_destaque %}
+        {% for servico in servicos_destaque %}
+          <div class="col-md-4">
+            <div class="category-card-modern">
+              <h5>{{ servico.nome }}</h5>
+              <p>{{ servico.descricao|truncatechars:100 }}</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="text-success fw-bold">
+                  {{ servico.orcamento }}€
+                </div>
+                <a href="{% url 'ver_servico_publico' servico.id %}" class="btn btn-outline-light btn-sm">Ver detalhes</a>
+              </div>
+              <div class="d-flex align-items-center mt-3">
+                <img src="{% if servico.freelancer.perfil.foto %}{{ servico.freelancer.perfil.foto.url }}{% else %}{% static 'images/profile-placeholder.png' %}{% endif %}" class="rounded-circle me-2" width="30" height="30">
+                <small class="text-light">{{ servico.freelancer.get_full_name }}</small>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <div class="alert alert-info">
+            Nenhum serviço em destaque disponível no momento.
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section-modern my-5">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h2 class="section-title-modern">O que dizem os nossos utilizadores</h2>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      {% if comentarios %}
+        {% for comentario in comentarios %}
+          <div class="col-md-4">
+            <div class="testimonial-card-modern">
+              <p class="testimonial-quote-modern">"{{ comentario.texto }}"</p>
+              <div class="d-flex align-items-center">
+                {% if comentario.utilizador.perfil.foto %}
+                  <img src="{{ comentario.utilizador.perfil.foto.url }}" class="rounded-circle me-2" width="40" height="40" alt="{{ comentario.utilizador.get_full_name }}">
+                {% else %}
+                  <div class="testimonial-avatar-modern {% cycle 'bg-primary' 'bg-success' 'bg-info' %} d-flex align-items-center justify-content-center text-white">
+                    <i class="bi bi-person-fill"></i>
+                  </div>
+                {% endif %}
+                <div class="ms-3">
+                  <div class="testimonial-author-modern">{{ comentario.utilizador.get_full_name }}</div>
+                  <small class="text-muted">
+                    {% if comentario.utilizador.user_type == 'cliente' %}
+                      Cliente
+                    {% else %}
+                      Freelancer
+                    {% endif %}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12 text-center">
+          <div class="alert alert-light">
+            <p>Ainda não temos testemunhos. Sê o primeiro a partilhar a tua experiência!</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    
+    <!-- Formulário de comentário -->
+    {% if user.is_authenticated %}
+    <div class="row mt-4">
+      <div class="col-md-8 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Deixa o teu testemunho</h5>
+            <form method="POST" action="{% url 'home' %}">
+              {% csrf_token %}
+              {{ comentario_form.texto }}
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Enviar testemunho</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="row mt-4">
+      <div class="col-md-8 mx-auto text-center">
+        <p>Para deixar um testemunho, por favor <a href="{% url 'login' %}" class="text-primary">inicia sessão</a>.</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section-modern">
+  <div class="container text-white text-center">
+    <h2>Pronto para começar?</h2>
+    <p>Junta-te a milhares de profissionais e clientes. Cria conta gratuitamente e começa a expandir o teu negócio hoje mesmo!</p>
+    
+    <div class="row justify-content-center g-3">
+      <div class="col-md-5">
+        <a href="{% url 'registo_cliente' %}" class="btn btn-cta-modern w-100">Começar como Cliente</a>
+      </div>
+      <div class="col-md-5">
+        <a href="{% url 'registo_freelancer' %}" class="btn btn-light w-100">Começar como Freelancer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section-modern">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="stat-card-modern">
+          <div class="stat-number-modern">{{ stats.freelancers|default:'1000+' }}</div>
+          <div class="stat-label-modern">Freelancers ativos</div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="stat-card-modern">
+          <div class="stat-number-modern">{{ stats.clientes|default:'5000+' }}</div>
+          <div class="stat-label-modern">Clientes satisfeitos</div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="stat-card-modern">
+          <div class="stat-number-modern">{{ stats.servicos|default:'10000+' }}</div>
+          <div class="stat-label-modern">Serviços oferecidos</div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="stat-card-modern">
+          <div class="stat-number-modern">{{ stats.projetos|default:'8000+' }}</div>
+          <div class="stat-label-modern">Projetos concluídos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

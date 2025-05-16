@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizManager - Login</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body class="background">
+
+    <div class="container">
+        <img src="{% static 'images/logo2.png' %}" alt="Logo" class="logo">
+
+        <h1>Login BizManager</h1>
+        <p>Faz login na tua conta para começar</p>
+
+        {% if error_message %}
+            <div class="alert alert-danger">{{ error_message }}</div>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="seu@email.com" required>
+
+            <label for="password">Palavra-passe</label>
+            <input type="password" name="password" id="password" placeholder="********" required>
+
+            <button type="submit" class="btn freelancer">Entrar</button>
+        </form>
+
+        <!-- Novo link para recuperação de senha -->
+        <div style="margin-top: 10px; text-align: center;">
+            <a href="{% url 'password_reset' %}">Esqueceu a sua palavra-passe?</a>
+        </div>
+
+        <div class="divisor-ou">
+            <span>OU</span>
+        </div>
+
+        <div class="login-social">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn-google">
+  <img src="{% static 'images/google-icon1.png' %}" alt="Google" class="google-icon">
+  <span>Entrar com Google</span>
+</a>
+
+        </div>
+
+        <a href="{% url 'escolher_conta' %}">Não tens uma conta? Regista-te aqui</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Notificações{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/notificacoes.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center py-3">
+                    <h5 class="mb-0">Notificações</h5>
+                    <div>
+                        {% if notificacoes %}
+                            <a href="{% url 'marcar_todas_notificacoes_lidas' %}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-check-all me-1"></i> Marcar todas como lidas
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    {% if notificacoes %}
+                        <div class="list-group notification-list">
+                            {% for notificacao in notificacoes %}
+                                <a href="{% url 'marcar_notificacao_lida' notificacao_id=notificacao.id %}" 
+                                   class="list-group-item list-group-item-action notification-item p-3 border-0 border-bottom {% if not notificacao.lida %}unread{% endif %}">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3">
+                                            <div class="notification-icon icon-{{ notificacao.tipo }}">
+                                                {% if notificacao.tipo == 'mensagem' %}
+                                                    <i class="bi bi-chat-dots-fill"></i>
+                                                {% elif notificacao.tipo == 'pedido' %}
+                                                    <i class="bi bi-file-earmark-plus-fill"></i>
+                                                {% elif notificacao.tipo == 'aceitacao' %}
+                                                    <i class="bi bi-check-circle-fill"></i>
+                                                {% elif notificacao.tipo == 'rejeicao' %}
+                                                    <i class="bi bi-x-circle-fill"></i>
+                                                {% elif notificacao.tipo == 'conclusao' %}
+                                                    <i class="bi bi-flag-fill"></i>
+                                                {% elif notificacao.tipo == 'pagamento' %}
+                                                    <i class="bi bi-cash-coin"></i>
+                                                {% else %}
+                                                    <i class="bi bi-bell-fill"></i>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">{{ notificacao.titulo }}</h6>
+                                                <small class="text-muted notification-time">
+                                                    {{ notificacao.criada_em|date:"d/m/Y" }} {{ notificacao.criada_em|time:"H:i" }}
+                                                </small>
+                                            </div>
+                                            <p class="mb-0 text-muted small">{{ notificacao.texto }}</p>
+                                            {% if not notificacao.lida %}
+                                                <span class="badge bg-primary mt-1">Nova</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="bi bi-bell-slash text-muted display-4"></i>
+                            <p class="mt-3 text-muted">Não tem notificações.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

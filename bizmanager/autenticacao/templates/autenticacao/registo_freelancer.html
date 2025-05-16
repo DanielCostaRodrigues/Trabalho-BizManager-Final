@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo - Freelancer</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="background">
+    <div class="container">
+        <img src="{% static 'images/logo2.png' %}" alt="BizManager Logo" class="logo">
+        <h1>Registo de Freelancer</h1>
+        <p>Cria a tua conta e começa a oferecer os teus serviços agora mesmo.</p>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>⚠️ Corrige os erros abaixo:</strong>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="POST" novalidate>
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    <div class="error-message">{{ form.first_name.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                    <div class="error-message">{{ form.last_name.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="error-message">{{ form.email.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <div class="error-message">{{ form.password1.errors.0 }}</div>
+                {% endif %}
+                {% if form.password1.help_text %}
+                    <small class="form-text text-muted">{{ form.password1.help_text }}</small>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="error-message">{{ form.password2.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.area.id_for_label }}">{{ form.area.label }}</label>
+                {{ form.area }}
+                {% if form.area.errors %}
+                    <div class="error-message">{{ form.area.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div id="outro-campo" style="display: none;">
+                <div class="form-group">
+                    <label for="{{ form.area_personalizada.id_for_label }}">{{ form.area_personalizada.label }}</label>
+                    {{ form.area_personalizada }}
+                    {% if form.area_personalizada.errors %}
+                        <div class="error-message">{{ form.area_personalizada.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.bio.id_for_label }}">{{ form.bio.label }}</label>
+                {{ form.bio }}
+                {% if form.bio.errors %}
+                    <div class="error-message">{{ form.bio.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn freelancer">Criar Conta</button>
+        </form>
+
+        <div class="divisor-ou">
+            <span>OU</span>
+        </div>
+        
+        <div class="login-social">
+            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn-google">
+        <img src="{% static 'images/google-icon1.png' %}" alt="Google" class="google-icon">
+        <span>Entrar com Google</span>
+        </a>
+        </div>
+
+        <div class="login-link">
+            <p>Já tens conta? <a href="{% url 'login' %}">Log In</a></p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarOutroCampo(valor) {
+            const outroCampo = document.getElementById("outro-campo");
+            const campoPersonalizado = document.getElementById("id_area_personalizada");
+            
+            if (valor === "outros") {
+                outroCampo.style.display = "block";
+                campoPersonalizado.required = true;
+            } else {
+                outroCampo.style.display = "none";
+                campoPersonalizado.required = false;
+                campoPersonalizado.value = "";
+            }
+        }
+
+        const selectArea = document.getElementById("id_area");
+        if (selectArea) {
+            selectArea.addEventListener("change", function() {
+                mostrarOutroCampo(this.value);
+            });
+            window.addEventListener("load", function() {
+                mostrarOutroCampo(selectArea.value);
+            });
+        }
+    </script>
+</body>
+</html>

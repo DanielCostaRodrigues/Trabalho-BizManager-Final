@@ -1,0 +1,393 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalhes do Pedido | BizManager{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Sidebar/Navegação lateral -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if request.user.perfil.foto %}
+            <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">
+              {% if user_type == 'freelancer' %}
+                Mostra o teu talento, conquista mais clientes!
+              {% else %}
+                Encontra os melhores profissionais para o teu projeto!
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        
+        <!-- Links de navegação -->
+        <div class="d-grid gap-2">
+          <a href="{% url 'perfil' %}" class="btn btn-outline-primary">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-outline-primary">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-success text-white">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'pedidos' %}">Pedidos</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Pedido #{{ pedido.id }}</li>
+        </ol>
+      </nav>
+      
+      <!-- Cabeçalho do pedido -->
+      <div class="card shadow-sm rounded mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+              <h5 class="card-title mb-1">{{ pedido.servico.nome }}</h5>
+              <div class="d-flex gap-2 mt-2">
+                <span class="badge {% if pedido.status == 'pendente' %}bg-warning
+                  {% elif pedido.status == 'aceite' %}bg-primary
+                  {% elif pedido.status == 'concluido' %}bg-success
+                  {% elif pedido.status == 'rejeitado' %}bg-danger
+                  {% else %}bg-secondary{% endif %}">
+                  {{ pedido.get_status_display }}
+                </span>
+                
+                {% if pedido.tipo_servico == 'agendado' %}
+                  <span class="badge bg-purple">Agendado</span>
+                {% else %}
+                  <span class="badge bg-info">Imediato</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="text-end">
+              <p class="text-muted mb-0"><strong>Data do Pedido:</strong></p>
+              <p class="mb-0">{{ pedido.data_pedido|date:"d/m/Y H:i" }}</p>
+            </div>
+          </div>
+          
+          <!-- Informações de agendamento -->
+          {% if pedido.tipo_servico == 'agendado' and pedido.data_agendamento %}
+            <div class="agendamento-info shadow-sm p-3 rounded mb-4">
+              <h6><i class="bi bi-calendar-event me-2"></i>Detalhes do Agendamento</h6>
+              <div class="fw-bold fs-5">
+                {{ pedido.data_agendamento|date:"d/m/Y" }} às {{ pedido.hora_agendamento|time:"H:i" }}
+              </div>
+              
+              {% if pedido.google_calendar_event_url %}
+                <div class="mt-2">
+                  <a href="{{ pedido.google_calendar_event_url }}" target="_blank" class="btn btn-primary btn-sm">
+                    <i class="bi bi-google me-1"></i> Ver no Google Calendar
+                  </a>
+                </div>
+              {% elif pedido.google_calendar_event_id %}
+                <div class="badge bg-success mt-2">
+                  <i class="bi bi-check-circle-fill"></i> Sincronizado com Google Calendar
+                </div>
+              {% elif user_type == 'cliente' %}
+                <a href="{% url 'sync_pedido_to_calendar' pedido.id %}" class="btn btn-primary btn-sm mt-2">
+                  <i class="bi bi-google"></i> Adicionar ao Google Calendar
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+          
+          <div class="row mt-4">
+            <!-- Detalhes do Pedido -->
+            <div class="col-lg-8">
+              <!-- Informações do Serviço -->
+              <div class="card mb-4">
+                <div class="card-header bg-transparent py-3">
+                  <h6 class="mb-0">Informações do Serviço</h6>
+                </div>
+                <div class="card-body">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label text-muted small">Nome do Serviço</label>
+                        <p class="mb-0 fw-medium">{{ pedido.servico.nome }}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label text-muted small">Área</label>
+                        <p class="mb-0 fw-medium">{{ pedido.servico.area.get_nome_display }}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label text-muted small">Orçamento</label>
+                        <p class="mb-0 fw-medium">{{ pedido.servico.orcamento }}€</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label text-muted small">Prazo</label>
+                        <p class="mb-0 fw-medium">{{ pedido.servico.prazo }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-3">
+                    <label class="form-label text-muted small">Descrição do Serviço</label>
+                    <p class="mb-0">{{ pedido.servico.descricao }}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Comentário do Cliente -->
+              <div class="card mb-4">
+                <div class="card-header bg-transparent py-3">
+                  <h6 class="mb-0">Comentário do Cliente</h6>
+                </div>
+                <div class="card-body">
+                  {% if pedido.comentario %}
+                    <p class="mb-0">{{ pedido.comentario }}</p>
+                  {% else %}
+                    <p class="text-muted mb-0">Nenhum comentário adicional do cliente.</p>
+                  {% endif %}
+                </div>
+              </div>
+              
+              <!-- Histórico do Pedido -->
+              <div class="card mb-4">
+                <div class="card-header bg-transparent py-3">
+                  <h6 class="mb-0">Histórico do Pedido</h6>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item px-0">
+                      <div class="d-flex">
+                        <div class="flex-shrink-0">
+                          <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px;">
+                            <i class="bi bi-plus"></i>
+                          </div>
+                        </div>
+                        <div class="ms-3">
+                          <h6 class="mb-1">Pedido Criado</h6>
+                          <p class="text-muted small mb-1">{{ pedido.data_pedido|date:"d/m/Y H:i" }}</p>
+                          <p class="mb-0">{{ pedido.cliente.get_full_name }} solicitou este serviço.</p>
+                        </div>
+                      </div>
+                    </li>
+                    
+                    {% if pedido.status != 'pendente' %}
+                      <li class="list-group-item px-0">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0">
+                            <div class="
+                              {% if pedido.status == 'aceite' %}bg-primary
+                              {% elif pedido.status == 'rejeitado' %}bg-danger
+                              {% elif pedido.status == 'concluido' %}bg-success
+                              {% elif pedido.status == 'cancelado' %}bg-secondary{% endif %}
+                              rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px;">
+                              {% if pedido.status == 'Aceite' %}<i class="bi bi-check"></i>
+                              {% elif pedido.status == 'rejeitado' %}<i class="bi bi-x"></i>
+                              {% elif pedido.status == 'concluido' %}<i class="bi bi-check-all"></i>
+                              {% elif pedido.status == 'cancelado' %}<i class="bi bi-slash-circle"></i>{% endif %}
+                            </div>
+                          </div>
+                          <div class="ms-3">
+                            {% if pedido.status == 'aceite' %}
+                              <h6 class="mb-1">Pedido Aceite</h6>
+                              <p class="mb-0">O freelancer aceitou este pedido e está a trabalhar nele.</p>
+                            {% elif pedido.status == 'rejeitado' %}
+                              <h6 class="mb-1">Pedido Rejeitado</h6>
+                              <p class="mb-0">O freelancer rejeitou este pedido.</p>
+                            {% elif pedido.status == 'concluido' %}
+                              <h6 class="mb-1">Pedido Concluído</h6>
+                              <p class="mb-0">O freelancer marcou este pedido como concluído.</p>
+                            {% elif pedido.status == 'cancelado' %}
+                              <h6 class="mb-1">Pedido Cancelado</h6>
+                              <p class="mb-0">Este pedido foi cancelado.</p>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </li>
+                    {% endif %}
+                    
+                    {% if pedido.google_calendar_event_id %}
+                      <li class="list-group-item px-0">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0">
+                            <div class="bg-info rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px;">
+                              <i class="bi bi-calendar-check"></i>
+                            </div>
+                          </div>
+                          <div class="ms-3">
+                            <h6 class="mb-1">Sincronizado com Google Calendar</h6>
+                            <p class="mb-0">
+                              Este pedido foi adicionado ao teu Google Calendar.
+                              {% if pedido.google_calendar_event_url %}
+                                <a href="{{ pedido.google_calendar_event_url }}" target="_blank" class="btn btn-link btn-sm p-0">
+                                  Ver no Google Calendar
+                                </a>
+                              {% endif %}
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    {% endif %}
+                    
+                    {% if pedido.status == 'concluido' and pedido.fatura %}
+                      <li class="list-group-item px-0">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0">
+                            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px;">
+                              <i class="bi bi-receipt"></i>
+                            </div>
+                          </div>
+                          <div class="ms-3">
+                            <h6 class="mb-1">Fatura Gerada</h6>
+                            <p class="text-muted small mb-1">{{ pedido.fatura.data_emissao|date:"d/m/Y H:i" }}</p>
+                            <p class="mb-1">Fatura #{{ pedido.fatura.id }} no valor de {{ pedido.fatura.valor }}€ foi gerada.</p>
+                            {% if pedido.fatura.pago %}
+                              <p class="text-muted small mb-1">{{ pedido.fatura.data_pagamento|date:"d/m/Y H:i" }}</p>
+                              <p class="mb-0">Fatura paga pelo cliente.</p>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Painel Lateral -->
+            <div class="col-lg-4">
+              <!-- Informações -->
+              <div class="card mb-4">
+                <div class="card-header bg-transparent py-3">
+                  <h6 class="mb-0">
+                    {% if user_type == 'freelancer' %}
+                      Informações do Cliente
+                    {% else %}
+                      Informações do Freelancer
+                    {% endif %}
+                  </h6>
+                </div>
+                <div class="card-body text-center">
+                  {% if user_type == 'freelancer' %}
+                    <img src="{% if pedido.cliente.perfil.foto %}{{ pedido.cliente.perfil.foto.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
+                      alt="{{ pedido.cliente.get_full_name }}" class="img-fluid rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    <h6>{{ pedido.cliente.get_full_name }}</h6>
+                    <p class="text-muted small mb-3">Cliente</p>
+                    <!-- Botão para ver perfil do cliente -->
+                    <a href="{% url 'ver_perfil_utilizador' user_id=pedido.cliente.id %}" class="btn btn-outline-primary btn-sm mb-2">
+                      <i class="bi bi-person-badge me-1"></i> Ver perfil
+                    </a>
+                    <!-- Botão para enviar mensagem -->
+                    <a href="{% url 'chat:start_chat' username=pedido.cliente.email %}" class="btn btn-outline-info btn-sm mb-3">
+                      <i class="bi bi-chat-dots me-1"></i> Enviar mensagem
+                    </a>
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                      <i class="bi bi-envelope text-primary me-2"></i>
+                      <span>{{ pedido.cliente.email }}</span>
+                    </div>
+                    {% if pedido.cliente.perfil.cliente_detalhe.empresa %}
+                      <div class="d-flex align-items-center justify-content-center">
+                        <i class="bi bi-building text-primary me-2"></i>
+                        <span>{{ pedido.cliente.perfil.cliente_detalhe.empresa }}</span>
+                      </div>
+                    {% endif %}
+                  {% else %}
+                    <img src="{% if pedido.servico.freelancer.perfil.foto %}{{ pedido.servico.freelancer.perfil.foto.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
+                      alt="{{ pedido.servico.freelancer.get_full_name }}" class="img-fluid rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    <h6>{{ pedido.servico.freelancer.get_full_name }}</h6>
+                    <p class="text-muted small mb-3">Freelancer</p>
+                    <!-- Botão para ver perfil do freelancer -->
+                    <a href="{% url 'ver_perfil_utilizador' user_id=pedido.servico.freelancer.id %}" class="btn btn-outline-primary btn-sm mb-2">
+                      <i class="bi bi-person-badge me-1"></i> Ver perfil 
+                    </a>
+                    <!-- Botão para enviar mensagem -->
+                    <a href="{% url 'chat:start_chat' username=pedido.servico.freelancer.email %}" class="btn btn-outline-info btn-sm mb-3">
+                      <i class="bi bi-chat-dots me-1"></i> Enviar mensagem
+                    </a>
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                      <i class="bi bi-envelope text-primary me-2"></i>
+                      <span>{{ pedido.servico.freelancer.email }}</span>
+                    </div>
+                    {% if pedido.servico.freelancer.perfil.freelancer_detalhe.areas_atuacao.all %}
+                      <div class="d-flex align-items-center justify-content-center">
+                        <i class="bi bi-briefcase text-primary me-2"></i>
+                        <span>
+                          {% for area in pedido.servico.freelancer.perfil.freelancer_detalhe.areas_atuacao.all %}
+                            {{ area.get_nome_display }}{% if not forloop.last %}, {% endif %}
+                          {% endfor %}
+                        </span>
+                      </div>
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+              
+              <!-- Ações -->
+              <div class="card mb-4">
+                <div class="card-header bg-transparent py-3">
+                  <h6 class="mb-0">Ações</h6>
+                </div>
+                <div class="card-body">
+                  <div class="d-grid gap-2">
+                    {% if user_type == 'freelancer' %}
+                      {% if pedido.status == 'pendente' %}
+                        <a href="{% url 'aceitar_pedido' pedido.id %}" class="btn btn-success">
+                          <i class="bi bi-check-circle me-2"></i>Aceitar Pedido
+                        </a>
+                        <a href="{% url 'rejeitar_pedido' pedido.id %}" class="btn btn-danger">
+                          <i class="bi bi-x-circle me-2"></i>Rejeitar Pedido
+                        </a>
+                      {% elif pedido.status == 'aceite' %}
+                        <a href="{% url 'concluir_pedido' pedido.id %}" class="btn btn-success">
+                          <i class="bi bi-check-circle me-2"></i>Marcar como Concluído
+                        </a>
+                        <a href="{% url 'cancelar_pedido' pedido.id %}" class="btn btn-danger">
+                          <i class="bi bi-x-circle me-2"></i>Cancelar Pedido
+                        </a>
+                      {% endif %}
+                    {% else %}
+                      {% if pedido.status == 'pendente' or pedido.status == 'aceite' %}
+                        <a href="{% url 'cancelar_pedido' pedido.id %}" class="btn btn-danger">
+                          <i class="bi bi-x-circle me-2"></i>Cancelar Pedido
+                        </a>
+                      {% endif %}
+                      
+                      {% if pedido.status == 'concluido' and pedido.fatura and not pedido.fatura.pago %}
+                        <a href="{% url 'selecionar_metodo_pagamento' pedido.fatura.id %}" class="btn btn-primary">
+                          <i class="bi bi-credit-card me-2"></i>Pagar Fatura
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                    
+                    <a href="{% url 'pedidos' %}" class="btn btn-outline-secondary">
+                      <i class="bi bi-arrow-left me-2"></i>Voltar para Lista
+                    </a>
+                    
+                    {% if pedido.fatura %}
+                      <a href="{% url 'ver_fatura' pedido.fatura.id %}" class="btn btn-primary">
+                        <i class="bi bi-receipt me-2"></i>Ver Fatura
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

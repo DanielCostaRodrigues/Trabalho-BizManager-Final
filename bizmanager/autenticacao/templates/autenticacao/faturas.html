@@ -1,0 +1,647 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Faturas | BizManager{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Sidebar/Navegação lateral -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if request.user.perfil.foto %}
+            <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">
+              {% if user_type == 'freelancer' %}
+                Mostra o teu talento, conquista mais clientes!
+              {% else %}
+                Encontra os melhores profissionais para o teu projeto!
+              {% endif %}
+            </p>
+            
+          </div>
+        </div>
+        
+        <!-- Links de navegação -->
+        <div class="d-grid gap-2">
+          <a href="{% url 'perfil' %}" class="btn btn-outline-primary">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-outline-primary">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-success text-white">Faturas</a>
+          {% if user_type == 'freelancer' %}
+          <a href="{% url 'listar_clientes' %}" class="btn btn-outline-primary">Clientes</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <!-- Abas principais -->
+      <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="faturas-tab" data-bs-toggle="tab" data-bs-target="#faturas-content" type="button" role="tab" aria-controls="faturas-content" aria-selected="true">
+            <i class="bi bi-receipt me-2"></i>Faturas
+          </button>
+        </li>
+        {% if user_type == 'freelancer' %}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="payment-methods-tab" data-bs-toggle="tab" data-bs-target="#payment-methods-content" type="button" role="tab" aria-controls="payment-methods-content" aria-selected="false">
+            <i class="bi bi-credit-card me-2"></i>Métodos de Pagamento
+          </button>
+        </li>
+        {% endif %}
+      </ul>
+      
+      <div class="tab-content" id="mainTabsContent">
+        <!-- Aba de Faturas -->
+        <div class="tab-pane fade show active" id="faturas-content" role="tabpanel" aria-labelledby="faturas-tab">
+          <div class="card shadow-sm rounded mb-4">
+            <div class="card-body p-4">
+              <h5 class="card-title mb-4">Gestão de Faturas</h5>
+              
+              {% if user_type == 'freelancer' %}
+                <p class="text-muted mb-4">Aqui podes gerir as tuas faturas emitidas para os teus serviços.</p>
+                
+                {% if not freelancer_detalhe.paypal_account_verified and not freelancer_detalhe.stripe_account_verified %}
+                <div class="alert alert-warning mb-4">
+                  <h6 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i>Ainda não configuraste os teus métodos de recebimento!</h6>
+                  <p class="mb-1">Configura os teus métodos de pagamento para começares a receber diretamente nas tuas contas.</p>
+                  <button type="button" class="btn btn-sm btn-warning mt-2" onclick="document.getElementById('payment-methods-tab').click()">
+                    Configurar Métodos de Pagamento
+                  </button>
+                </div>
+                {% endif %}
+              {% else %}
+                <p class="text-muted mb-4">Aqui podes gerir as faturas dos serviços que contrataste.</p>
+              {% endif %}
+              
+              <!-- Filtros de Faturas -->
+              <div class="card bg-light border-0 mb-4">
+                <div class="card-body p-3">
+                  <div class="row g-2">
+                    <div class="col-md-8">
+                      <div class="d-flex flex-wrap gap-2">
+                        <a href="?status=all" class="btn {% if not request.GET.status or request.GET.status == 'all' %}btn-primary{% else %}btn-outline-secondary{% endif %} btn-sm">Todas</a>
+                        <a href="?status=pagas" class="btn {% if request.GET.status == 'pagas' %}btn-primary{% else %}btn-outline-secondary{% endif %} btn-sm">Pagas</a>
+                        <a href="?status=pendentes" class="btn {% if request.GET.status == 'pendentes' %}btn-primary{% else %}btn-outline-secondary{% endif %} btn-sm">Pendentes</a>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Pesquisar faturas...">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tabela de Faturas -->
+              {% if faturas %}
+                <div class="card shadow-sm">
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                           <thead style="background-color: transparent !important;"></thead>
+                          <tr>
+                            <th>Nº Fatura</th>
+                            <th>Serviço</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Estado</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for fatura in faturas %}
+                            <tr class="fatura-row" data-status="{{ fatura.pago|yesno:'paga,pendente' }}">
+                              <td class="fatura-id">
+                                <strong>F-{{ fatura.id|stringformat:"06d" }}</strong>
+                              </td>
+                              <td class="servico-nome">
+                                {{ fatura.pedido.servico.nome }}
+                              </td>
+                              <td class="fatura-data">
+                                {{ fatura.data_emissao|date:"d/m/Y" }}
+                              </td>
+                              <td class="fatura-valor">
+                                <strong>€{{ fatura.valor }}</strong>
+                                {% if user_type == 'freelancer' and fatura.valor_freelancer %}
+                                <br><small class="text-muted">Líquido: €{{ fatura.valor_freelancer }}</small>
+                                {% endif %}
+                              </td>
+                              <td class="fatura-status">
+                                <span class="badge {% if fatura.pago %}bg-success{% else %}bg-warning{% endif %}">
+                                  {{ fatura.pago|yesno:"Paga,Pendente" }}
+                                </span>
+                              </td>
+                              <td class="fatura-acoes">
+                                <div class="btn-group btn-group-sm">
+                                  <a href="{% url 'ver_fatura' fatura.id %}" class="btn btn-ver">
+                                    <i class="bi bi-eye"></i> Ver
+                                  </a>
+                                  
+                                  {% if user_type == 'cliente' and not fatura.pago %}
+                                  <a href="{% url 'selecionar_metodo_pagamento' fatura.id %}" class="btn btn-success">
+                                    <i class="bi bi-credit-card"></i> Pagar
+                                  </a>
+                                  {% endif %}
+                                </div>
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Paginação para as faturas -->
+                {% if faturas.paginator.num_pages > 1 %}
+                <div class="pagination-container d-flex justify-content-center mt-4">
+                  <nav aria-label="Navegação de páginas">
+                    <ul class="pagination">
+                      {% if faturas.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page=1{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Primeira">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ faturas.previous_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                      {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&laquo;&laquo;</span>
+                        </li>
+                        <li class="page-item disabled">
+                          <span class="page-link">&laquo;</span>
+                        </li>
+                      {% endif %}
+                      
+                      {% for i in faturas.paginator.page_range %}
+                        {% if faturas.number == i %}
+                          <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% elif i > faturas.number|add:'-3' and i < faturas.number|add:'3' %}
+                          <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}">{{ i }}</a>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% if faturas.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ faturas.next_page_number }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Próxima">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ faturas.paginator.num_pages }}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}" aria-label="Última">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                          </a>
+                        </li>
+                      {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&raquo;</span>
+                        </li>
+                        <li class="page-item disabled">
+                          <span class="page-link">&raquo;&raquo;</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+                <div class="text-center text-muted small mt-2">
+                  Página {{ faturas.number }} de {{ faturas.paginator.num_pages }} ({{ faturas.paginator.count }} faturas no total)
+                </div>
+                {% endif %}
+                <!-- Fim da paginação -->
+                
+                <!-- Resumo Financeiro (apenas para freelancers) -->
+                {% if user_type == 'freelancer' %}
+                  <div class="row g-3 mt-4">
+                    <div class="col-md-4">
+                      <div class="card bg-primary text-white h-100">
+                        <div class="card-body">
+                          <h3 class="card-title">€{{ total_faturado|default:"0" }}</h3>
+                          <p class="card-text">Total Faturado</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card bg-success text-white h-100">
+                        <div class="card-body">
+                          <h3 class="card-title">€{{ total_pago|default:"0" }}</h3>
+                          <p class="card-text">Faturas Pagas</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card bg-warning text-white h-100">
+                        <div class="card-body">
+                          <h3 class="card-title">€{{ total_pendente|default:"0" }}</h3>
+                          <p class="card-text">Pendente de Pagamento</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              {% else %}
+                <!-- Estado Vazio -->
+                <div class="alert alert-info">
+                  <div class="text-center py-5">
+                    <i class="bi bi-receipt fs-1 mb-3 text-muted"></i>
+                    <h5>Nenhuma fatura encontrada</h5>
+                    {% if user_type == 'freelancer' %}
+                      <p class="text-muted">Ainda não emitiste nenhuma fatura. As faturas são geradas automaticamente quando um pedido é marcado como concluído.</p>
+                    {% else %}
+                      <p class="text-muted">Ainda não recebeste nenhuma fatura. As faturas são geradas quando um serviço é concluído pelo freelancer.</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Aba de Métodos de Pagamento (apenas para freelancers) -->
+        {% if user_type == 'freelancer' %}
+        <div class="tab-pane fade" id="payment-methods-content" role="tabpanel" aria-labelledby="payment-methods-tab">
+          <div class="card shadow-sm rounded mb-4">
+            <div class="card-body p-4">
+              <h5 class="card-title mb-4">
+                <i class="bi bi-credit-card me-2"></i>Configuração de Métodos de Pagamento
+              </h5>
+              
+              <div class="alert alert-info mb-4">
+                <h6 class="alert-heading">
+                  <i class="bi bi-info-circle-fill me-2"></i>Recebe pagamentos diretamente!
+                </h6>
+                <p class="mb-0">Configura as tuas contas de pagamento para receberes diretamente dos clientes. A plataforma cobrará uma taxa de {{ freelancer_detalhe.platform_fee_percentage }}% sobre cada transação.</p>
+              </div>
+              
+              <!-- Abas para os diferentes métodos de pagamento -->
+              <ul class="nav nav-tabs mb-4" id="paymentTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="paypal-tab" data-bs-toggle="tab" data-bs-target="#paypal" type="button" role="tab" aria-controls="paypal" aria-selected="true">
+                    <i class="bi bi-paypal me-1"></i> PayPal
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="stripe-tab" data-bs-toggle="tab" data-bs-target="#stripe" type="button" role="tab" aria-controls="stripe" aria-selected="false">
+                    <i class="bi bi-credit-card-2-front me-1"></i> Stripe
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">
+                    <i class="bi bi-gear me-1"></i> Configurações
+                  </button>
+                </li>
+              </ul>
+              
+              <div class="tab-content" id="paymentTabsContent">
+                <!-- PayPal -->
+                <div class="tab-pane fade show active" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
+                  <div class="card border-0">
+                    <div class="card-body">
+                      <h5 class="card-title mb-3">Configuração do PayPal</h5>
+                      
+                      {% if freelancer_detalhe.paypal_email and freelancer_detalhe.paypal_account_verified %}
+                      <div class="alert alert-success mb-4">
+                        <i class="bi bi-check-circle-fill me-2"></i> A tua conta PayPal está configurada e verificada!
+                      </div>
+                      {% endif %}
+                      
+                      <form method="post" action="{% url 'faturas' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="update_paypal">
+                        
+                        <div class="mb-3">
+                          <label for="paypal_email" class="form-label">Email do PayPal</label>
+                          <input type="email" class="form-control" id="paypal_email" name="paypal_email" value="{{ freelancer_detalhe.paypal_email|default:'' }}" required>
+                          <div class="form-text">Este é o email associado à tua conta PayPal onde receberás os pagamentos.</div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                          <i class="bi bi-save me-1"></i> Guardar Configurações do PayPal
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Stripe -->
+                <div class="tab-pane fade" id="stripe" role="tabpanel" aria-labelledby="stripe-tab">
+                  <div class="card border-0">
+                    <div class="card-body">
+                      <h5 class="card-title mb-3">Configuração do Stripe</h5>
+                      
+                      {% if freelancer_detalhe.stripe_account_id %}
+                        {% if freelancer_detalhe.stripe_account_verified %}
+                        <div class="alert alert-success mb-4">
+                          <i class="bi bi-check-circle-fill me-2"></i> A tua conta Stripe está conectada e verificada!
+                        </div>
+                        {% elif stripe_account_status %}
+                          {% if stripe_account_status.details_submitted %}
+                          <div class="alert alert-warning mb-4">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i> A tua conta Stripe está em processo de verificação. Isto pode levar alguns dias úteis.
+                          </div>
+                          {% else %}
+                          <div class="alert alert-warning mb-4">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i> Precisas de completar o cadastro da tua conta Stripe.
+                            <form method="post" action="{% url 'faturas' %}" class="mt-2">
+                              {% csrf_token %}
+                              <input type="hidden" name="action" value="connect_stripe">
+                              <button type="submit" class="btn btn-sm btn-warning">
+                                Completar Cadastro
+                              </button>
+                            </form>
+                          </div>
+                          {% endif %}
+                        {% endif %}
+                      {% else %}
+                        <div class="alert alert-info mb-4">
+                          <i class="bi bi-info-circle-fill me-2"></i> Ainda não tens uma conta Stripe conectada. Configura para receberes pagamentos diretamente!
+                        </div>
+                        
+                        <form method="post" action="{% url 'faturas' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="action" value="connect_stripe">
+                          <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-credit-card me-1"></i> Conectar com Stripe
+                          </button>
+                        </form>
+                      {% endif %}
+                      
+                      {% if freelancer_detalhe.stripe_account_id and freelancer_detalhe.stripe_account_verified %}
+                        <div class="mt-4">
+                          <h6>Detalhes da Conta</h6>
+                          <p><strong>ID da Conta:</strong> {{ freelancer_detalhe.stripe_account_id }}</p>
+                          
+                          {% if stripe_account_status %}
+                            <p><strong>Estado:</strong> 
+                              {% if stripe_account_status.is_complete %}
+                                <span class="badge bg-success">Completa</span>
+                              {% else %}
+                                <span class="badge bg-warning">Incompleta</span>
+                              {% endif %}
+                            </p>
+                            <p><strong>Pagamentos habilitados:</strong> 
+                              {% if stripe_account_status.charges_enabled %}
+                                <span class="badge bg-success">Sim</span>
+                              {% else %}
+                                <span class="badge bg-danger">Não</span>
+                              {% endif %}
+                            </p>
+                            <p><strong>Saques habilitados:</strong> 
+                              {% if stripe_account_status.payouts_enabled %}
+                                <span class="badge bg-success">Sim</span>
+                              {% else %}
+                                <span class="badge bg-danger">Não</span>
+                              {% endif %}
+                            </p>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Configurações -->
+                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                  <div class="card border-0">
+                    <div class="card-body">
+                      <h5 class="card-title mb-3">Configurações de Pagamento</h5>
+                      
+                      <form method="post" action="{% url 'faturas' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="update_fee">
+                        
+                        <div class="mb-3">
+                          <label for="platform_fee_percentage" class="form-label">Taxa da Plataforma (%)</label>
+                          <input type="number" class="form-control" id="platform_fee_percentage" name="platform_fee_percentage" 
+                                 value="{{ freelancer_detalhe.platform_fee_percentage|default:'10.0' }}" min="5" max="20" step="0.5" required>
+                          <div class="form-text">Esta é a percentagem que a plataforma cobra por cada transação. A taxa deve estar entre 5% e 20%.</div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                          <i class="bi bi-save me-1"></i> Guardar Configurações
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Histórico de Pagamentos -->
+          <div class="card shadow-sm rounded">
+            <div class="card-header bg-transparent">
+              <h5 class="card-title mb-0">
+                <i class="bi bi-clock-history me-2"></i>Histórico de Recebimentos
+              </h5>
+            </div>
+            <div class="card-body p-4">
+              {% if faturas_pagas %}
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Fatura</th>
+                        <th>Data</th>
+                        <th>Método</th>
+                        <th>Valor Total</th>
+                        <th>Taxa</th>
+                        <th>Valor Recebido</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for fatura in faturas_pagas %}
+                        <tr>
+                          <td>F-{{ fatura.id|stringformat:"06d" }}</td>
+                          <td>{{ fatura.data_pagamento|date:"d/m/Y" }}</td>
+                          <td>
+                            {% if fatura.metodo_pagamento == 'stripe' %}
+                              <span class="badge bg-primary">Cartão</span>
+                            {% elif fatura.metodo_pagamento == 'paypal' %}
+                              <span class="badge bg-info">PayPal</span>
+                            {% elif fatura.metodo_pagamento == 'multibanco' %}
+                              <span class="badge bg-secondary">Multibanco</span>
+                            {% else %}
+                              <span class="badge bg-secondary">Transferência</span>
+                            {% endif %}
+                          </td>
+                          <td>€{{ fatura.valor }}</td>
+                          <td>€{{ fatura.valor_plataforma|default:"0.00" }}</td>
+                          <td>€{{ fatura.valor_freelancer|default:fatura.valor }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                
+                <!-- Paginação para o histórico de faturas pagas -->
+                {% if faturas_pagas.paginator.num_pages > 1 %}
+                <div class="pagination-container d-flex justify-content-center mt-4">
+                  <nav aria-label="Navegação de páginas do histórico">
+                    <ul class="pagination pagination-sm">
+                      {% if faturas_pagas.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?tab=payment-methods&history_page=1" aria-label="Primeira">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?tab=payment-methods&history_page={{ faturas_pagas.previous_page_number }}" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                      {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&laquo;&laquo;</span>
+                        </li>
+                        <li class="page-item disabled">
+                          <span class="page-link">&laquo;</span>
+                        </li>
+                      {% endif %}
+                      
+                      {% for i in faturas_pagas.paginator.page_range %}
+                        {% if faturas_pagas.number == i %}
+                          <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% elif i > faturas_pagas.number|add:'-3' and i < faturas_pagas.number|add:'3' %}
+                          <li class="page-item">
+                            <a class="page-link" href="?tab=payment-methods&history_page={{ i }}">{{ i }}</a>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% if faturas_pagas.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?tab=payment-methods&history_page={{ faturas_pagas.next_page_number }}" aria-label="Próxima">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?tab=payment-methods&history_page={{ faturas_pagas.paginator.num_pages }}" aria-label="Última">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                          </a>
+                        </li>
+                      {% else %}
+                        <li class="page-item disabled">
+                          <span class="page-link">&raquo;</span>
+                        </li>
+                        <li class="page-item disabled">
+                          <span class="page-link">&raquo;&raquo;</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+                <div class="text-center text-muted small mt-2">
+                  Página {{ faturas_pagas.number }} de {{ faturas_pagas.paginator.num_pages }} ({{ faturas_pagas.paginator.count }} faturas no total)
+                </div>
+                {% endif %}
+                <!-- Fim da paginação do histórico -->
+              {% else %}
+                <div class="text-center py-5">
+                  <i class="bi bi-cash-stack fs-1 mb-3 text-muted"></i>
+                  <h5>Ainda não recebeste nenhum pagamento</h5>
+                  <p class="text-muted">O histórico de recebimentos será exibido aqui quando tiveres faturas pagas pelos clientes.</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const faturaRows = document.querySelectorAll('.fatura-row');
+    
+    if (searchInput && faturaRows.length > 0) {
+      searchInput.addEventListener('keyup', function() {
+        const searchValue = this.value.toLowerCase();
+        
+        faturaRows.forEach(function(row) {
+          const id = row.querySelector('.fatura-id').textContent.toLowerCase();
+          const servico = row.querySelector('.servico-nome').textContent.toLowerCase();
+          
+          if (id.includes(searchValue) || servico.includes(searchValue)) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+    }
+    
+    // Verificar parâmetro na URL para ativar a aba de métodos de pagamento
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab') === 'payment-methods') {
+      const paymentMethodsTab = document.getElementById('payment-methods-tab');
+      if (paymentMethodsTab) {
+        paymentMethodsTab.click();
+      }
+    }
+    
+    // Verificar ação para ativar abas específicas
+    const action = urlParams.get('action');
+    if (action) {
+      if (action === 'update_paypal' && document.getElementById('paypal-tab')) {
+        document.getElementById('payment-methods-tab').click();
+        document.getElementById('paypal-tab').click();
+      } 
+      else if (action === 'connect_stripe' && document.getElementById('stripe-tab')) {
+        document.getElementById('payment-methods-tab').click();
+        document.getElementById('stripe-tab').click();
+      }
+      else if (action === 'update_fee' && document.getElementById('settings-tab')) {
+        document.getElementById('payment-methods-tab').click();
+        document.getElementById('settings-tab').click();
+      }
+    }
+    
+    // Atualizar os links de filtro para preservar a paginação
+    const updateFilterLinks = function() {
+      const statusLinks = document.querySelectorAll('a[href^="?status="]');
+      const currentPage = urlParams.get('page');
+      
+      if (currentPage) {
+        statusLinks.forEach(function(link) {
+          const href = link.getAttribute('href');
+          link.setAttribute('href', href + '&page=' + currentPage);
+        });
+      }
+    };
+    
+    updateFilterLinks();
+  });
+</script>
+{% endblock %}

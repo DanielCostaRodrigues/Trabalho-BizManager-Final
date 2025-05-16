@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gestão de Clientes{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Barra lateral/Navegação -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if user.perfil.foto %}
+            <img src="{{ user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/profile-placeholder.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">Gestão de Clientes</p>
+          </div>
+        </div>
+        
+        <!-- Links de navegação -->
+        <div class="d-grid gap-2">
+          <a href="{% url 'perfil' %}" class="btn btn-outline-primary">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-outline-primary">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+          <a href="{% url 'listar_clientes' %}" class="btn btn-success text-white">Clientes</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      <div class="card shadow-sm rounded mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="card-title mb-0">Gestão de Clientes</h5>
+            <span class="badge bg-primary rounded-pill">{{ num_total_clientes }} clientes</span>
+          </div>
+          
+          <!-- Formulário de Filtros -->
+          <form method="get" class="mb-4">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="{{ form.search.id_for_label }}" class="form-label">{{ form.search.label }}</label>
+                {{ form.search }}
+              </div>
+              <div class="col-md-2">
+                <label for="{{ form.status.id_for_label }}" class="form-label">{{ form.status.label }}</label>
+                {{ form.status }}
+              </div>
+              <div class="col-md-3">
+                <label for="{{ form.ultimo_servico.id_for_label }}" class="form-label">{{ form.ultimo_servico.label }}</label>
+                {{ form.ultimo_servico }}
+              </div>
+              <div class="col-md-3">
+                <label for="{{ form.servico_tipo.id_for_label }}" class="form-label">{{ form.servico_tipo.label }}</label>
+                {{ form.servico_tipo }}
+              </div>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-4">
+                <label for="{{ form.ordenar_por.id_for_label }}" class="form-label">{{ form.ordenar_por.label }}</label>
+                {{ form.ordenar_por }}
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="bi bi-search me-1"></i>Filtrar
+                </button>
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <a href="{% url 'listar_clientes' %}" class="btn btn-outline-secondary w-100">
+                  <i class="bi bi-x-circle me-1"></i>Limpar
+                </a>
+              </div>
+              <div class="col-md-4 text-md-end d-flex align-items-end justify-content-end">
+                <div class="dropdown">
+                  <button class="btn btn-outline-primary dropdown-toggle" type="button" id="relatoriosDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-file-earmark-text me-1"></i>Relatórios Rápidos
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="relatoriosDropdown">
+                    <li><a class="dropdown-item" href="?relatorio=top10">Top 10 Clientes</a></li>
+                    <li><a class="dropdown-item" href="?relatorio=inativos">Clientes a Reconquistar</a></li>
+                    <li><a class="dropdown-item" href="?relatorio=oportunidades">Oportunidades de Upsell</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+          
+          <!-- Tabela de Clientes -->
+          {% if clientes %}
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <thead style="background-color: transparent !important;"></thead>
+                <tr>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Pedidos</th>
+                  <th scope="col">Total Gasto</th>
+                  <th scope="col">Última Compra</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                          <i class="bi bi-person text-primary"></i>
+                        </div>
+                      </div>
+                      <div class="ms-3">
+                        <h6 class="mb-0">{{ cliente.get_full_name }}</h6>
+                        {% if cliente.perfil.cliente_detalhe.empresa %}
+                          <small class="text-muted">{{ cliente.perfil.cliente_detalhe.empresa }}</small>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{ cliente.email }}</td>
+                  <td>{{ cliente.num_pedidos }}</td>
+                  <td>{{ cliente.total_gasto }}€</td>
+                  <td>
+                    {% if cliente.ultimo_pedido_data %}
+                      {{ cliente.ultimo_pedido_data|date:"d/m/Y" }}
+                    {% else %}
+                      <span class="text-muted">Nunca</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if cliente.ultimo_pedido_data %}
+                      {% if cliente.is_inactive %}
+                        <span class="badge bg-danger">Inativo</span>
+                      {% else %}
+                        <span class="badge bg-success">Ativo</span>
+                      {% endif %}
+                    {% else %}
+                      <span class="badge bg-warning">Sem Pedidos</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <div class="btn-group">
+  <a href="{% url 'ver_perfil_utilizador' cliente.id %}" class="btn btn-sm btn-ver">
+    <i class="bi bi-eye"></i>
+  </a>
+  <button type="button" class="btn btn-sm btn-ver dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="visually-hidden">Expandir Menu</span>
+  </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="{% url 'chat:start_chat' username=cliente.email %}">
+                            <i class="bi bi-chat-dots me-1"></i>Enviar Mensagem
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="{% url 'enviar_proposta_cliente' cliente.id %}">
+                            <i class="bi bi-tag me-1"></i>Enviar Proposta
+                          </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                          <a class="dropdown-item" href="{% url 'exportar_dados_cliente' cliente.id %}">
+                            <i class="bi bi-file-earmark-text me-1"></i>Exportar Dados
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Paginação -->
+          {% if clientes.has_other_pages %}
+          <nav aria-label="Paginação" class="mt-4">
+            <ul class="pagination justify-content-center">
+              {% if clientes.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Primeira">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ clientes.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Primeira">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+              {% endif %}
+              
+              {% for i in clientes.paginator.page_range %}
+                {% if clientes.number == i %}
+                  <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                {% elif i > clientes.number|add:'-3' and i < clientes.number|add:'3' %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              
+              {% if clientes.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ clientes.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Próxima">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ clientes.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Última">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                  </a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Próxima">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Última">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+          {% endif %}
+          
+          {% else %}
+          <!-- Mensagem de nenhum cliente encontrado -->
+          <div class="alert alert-info">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <i class="bi bi-info-circle fs-3 me-3"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">Nenhum cliente encontrado</h5>
+                <p class="mb-0">Tenta ajustar os filtros ou aguarda até que novos clientes solicitem os teus serviços.</p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Código JavaScript para melhorar a experiência do utilizador
+    
+    // Atualização automática de filtros ao mudar selects
+    const selects = document.querySelectorAll('select[name="status"], select[name="ultimo_servico"], select[name="servico_tipo"], select[name="ordenar_por"]');
+    selects.forEach(select => {
+      select.addEventListener('change', function() {
+        this.closest('form').submit();
+      });
+    });
+    
+
+  });
+</script>
+{% endblock %}

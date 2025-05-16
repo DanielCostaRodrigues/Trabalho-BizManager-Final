@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if profile_user.user_type == 'freelancer' %}
+        Perfil de Freelancer - {{ profile_user.get_full_name }}
+    {% elif profile_user.user_type == 'cliente' %}
+        Perfil de Cliente - {{ profile_user.get_full_name }}
+    {% else %}
+        Perfil de {{ profile_user.get_full_name }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Card principal do perfil -->
+            <div class="card {{ profile_user.user_type }}">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start">
+                        {% if perfil.foto %}
+                            <img src="{{ perfil.foto.url }}" alt="Foto de perfil" class="avatar freelancer-avatar">
+                        {% else %}
+                            <img src="{% static 'images/profile-placeholder.png' %}" alt="Foto de perfil" class="avatar freelancer-avatar">
+                        {% endif %}
+                        
+                        <div class="ms-md-4 mt-3 mt-md-0 text-center text-md-start">
+                            <h2 class="card-title">{{ profile_user.get_full_name }}</h2>
+                            <p class="text-muted">{{ profile_user.email }}</p>
+                            <span class="badge {% if profile_user.user_type == 'freelancer' %}freelancer{% elif profile_user.user_type == 'cliente' %}cliente{% endif %}">
+                                {% if profile_user.user_type == 'freelancer' %}
+                                    Freelancer
+                                {% elif profile_user.user_type == 'cliente' %}
+                                    Cliente
+                                {% else %}
+                                    Utilizador
+                                {% endif %}
+                            </span>
+                            <p class="mt-2">
+                                <i class="bi bi-clock me-2"></i> Membro desde {{ profile_user.date_joined|date:"d/m/Y" }}
+                            </p>
+                            
+                            {% if not is_current_user %}
+                                <div class="mt-3">
+                                    <a href="{% url 'chat:start_chat' username=profile_user.email %}" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-chat-dots-fill me-2"></i> Enviar mensagem
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Estatísticas do utilizador -->
+            <div class="row mt-4">
+                {% if profile_user.user_type == 'freelancer' %}
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card-modern">
+                            <div class="stat-number-modern">{{ user_services.count }}</div>
+                            <div class="stat-label-modern">Serviços</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card-modern">
+                            <div class="stat-number-modern">{{ projetos_concluidos }}</div>
+                            <div class="stat-label-modern">Projetos concluídos</div>
+                        </div>
+                    </div>
+                {% elif profile_user.user_type == 'cliente' %}
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card-modern">
+                            <div class="stat-number-modern">{{ pedidos_realizados }}</div>
+                            <div class="stat-label-modern">Pedidos realizados</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="stat-card-modern">
+                            <div class="stat-number-modern">{{ projetos_concluidos }}</div>
+                            <div class="stat-label-modern">Projetos concluídos</div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="col-md-4 mb-3">
+                    <div class="stat-card-modern">
+                        <div class="stat-number-modern">{{ user_comments.count }}</div>
+                        <div class="stat-label-modern">Avaliações</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Informações biográficas -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {% if profile_user.user_type == 'freelancer' %}
+                            Sobre o Freelancer
+                        {% elif profile_user.user_type == 'cliente' %}
+                            Sobre o Cliente
+                        {% else %}
+                            Sobre
+                        {% endif %}
+                    </h4>
+                    
+                    {% if perfil.bio %}
+                        <p>{{ perfil.bio }}</p>
+                    {% else %}
+                        <p class="text-muted">Sem informações disponíveis.</p>
+                    {% endif %}
+                    
+                    {% if profile_user.user_type == 'freelancer' and has_freelancer_details %}
+                        <h5 class="mt-4 mb-2">Especialização</h5>
+                        <p>
+                            {% for area in perfil.freelancer_detalhe.areas_atuacao.all %}
+                                <span class="category-pill me-1">{{ area.nome }}</span>
+                            {% empty %}
+                                <span class="text-muted">Não especificado</span>
+                            {% endfor %}
+                        </p>
+                        
+                        {% if perfil.freelancer_detalhe.area_personalizada %}
+                            <p><strong>Área personalizada:</strong> {{ perfil.freelancer_detalhe.area_personalizada }}</p>
+                        {% endif %}
+                        
+                        <h5 class="mt-4 mb-2">Disponibilidade</h5>
+                        <p>
+                            {% if user_services.count > 0 %}
+                                <span class="badge cliente">Disponível para novos projetos</span>
+                            {% else %}
+                                <span class="badge status-pendente">Sem serviços disponíveis</span>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    
+                    {% if profile_user.user_type == 'cliente' and has_cliente_details %}
+                        {% if perfil.cliente_detalhe.empresa %}
+                            <h5 class="mt-4 mb-2">Empresa</h5>
+                            <p>{{ perfil.cliente_detalhe.empresa }}</p>
+                        {% endif %}
+                        
+                        <h5 class="mt-4 mb-2">Histórico de Contratações</h5>
+                        <p>
+                            {% if pedidos_realizados > 0 %}
+                                <span class="badge status-concluido">Cliente ativo</span>
+                            {% else %}
+                                <span class="badge">Sem contratações anteriores</span>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    
+                    {% if perfil.morada %}
+                        <h5 class="mt-4 mb-2">Localização</h5>
+                        <p>{{ perfil.morada }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Serviços oferecidos (apenas para freelancers) -->
+            {% if profile_user.user_type == 'freelancer' and user_services %}
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Serviços Oferecidos</h4>
+                        <div class="row service-grid">
+                            {% for servico in user_services %}
+                                <div class="col-md-6 mb-3">
+                                    <div class="service-card">
+                                        <div class="service-card-body">
+                                            <span class="service-card-tag">{{ servico.area.nome|title }}</span>
+                                            <h5 class="service-card-title">{{ servico.nome }}</h5>
+                                            <p class="service-card-description">{{ servico.descricao|truncatewords:15 }}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="service-price">{{ servico.orcamento }} €</div>
+                                                <a href="{% url 'ver_servico_publico' servico_id=servico.id %}" class="btn btn-primary btn-sm">Ver detalhes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            
+            <!-- Histórico de projetos para clientes -->
+            {% if profile_user.user_type == 'cliente' and projetos_concluidos > 0 %}
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Histórico de Projetos</h4>
+                        <p class="text-success">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            {{ projetos_concluidos }} projeto(s) concluído(s) com sucesso
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+            
+            <!-- Avaliações e comentários -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {% if profile_user.user_type == 'freelancer' %}
+                            Avaliações de Clientes
+                        {% elif profile_user.user_type == 'cliente' %}
+                            Feedback para Freelancers
+                        {% else %}
+                            Avaliações e Comentários
+                        {% endif %}
+                    </h4>
+                    
+                    {% if user_comments %}
+                        {% for comentario in user_comments|slice:":5" %}
+                            <div class="testimonial-card-modern mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="testimonial-author-modern">{{ comentario.utilizador.get_full_name }}</div>
+                                        <small class="text-muted">{{ comentario.data_criacao|date:"d/m/Y" }}</small>
+                                    </div>
+                                </div>
+                                <p class="testimonial-quote-modern mt-2">{{ comentario.texto }}</p>
+                            </div>
+                        {% endfor %}
+                        
+                        {% if user_comments.count > 5 %}
+                            <div class="text-center mt-3">
+                                <button class="btn-cta-modern" id="loadMoreComments">Ver mais comentários</button>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <p class="text-muted">
+                            {% if profile_user.user_type == 'freelancer' %}
+                                Este freelancer ainda não recebeu avaliações.
+                            {% elif profile_user.user_type == 'cliente' %}
+                                Este cliente ainda não fez comentários.
+                            {% else %}
+                                Este utilizador ainda não tem avaliações.
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Script para carregar mais comentários
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadMoreBtn = document.getElementById('loadMoreComments');
+        if (loadMoreBtn) {
+            let offset = 5;
+            loadMoreBtn.addEventListener('click', function() {
+                // Mostrar indicador de carregamento
+                loadMoreBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> A carregar...';
+                loadMoreBtn.disabled = true;
+                
+                fetch(`/api/comentarios/utilizador/{{profile_user.id}}/?offset=${offset}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.comentarios && data.comentarios.length > 0) {
+                            const commentsContainer = document.querySelector('.card-body:last-child');
+                            
+                            data.comentarios.forEach(comment => {
+                                const commentElement = document.createElement('div');
+                                commentElement.className = 'testimonial-card-modern mb-3';
+                                commentElement.innerHTML = `
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <div class="testimonial-author-modern">${comment.nome_utilizador}</div>
+                                            <small class="text-muted">${comment.data}</small>
+                                        </div>
+                                    </div>
+                                    <p class="testimonial-quote-modern mt-2">${comment.texto}</p>
+                                `;
+                                commentsContainer.insertBefore(commentElement, loadMoreBtn.parentNode);
+                            });
+                            
+                            offset += data.comentarios.length;
+                            
+                            // Verificar se há mais comentários para carregar
+                            if (!data.has_more) {
+                                loadMoreBtn.parentNode.remove();
+                            } else {
+                                // Restaurar o botão para permitir mais carregamentos
+                                loadMoreBtn.innerHTML = 'Ver mais comentários';
+                                loadMoreBtn.disabled = false;
+                            }
+                        } else {
+                            // Sem mais comentários para carregar
+                            loadMoreBtn.parentNode.remove();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao carregar mais comentários:', error);
+                        loadMoreBtn.innerHTML = 'Tentar novamente';
+                        loadMoreBtn.disabled = false;
+                    });
+            });
+        }
+    });
+</script>
+{% endblock %}

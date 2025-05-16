@@ -1,0 +1,315 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Solicitar Serviço | BizManager{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Sidebar/Navegação lateral -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if request.user.perfil.foto %}
+            <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">
+              {% if user_type == 'freelancer' %}
+                Mostra o teu talento, conquista mais clientes!
+              {% else %}
+                Encontra os melhores profissionais para o teu projeto!
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        
+        <!-- Links de navegação -->
+        <div class="d-grid gap-2">
+          <a href="{% url 'perfil' %}" class="btn btn-outline-primary">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-success text-white">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'servicos_publicos' %}">Serviços</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'ver_servico_publico' servico.id %}">{{ servico.nome }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Solicitar</li>
+        </ol>
+      </nav>
+      
+      <div class="card shadow-sm rounded mb-4">
+        <div class="card-body p-4">
+          <h5 class="card-title mb-4">Solicitar Serviço</h5>
+          
+          <!-- Informações do serviço -->
+          <div class="d-flex align-items-center mb-4">
+            <div>
+              <h4>{{ servico.nome }}</h4>
+              <div class="text-muted">{{ servico.area.get_nome_display }}</div>
+            </div>
+            <div class="ms-auto">
+              <span class="badge bg-primary fs-6 p-2">{{ servico.orcamento }}€</span>
+            </div>
+          </div>
+          
+          <!-- Formulário de solicitação -->
+          <form method="post" action="{% url 'solicitar_servico' servico.id %}" id="servico-form">
+            {% csrf_token %}
+            
+            <!-- Tipo de serviço -->
+            <div class="card mb-4">
+              <div class="card-header bg-transparent py-3">
+                <h6 class="mb-0">Tipo de Serviço</h6>
+              </div>
+              <div class="card-body">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="tipo_servico" id="tipo_imediato" value="imediato" checked>
+                  <label class="form-check-label" for="tipo_imediato">Imediato</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="tipo_servico" id="tipo_agendado" value="agendado">
+                  <label class="form-check-label" for="tipo_agendado">Agendado</label>
+                </div>
+                
+                <div class="mt-3 small text-muted">
+                  <i class="bi bi-info-circle me-1"></i>
+                  <span id="tipo-servico-info">Escolhe "Imediato" para um processamento rápido ou "Agendado" para selecionar uma data específica.</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Nova secção de calendário -->
+            <div class="card mb-4" id="calendar-section" style="display: none;">
+              <div class="card-header shadow-sm py-3">
+                <h6 class="mb-0">Marcação do dia</h6>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-4">
+                      <label for="data_agendamento" class="form-label">Data do serviço</label>
+                      <input type="date" class="form-control" id="data_agendamento" name="data_agendamento" 
+                           min="{{ hoje|date:'Y-m-d' }}">
+                    </div>
+                    
+                    <div class="mt-3" id="data-selecionada-container" style="display: none;">
+                      <div class="alert alert-primary mb-0">
+                        <i class="bi bi-calendar-check me-2"></i>
+                        <strong>Data selecionada:</strong> <span id="data-selecionada-texto"></span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <!-- Seletor de hora -->
+                    <div class="mb-3 time-selector">
+                      <label for="time-selector" class="form-label">Hora do dia</label>
+                      <select class="form-select" id="time-selector" name="hora_agendamento">
+                        <option value="" selected>Selecione uma hora</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Integração com Google Calendar -->
+                    <div class="google-calendar-sync">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="sync-google-calendar" name="sync_google_calendar">
+                        <label class="form-check-label" for="sync-google-calendar">Sincronizar com Google Calendar</label>
+                      </div>
+                      <p class="small text-muted mt-2">
+                        Ao ativares esta opção, o evento será adicionado automaticamente ao teu Google Calendar.
+                      </p>
+                      <div id="google-auth-container">
+                        {% if google_calendar_connected %}
+                          <div class="alert alert-success py-2 mb-0">
+                            <i class="bi bi-check-circle me-1"></i> Google Calendar conectado
+                          </div>
+                        {% else %}
+                          <a href="{% url 'google_auth' %}?next={{ request.path }}" class="btn btn-sm btn-primary mt-2" id="btn-connect-google">
+                            <i class="bi bi-google me-1"></i> Conectar Google Calendar
+                          </a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Descrição e instruções -->
+            <div class="card mb-4">
+              <div class="card-header bg-transparent py-3">
+
+                <h6 class="mb-0">Descrição</h6>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="{{ form.comentario.id_for_label }}" class="form-label">Comentário ou Instruções Adicionais</label>
+                  {{ form.comentario }}
+                  {% if form.comentario.errors %}
+                    <div class="text-danger mt-1 small">
+                      {{ form.comentario.errors }}
+                    </div>
+                  {% endif %}
+                  <div class="form-text">
+                    Descreve detalhes específicos ou requisitos para este serviço.
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Termos e condições -->
+            <div class="card mb-4">
+              <div class="card-header bg-transparent py-3">
+                <h6 class="mb-0">Termos e Condições</h6>
+              </div>
+              <div class="card-body">
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="termos" name="termos" required>
+                  <label class="form-check-label" for="termos">
+                    Concordo com os termos e condições do serviço
+                  </label>
+                </div>
+                
+                <div class="alert alert-info mb-0">
+                  <i class="bi bi-info-circle me-2"></i>
+                  Ao solicitar este serviço, concordas em pagar o valor de <strong>{{ servico.orcamento }}€</strong> após a conclusão satisfatória do trabalho.
+                </div>
+              </div>
+            </div>
+            
+            <!-- Botões de ação -->
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-send me-2"></i>Enviar Solicitação
+              </button>
+              <a href="{% url 'ver_servico_publico' servico.id %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Voltar
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Elementos do tipo de serviço
+  const tipoImediato = document.getElementById('tipo_imediato');
+  const tipoAgendado = document.getElementById('tipo_agendado');
+  const calendarSection = document.getElementById('calendar-section');
+  const tipoServicoInfo = document.getElementById('tipo-servico-info');
+  const dataSelecionadaContainer = document.getElementById('data-selecionada-container');
+  const dataSelecionadaTexto = document.getElementById('data-selecionada-texto');
+  const dataAgendamentoInput = document.getElementById('data_agendamento');
+  
+  // Seleção do tipo de serviço
+  tipoImediato.addEventListener('change', function() {
+    if (this.checked) {
+      calendarSection.style.display = 'none';
+      tipoServicoInfo.textContent = 'O serviço será processado assim que possível pelo prestador.';
+      dataAgendamentoInput.value = '';
+      document.getElementById('time-selector').value = '';
+      dataSelecionadaContainer.style.display = 'none';
+    }
+  });
+  
+  tipoAgendado.addEventListener('change', function() {
+    if (this.checked) {
+      calendarSection.style.display = 'block';
+      tipoServicoInfo.textContent = 'Seleciona uma data e hora específicas para este serviço.';
+    }
+  });
+  
+  // Atualizar texto da data selecionada quando o input de data mudar
+  dataAgendamentoInput.addEventListener('change', function() {
+    if (this.value) {
+      // Formatar a data para exibição
+      const dataSelecionada = new Date(this.value);
+      const dia = dataSelecionada.getDate();
+      
+      // Obter o nome do mês em português
+      const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 
+                     'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+      const mes = meses[dataSelecionada.getMonth()];
+      
+      const ano = dataSelecionada.getFullYear();
+      
+      const formattedDisplayDate = `${dia} de ${mes} de ${ano}`;
+      dataSelecionadaTexto.textContent = formattedDisplayDate;
+      dataSelecionadaContainer.style.display = 'block';
+    } else {
+      dataSelecionadaContainer.style.display = 'none';
+    }
+  });
+  
+  // Validar o formulário na submissão
+  document.getElementById('servico-form').addEventListener('submit', function(e) {
+    if (tipoAgendado.checked) {
+      const dataAgendamento = dataAgendamentoInput.value;
+      const horaAgendamento = document.getElementById('time-selector').value;
+      
+      if (!dataAgendamento) {
+        e.preventDefault();
+        alert('Por favor, seleciona uma data para o agendamento.');
+        return false;
+      }
+      
+      if (!horaAgendamento) {
+        e.preventDefault();
+        alert('Por favor, seleciona uma hora para o agendamento.');
+        return false;
+      }
+      
+      // Verificar Google Calendar
+      const syncGoogleCalendar = document.getElementById('sync-google-calendar');
+      if (syncGoogleCalendar.checked) {
+        const isConnected = document.querySelector('#google-auth-container .alert-success');
+        if (!isConnected) {
+          if (!confirm('Precisas de conectar o Google Calendar para usar esta funcionalidade. Queres continuar sem sincronizar?')) {
+            e.preventDefault();
+            return false;
+          }
+          // Se o utilizador escolher continuar, desmarcar opção
+          syncGoogleCalendar.checked = false;
+        }
+      }
+    }
+  });
+  
+  // Inicializar estado
+  if (tipoImediato.checked) {
+    calendarSection.style.display = 'none';
+  } else if (tipoAgendado.checked) {
+    calendarSection.style.display = 'block';
+  }
+});
+</script>
+{% endblock %}

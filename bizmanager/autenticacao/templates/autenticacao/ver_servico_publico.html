@@ -1,0 +1,354 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ servico.nome }} - BizManager{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container service-detail-container">
+  <!-- Navegação (breadcrumbs) -->
+  <div class="service-breadcrumb">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'servicos_publicos' %}">Serviços</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ servico.nome }}</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="row mt-4">
+    <!-- Coluna principal com detalhes do serviço -->
+    <div class="col-lg-8">
+      <!-- Card principal do serviço -->
+      <div class="service-detail-card">
+        <!-- Galeria de imagens -->
+        <div class="service-detail-img">
+          {% if servico.imagens.all %}
+            <!-- Carrossel de imagens -->
+            <div id="serviceImageCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                {% for img in servico.imagens.all %}
+                  <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ img.imagem.url }}" class="d-block w-100" alt="{{ servico.nome }}" style="height: 400px; object-fit: cover;">
+                  </div>
+                {% endfor %}
+              </div>
+              
+              {% if servico.imagens.all.count > 1 %}
+              <button class="carousel-control-prev" type="button" data-bs-target="#serviceImageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#serviceImageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+              </button>
+              
+              <!-- Indicadores de imagens -->
+              <div class="carousel-indicators">
+                {% for img in servico.imagens.all %}
+                  <button type="button" data-bs-target="#serviceImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" 
+                    {% if forloop.first %}class="active" aria-current="true"{% endif %} 
+                    aria-label="Imagem {{ forloop.counter }}"></button>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+            
+            <!-- Miniaturas -->
+            {% if servico.imagens.all.count > 1 %}
+            <div class="service-thumbnails mt-3">
+              <div class="row g-2">
+                {% for img in servico.imagens.all %}
+                  <div class="col-2">
+                    <img src="{{ img.imagem.url }}" class="img-thumbnail cursor-pointer" 
+                        alt="Miniatura" data-bs-target="#serviceImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                        style="height: 60px; object-fit: cover; cursor: pointer;">
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          {% elif servico.imagem %}
+            <!-- Imagem única (compatibilidade retroativa) -->
+            <img src="{{ servico.imagem.url }}" alt="{{ servico.nome }}" class="img-fluid">
+          {% else %}
+            <!-- Sem imagem -->
+            <div class="d-flex align-items-center justify-content-center h-100" style="min-height: 300px; background-color: #f8f9fa;">
+              <i class="bi bi-briefcase display-1 text-muted"></i>
+            </div>
+          {% endif %}
+        </div>
+        
+        <div class="service-detail-body">
+          <!-- Categoria e meta informações -->
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <span class="service-detail-tag">{{ servico.area }}</span>
+            <div class="service-detail-meta">
+              <i class="bi bi-calendar me-1"></i> Publicado em {{ servico.data_criacao|date:"d/m/Y" }}
+            </div>
+          </div>
+          
+          <!-- Título do serviço -->
+          <h1 class="service-detail-title">{{ servico.nome }}</h1>
+          
+          <!-- Detalhes do preço e prazo -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="service-detail-info-box">
+                <div class="service-detail-info-title">Orçamento</div>
+                <div class="service-detail-info-value price">{{ servico.orcamento }}€</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="service-detail-info-box">
+                <div class="service-detail-info-title">Prazo de Entrega</div>
+                <div class="service-detail-info-value">{{ servico.prazo }}</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Descrição detalhada -->
+          <div class="mb-4">
+            <h5 class="fw-bold mb-3">Descrição do Serviço</h5>
+            <div class="service-detail-description">
+              {{ servico.descricao|linebreaks }}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Comentários Section -->
+      <div class="service-comments-section mt-5">
+        <h3 class="related-services-title">Comentários e Avaliações</h3>
+        
+        <!-- Lista de comentários -->
+        <div class="row g-4">
+          {% if comentarios %}
+            {% for comentario in comentarios %}
+              <div class="col-md-6">
+                <div class="service-comment-card">
+                  <div class="service-comment-header d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                      {% if comentario.utilizador.perfil.foto %}
+                        <img src="{{ comentario.utilizador.perfil.foto.url }}" class="rounded-circle me-2" width="40" height="40" alt="{{ comentario.utilizador.get_full_name }}">
+                      {% else %}
+                        <div class="service-comment-avatar {% cycle 'bg-primary' 'bg-success' 'bg-info' %} d-flex align-items-center justify-content-center text-white rounded-circle" style="width: 40px; height: 40px;">
+                          <i class="bi bi-person-fill"></i>
+                        </div>
+                      {% endif %}
+                      <div>
+                        <div class="fw-bold">{{ comentario.utilizador.get_full_name }}</div>
+                        <small class="text-muted">{{ comentario.data_criacao|date:"d/m/Y" }}</small>
+                      </div>
+                    </div>
+                    <div class="service-comment-rating">
+                      {% for i in "12345" %}
+                        {% if forloop.counter <= comentario.avaliacao %}
+                          <i class="bi bi-star-fill text-warning"></i>
+                        {% else %}
+                          <i class="bi bi-star text-warning"></i>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="service-comment-body mt-2">
+                    <p>{{ comentario.texto }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="col-12">
+              <div class="alert">
+                <p>Ainda não há comentários para este serviço. Sê o primeiro a comentar!</p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        
+        <!-- Formulário de comentário -->
+        {% if user.is_authenticated %}
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Deixa a tua opinião sobre este serviço</h5>
+                <form method="POST">
+                  {% csrf_token %}
+                  {% if comentario_form.avaliacao %}
+                  <div class="mb-3">
+                    <label class="form-label">Avaliação</label>
+                    <div class="rating-input">
+                      {{ comentario_form.avaliacao }}
+                    </div>
+                  </div>
+                  {% endif %}
+                  {{ comentario_form.texto }}
+                  <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">Enviar comentário</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="row mt-4">
+          <div class="col-md-12 text-center">
+            <p>Para deixar um comentário, por favor <a href="{% url 'login' %}" class="text-primary">inicia sessão</a>.</p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      
+      <!-- Serviços relacionados -->
+      <div class="related-services mt-5">
+        <h3 class="related-services-title">Serviços similares</h3>
+        
+        <div class="row g-4">
+          {% for servico_rel in servicos_relacionados %}
+            <div class="col-md-6">
+              <div class="related-service-card">
+                <h6 class="related-service-title">{{ servico_rel.nome }}</h6>
+                <p class="related-service-description">{{ servico_rel.descricao|truncatechars:80 }}</p>
+                <div class="related-service-footer">
+                  <span class="related-service-price">{{ servico_rel.orcamento }}€</span>
+                  <a href="{% url 'ver_servico_publico' servico_rel.id %}" class="btn btn-outline-primary btn-sm related-service-btn">Ver detalhes</a>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="col-12">
+              <p class="text-muted">Nenhum serviço similar encontrado.</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Coluna lateral com informações do freelancer e CTA -->
+    <div class="col-lg-4">
+      <!-- Card do freelancer -->
+      <div class="freelancer-card">
+        <div class="text-center mb-4">
+          {% if servico.freelancer.perfil.foto %}
+            <img src="{{ servico.freelancer.perfil.foto.url }}" alt="Foto do freelancer" class="freelancer-avatar">
+          {% else %}
+            <img src="{% static 'images/profile-placeholder.png' %}" alt="Foto do freelancer" class="freelancer-avatar">
+          {% endif %}
+          <h5 class="freelancer-name">{{ servico.freelancer.get_full_name }}</h5>
+          <p class="freelancer-since">Membro desde {{ servico.freelancer.date_joined|date:"M/Y" }}</p>
+          
+          <!-- Botão para ver perfil completo do freelancer -->
+          <a href="{% url 'ver_perfil_utilizador' user_id=servico.freelancer.id %}" class="btn btn-outline-primary btn-sm mt-2">
+            <i class="bi bi-person-badge me-1"></i> Ver perfil
+          </a>
+        </div>
+        
+        {% if servico.freelancer.perfil.bio %}
+          <div class="mb-4">
+            <h6 class="fw-bold mb-2">Sobre o Freelancer</h6>
+            <p class="freelancer-bio">{{ servico.freelancer.perfil.bio|truncatewords:50 }}</p>
+          </div>
+        {% endif %}
+        
+        <!-- Áreas de atuação -->
+        {% if servico.freelancer.perfil.freelancer_detalhe.areas_atuacao.all %}
+          <div class="freelancer-areas mb-4">
+            <h6 class="fw-bold mb-2">Áreas de Atuação</h6>
+            <div>
+              {% for area in servico.freelancer.perfil.freelancer_detalhe.areas_atuacao.all %}
+                <span class="freelancer-area-tag">{{ area.get_nome_display }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+        
+        <!-- Estatísticas -->
+        <div class="freelancer-stats mb-4">
+          <h6 class="fw-bold mb-2">Estatísticas</h6>
+          <div class="freelancer-stat-item">
+            <span>Serviços oferecidos</span>
+            <span class="freelancer-stat-value">{{ servicos_count }}</span>
+          </div>
+          <div class="freelancer-stat-item">
+            <span>Projetos concluídos</span>
+            <span class="freelancer-stat-value">{{ projetos_concluidos }}</span>
+          </div>
+        </div>
+        
+        <!-- Outros serviços do freelancer -->
+        {% if outros_servicos %}
+          <div class="freelancer-services-list">
+            <h6 class="fw-bold mb-3">Outros serviços deste freelancer</h6>
+            {% for outro_servico in outros_servicos %}
+              <div class="freelancer-service-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <a href="{% url 'ver_servico_publico' outro_servico.id %}" class="freelancer-service-title">{{ outro_servico.nome }}</a>
+                    <div class="freelancer-service-category">{{ outro_servico.area }}</div>
+                  </div>
+                  <span class="freelancer-service-price">{{ outro_servico.orcamento }}€</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- CTA para solicitar serviço -->
+      <div class="service-request-box mt-4">
+        <h5 class="service-request-title">Interessado neste serviço?</h5>
+        
+        {% if user.is_authenticated %}
+          {% if user.user_type == 'cliente' %}
+            {% if pedido_existente %}
+              <div class="service-request-info">
+                <i class="bi bi-info-circle-fill"></i>
+                Tu já solicitaste este serviço e aguardas uma resposta do freelancer.
+              </div>
+              <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Ver os meus pedidos</a>
+            {% else %}
+              <a href="{% url 'solicitar_servico' servico.id %}" class="service-request-btn">
+                <i class="bi bi-clipboard-check me-2"></i>Solicitar Serviço
+              </a>
+            {% endif %}
+          {% elif user.user_type == 'freelancer' %}
+            <div class="service-request-info">
+              <i class="bi bi-info-circle-fill"></i>
+              Como freelancer, podes ver este serviço mas não podes contratá-lo.
+            </div>
+          {% endif %}
+        {% else %}
+          <p>Para solicitar este serviço, precisas de ser cliente.</p>
+          <div class="d-grid gap-2">
+            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">Fazer login</a>
+            <a href="{% url 'registo_cliente' %}" class="btn btn-success">Registar como Cliente</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript para as miniaturas do carrossel -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Ativar cliques nas miniaturas
+    const thumbnails = document.querySelectorAll('.service-thumbnails img');
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        const slideIndex = this.getAttribute('data-bs-slide-to');
+        const carousel = document.getElementById('serviceImageCarousel');
+        const bsCarousel = new bootstrap.Carousel(carousel);
+        bsCarousel.to(Number(slideIndex));
+      });
+    });
+  });
+</script>
+{% endblock %}

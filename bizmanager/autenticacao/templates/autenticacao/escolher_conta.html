@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizManager - Criar conta</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="background escolher-conta">
+  <div class="container card-escolher-conta">
+    <img src="{% static 'images/logo2.png' %}" alt="BizManager Logo" class="logo">
+    <h1>Criar Conta</h1>
+    <p>"Encontra o serviço ideal ou oferece o teu – simples, rápido e eficiente!"</p>
+
+    <a href="{% url 'registo_freelancer' %}">
+      <button class="btn freelancer">Sou Freelancer</button>
+    </a>
+    <a href="{% url 'registo_cliente' %}">
+      <button class="btn cliente">Sou Cliente</button>
+    </a>
+
+    <a href="{% url 'login' %}">Já tens conta? Login</a>
+  </div>
+</body>
+
+</html>

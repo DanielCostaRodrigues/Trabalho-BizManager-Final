@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Serviços Disponíveis{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Cabeçalho da página -->
+<div class="services-header">
+  <div class="container">
+    <h1>Serviços disponíveis</h1>
+    <p class="lead">Encontra os melhores profissionais para o teu projeto. Temos uma ampla variedade de serviços para atender às tuas necessidades.</p>
+  </div>
+</div>
+
+<!-- Busca e filtros -->
+<div class="container">
+  <div class="search-filters-container">
+    <form method="GET" action="{% url 'servicos_publicos' %}">
+      <div class="row g-3">
+        <!-- Busca por palavra-chave -->
+        <div class="col-md-6">
+          <div class="search-input-group">
+            <input type="text" class="form-control" placeholder="Procurar serviços..." name="q" value="{{ request.GET.q|default:'' }}">
+            <button class="btn-search" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Filtro por área -->
+        <div class="col-md-3">
+          <select class="filter-select" name="area">
+            <option value="">Todas as áreas</option>
+            {% for area in areas %}
+              <option value="{{ area.id }}" {% if request.GET.area == area.id|stringformat:"i" %}selected{% endif %}>
+                {{ area.nome }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <!-- Ordenação -->
+        <div class="col-md-3">
+          <select class="filter-select" name="ordem">
+            <option value="recentes" {% if request.GET.ordem == 'recentes' %}selected{% endif %}>Mais recentes</option>
+            <option value="preco_asc" {% if request.GET.ordem == 'preco_asc' %}selected{% endif %}>Menor preço</option>
+            <option value="preco_desc" {% if request.GET.ordem == 'preco_desc' %}selected{% endif %}>Maior preço</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Categorias em pills -->
+  <div class="categories-filter text-center">
+    <a href="{% url 'servicos_publicos' %}" class="category-pill {% if not request.GET.area %}active{% endif %}">
+      Todos
+    </a>
+    {% for area in areas %}
+      <a href="{% url 'servicos_publicos' %}?area={{ area.id }}" class="category-pill {% if request.GET.area == area.id|stringformat:'i' %}active{% endif %}">
+        {{ area.nome }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <!-- Listagem de serviços -->
+  <div class="service-grid">
+    <div class="row g-4">
+      {% if servicos %}
+        {% for servico in servicos %}
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card">
+              <div class="service-card-img">
+                {% if servico.imagem %}
+                  <img src="{{ servico.imagem.url }}" alt="{{ servico.nome }}">
+                {% else %}
+                  <div class="service-card-img-placeholder">
+                    <i class="bi bi-briefcase"></i>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <div class="service-card-body">
+                <span class="service-card-tag">{{ servico.area }}</span>
+                <h5 class="service-card-title">{{ servico.nome }}</h5>
+                <p class="service-card-description">{{ servico.descricao|truncatechars:100 }}</p>
+              </div>
+              
+              <div class="service-card-footer">
+                <div class="service-provider">
+                  {% if servico.freelancer.perfil.foto %}
+                    <img src="{{ servico.freelancer.perfil.foto.url }}" alt="{{ servico.freelancer.get_full_name }}" class="service-provider-avatar">
+                  {% else %}
+                    <img src="{% static 'images/profile-placeholder.png' %}" alt="{{ servico.freelancer.get_full_name }}" class="service-provider-avatar">
+                  {% endif %}
+                  <span class="service-provider-name">{{ servico.freelancer.get_full_name }}</span>
+                </div>
+                <span class="service-price">{{ servico.orcamento }}€</span>
+              </div>
+              
+              <a href="{% url 'ver_servico_publico' servico.id %}" class="stretched-link"></a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <div class="empty-state">
+            <div class="empty-state-icon">
+              <i class="bi bi-search"></i>
+            </div>
+            <h4>Nenhum serviço encontrado</h4>
+            <p>Tenta ajustar os filtros ou fazer uma nova pesquisa.</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Paginação -->
+  {% if servicos.has_other_pages %}
+    <div class="pagination-container">
+      <nav aria-label="Navegação de páginas">
+        <ul class="pagination justify-content-center custom-pagination">
+          {% if servicos.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Primeira">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ servicos.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Anterior">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#" aria-label="Primeira">
+                <span aria-hidden="true">&laquo;&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#" aria-label="Anterior">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          {% endif %}
+          
+          {% for num in servicos.paginator.page_range %}
+            {% if servicos.number == num %}
+              <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+            {% elif num > servicos.number|add:'-3' and num < servicos.number|add:'3' %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          
+          {% if servicos.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ servicos.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Seguinte">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ servicos.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Última">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#" aria-label="Seguinte">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#" aria-label="Última">
+                <span aria-hidden="true">&raquo;&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  {% endif %}
+
+  <!-- CTA para freelancers -->
+  <div class="cta-box">
+    <h4>És um profissional qualificado? Oferece os teus serviços!</h4>
+    <p>Começa como freelancer e oferece os teus serviços para milhares de clientes.</p>
+    <a href="{% url 'registo_freelancer' %}" class="cta-btn">Sê um Freelancer</a>
+  </div>
+</div>
+{% endblock %}

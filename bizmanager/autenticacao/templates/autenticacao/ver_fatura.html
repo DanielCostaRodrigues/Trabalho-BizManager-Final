@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalhes da Fatura | BizManager{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Sidebar/Navegação lateral -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if request.user.perfil.foto %}
+            <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">
+              {% if user_type == 'freelancer' %}
+                Mostra o teu talento, conquista mais clientes!
+              {% else %}
+                Encontra os melhores profissionais para o teu projeto!
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        
+        <!-- Links de navegação -->
+        <div class="d-grid gap-2">
+          <a href="{% url 'perfil' %}" class="btn btn-outline-primary">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-outline-primary">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-success text-white">Faturas</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'faturas' %}">Faturas</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Fatura #{{ fatura.id|stringformat:"06d" }}</li>
+        </ol>
+      </nav>
+      
+      <!-- Fatura -->
+      <div class="card shadow-sm rounded mb-4">
+        <div class="card-body p-4">
+          <!-- Ações da Fatura -->
+          <div class="d-flex justify-content-end mb-4">
+            <div class="btn-group">
+              {% if user_type == 'cliente' and not fatura.pago %}
+              <a href="{% url 'selecionar_metodo_pagamento' fatura.id %}" class="btn btn-primary">
+                <i class="bi bi-credit-card me-2"></i> Pagar Agora
+              </a>
+              {% endif %}
+              
+              <button class="btn btn-secondary" onclick="window.print()">
+                <i class="bi bi-printer me-2"></i>Imprimir Fatura
+              </button>
+              
+              <a href="{% url 'ver_pedido' fatura.pedido.id %}" class="btn btn-primary">
+                <i class="bi bi-eye me-2"></i>Ver Pedido
+              </a>
+              
+              <a href="{% url 'faturas' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Voltar para Lista
+              </a>
+            </div>
+          </div>
+          
+          <!-- Cabeçalho da Fatura -->
+          <div class="row mb-5">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center">
+                <img src="{% static 'images/logo2.png' %}" alt="BizManager" height="50" class="me-3">
+                <div>
+                  <h5 class="mb-1">BizManager</h5>
+                  <p class="text-muted mb-0">Simplifica a gestão do teu negócio.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 text-end">
+              <h3 class="mb-1">FATURA</h3>
+              <h5 class="text-primary mb-2">F-{{ fatura.id|stringformat:"06d" }}</h5>
+              <p class="mb-1">Data de emissão: {{ fatura.data_emissao|date:"d/m/Y" }}</p>
+              
+              {% if fatura.pago %}
+                <div class="badge bg-success p-2 mt-2">PAGA</div>
+                <p class="mb-0 mt-2">Data de pagamento: {{ fatura.data_pagamento|date:"d/m/Y" }}</p>
+              {% else %}
+                <div class="badge bg-warning p-2 mt-2">PENDENTE</div>
+              {% endif %}
+            </div>
+          </div>
+          
+          <!-- Informações de prestador e cliente -->
+          <div class="row mb-5">
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title text-uppercase text-muted small mb-3">PRESTADOR DE SERVIÇO</h6>
+                  <h5 class="mb-2">{{ fatura.pedido.servico.freelancer.get_full_name }}</h5>
+                  <p class="mb-1">{{ fatura.pedido.servico.freelancer.email }}</p>
+                  {% if fatura.pedido.servico.freelancer.perfil.morada %}
+                    <p class="mb-0">{{ fatura.pedido.servico.freelancer.perfil.morada }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title text-uppercase text-muted small mb-3">CLIENTE</h6>
+                  <h5 class="mb-2">{{ fatura.pedido.cliente.get_full_name }}</h5>
+                  <p class="mb-1">{{ fatura.pedido.cliente.email }}</p>
+                  {% if fatura.pedido.cliente.perfil.morada %}
+                    <p class="mb-1">{{ fatura.pedido.cliente.perfil.morada }}</p>
+                  {% endif %}
+                  {% if fatura.pedido.cliente.perfil.cliente_detalhe.empresa %}
+                    <p class="mb-0"><strong>{{ fatura.pedido.cliente.perfil.cliente_detalhe.empresa }}</strong></p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Detalhes do serviço -->
+          <div class="card mb-5">
+            <div class="card-header shadow-sm">
+              <h6 class="mb-0">Detalhes do Serviço</h6>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Descrição</th>
+                      <th>Pedido</th>
+                      <th class="text-end">Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p class="mb-1"><strong>{{ fatura.pedido.servico.nome }}</strong></p>
+                        <p class="text-muted small mb-0">{{ fatura.pedido.servico.descricao|truncatechars:100 }}</p>
+                      </td>
+                      <td>#{{ fatura.pedido.id|stringformat:"06d" }}</td>
+                      <td class="text-end">{{ fatura.valor }}€</td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="table-light">
+                    <tr>
+                      <td colspan="2" class="text-end"><strong>TOTAL</strong></td>
+                      <td class="text-end"><strong>{{ fatura.valor }}€</strong></td>
+                    </tr>
+                    {% if user_type == 'freelancer' and fatura.valor_freelancer %}
+                    <tr>
+                      <td colspan="2" class="text-end text-muted"><small>Taxa da plataforma ({{ freelancer_detalhe.platform_fee_percentage }}%)</small></td>
+                      <td class="text-end text-muted"><small>{{ fatura.valor_plataforma }}€</small></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="text-end text-muted"><small>Valor líquido</small></td>
+                      <td class="text-end text-muted"><small>{{ fatura.valor_freelancer }}€</small></td>
+                    </tr>
+                    {% endif %}
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Notas -->
+          <div class="card">
+            <div class="card-header bg-transparent py-3">
+              <h6 class="mb-0">Notas</h6>
+            </div>
+            <div class="card-body">
+              <p class="mb-2">Esta fatura foi gerada automaticamente pelo sistema BizManager após a conclusão do serviço.</p>
+              <p class="mb-2"><strong>Prazo do serviço:</strong> {{ fatura.pedido.servico.prazo }} dias</p>
+              <p class="mb-0"><strong>Área:</strong> {{ fatura.pedido.servico.area.get_nome_display }}</p>
+              
+              {% if fatura.metodo_pagamento and fatura.pago %}
+              <hr>
+              <p class="mb-0"><strong>Método de pagamento:</strong> 
+                {% if fatura.metodo_pagamento == 'stripe' %}
+                  Cartão de Crédito/Débito
+                {% elif fatura.metodo_pagamento == 'paypal' %}
+                  PayPal
+                {% elif fatura.metodo_pagamento == 'multibanco' %}
+                  Multibanco
+                {% else %}
+                  Transferência Bancária
+                {% endif %}
+              </p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Script para impressão da fatura
+  document.addEventListener('DOMContentLoaded', function() {
+    // Configurações específicas para impressão podem ser adicionadas aqui
+    window.addEventListener('beforeprint', function() {
+      // Preparação para impressão
+      document.body.classList.add('printing');
+    });
+    
+    window.addEventListener('afterprint', function() {
+      // Limpeza após impressão
+      document.body.classList.remove('printing');
+    });
+  });
+</script>
+{% endblock %}

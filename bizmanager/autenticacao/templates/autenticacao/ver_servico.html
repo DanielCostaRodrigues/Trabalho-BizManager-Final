@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ servico.nome }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+  <div class="row g-4">
+    <!-- Sidebar/Navegação lateral -->
+    <div class="col-md-3">
+      <div class="card shadow-sm rounded p-4 mb-4">
+        <!-- Foto de perfil -->
+        <div class="text-center mb-4">
+          {% if request.user.perfil.foto %}
+            <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/default-avatar.png' %}" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+          {% endif %}
+          
+          <div class="mt-3">
+            <h5>{{ nome_completo }}</h5>
+            <p class="text-muted small">
+              {% if user_type == 'freelancer' %}
+                Mostra o teu talento, conquista mais clientes!
+              {% else %}
+                Encontra os melhores profissionais para o teu projeto!
+              {% endif %}
+            </p>
+            
+          </div>
+        </div>
+        
+        <!-- Menu de navegação -->
+        <div class="d-grid gap-3">
+          <a href="{% url 'perfil' %}" class="btn btn-outline-primary">Perfil</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">Dashboard</a>
+          <a href="{% url 'servicos' %}" class="btn btn-success">Serviços</a>
+          <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
+          <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+      <div class="px-4 py-5">
+        <!-- Voltar para serviços -->
+        <div class="mb-4">
+          <a href="{% url 'servicos' %}" class="text-decoration-none">
+            <i class="bi bi-arrow-left"></i> Voltar para serviços
+          </a>
+        </div>
+        
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        
+        <!-- Detalhes do serviço -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="mb-0">{{ servico.nome }}</h4>
+              <span class="badge bg-{% if servico.ativo %}success{% else %}danger{% endif %} px-3 py-2">
+                {% if servico.ativo %}Ativo{% else %}Inativo{% endif %}
+              </span>
+            </div>
+            
+            <!-- Galeria de imagens -->
+            <div class="mb-4">
+              {% if servico.imagens.all %}
+                <!-- Carrossel de imagens -->
+                <div id="serviceImageCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    {% for img in servico.imagens.all %}
+                      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img.imagem.url }}" class="d-block w-100" alt="{{ servico.nome }}" style="max-height: 400px; object-fit: contain;">
+                      </div>
+                    {% endfor %}
+                  </div>
+                  
+                  {% if servico.imagens.all.count > 1 %}
+                  <button class="carousel-control-prev" type="button" data-bs-target="#serviceImageCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#serviceImageCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                  </button>
+                  
+                  <!-- Indicadores de imagens -->
+                  <div class="carousel-indicators">
+                    {% for img in servico.imagens.all %}
+                      <button type="button" data-bs-target="#serviceImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}" 
+                        {% if forloop.first %}class="active" aria-current="true"{% endif %} 
+                        aria-label="Imagem {{ forloop.counter }}"></button>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+                
+                <!-- Miniaturas -->
+                {% if servico.imagens.all.count > 1 %}
+                <div class="service-thumbnails">
+                  <div class="row g-2">
+                    {% for img in servico.imagens.all %}
+                      <div class="col-2">
+                        <img src="{{ img.imagem.url }}" class="img-thumbnail cursor-pointer" 
+                            alt="Miniatura" data-bs-target="#serviceImageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                            style="height: 60px; object-fit: cover; cursor: pointer;">
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                {% endif %}
+              {% elif servico.imagem %}
+                <!-- Imagem única (compatibilidade retroativa) -->
+                <img src="{{ servico.imagem.url }}" alt="{{ servico.nome }}" class="img-fluid rounded mb-4" style="max-height: 400px; width: 100%; object-fit: contain;">
+              {% else %}
+                <!-- Sem imagem -->
+                <div class="d-flex align-items-center justify-content-center bg-light rounded mb-4" style="height: 300px;">
+                  <i class="bi bi-image text-muted" style="font-size: 4rem;"></i>
+                </div>
+              {% endif %}
+            </div>
+            
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <p class="text-muted mb-1">Área de Atuação</p>
+                <p class="fw-bold">{{ servico.area }}</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text-muted mb-1">Data de Criação</p>
+                <p class="fw-bold">{{ servico.data_criacao|date:"d/m/Y" }}</p>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <p class="text-muted mb-1">Descrição</p>
+              <p>{{ servico.descricao|linebreaks }}</p>
+            </div>
+            
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="p-3 rounded">
+                  <p class="text-muted mb-1">Orçamento</p>
+                  <p class="h4 text-success fw-bold mb-0">{{ servico.orcamento }}€</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 rounded">
+                  <p class="text-muted mb-1">Prazo de Entrega</p>
+                  <p class="h4 fw-bold mb-0">{{ servico.prazo }}</p>
+                </div>
+              </div>
+            </div>
+            
+            {% if user_type == 'freelancer' and servico.freelancer == user %}
+              <div class="d-flex gap-2 justify-content-end">
+                <a href="{% url 'editar_servico' servico.id %}" class="btn btn-primary">
+                  <i class="bi bi-pencil me-2"></i>Editar Serviço
+                </a>
+                <form method="post" action="{% url 'toggle_servico_status' servico.id %}" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-{% if servico.ativo %}danger{% else %}success{% endif %}">
+                    {% if servico.ativo %}
+                      <i class="bi bi-x-circle me-2"></i>Desativar
+                    {% else %}
+                      <i class="bi bi-check-circle me-2"></i>Ativar
+                    {% endif %}
+                  </button>
+                </form>
+              </div>
+            {% elif user_type == 'cliente' and servico.ativo %}
+              <div class="d-grid">
+                {% if not pedido_existente %}
+                  <a href="{% url 'solicitar_servico' servico.id %}" class="btn btn-success btn-lg py-3">
+                    <i class="bi bi-clipboard-check me-2"></i>Solicitar Serviço
+                  </a>
+                {% else %}
+                  <button class="btn btn-secondary btn-lg py-3" disabled>
+                    <i class="bi bi-clipboard-check me-2"></i>Serviço Já Solicitado
+                  </button>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript para as miniaturas do carrossel -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Ativar cliques nas miniaturas
+    const thumbnails = document.querySelectorAll('.service-thumbnails img');
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        const slideIndex = this.getAttribute('data-bs-slide-to');
+        const carousel = document.getElementById('serviceImageCarousel');
+        const bsCarousel = new bootstrap.Carousel(carousel);
+        bsCarousel.to(Number(slideIndex));
+      });
+    });
+  });
+</script>
+{% endblock %}

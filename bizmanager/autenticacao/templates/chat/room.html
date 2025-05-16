@@ -1,0 +1,672 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chat - {{ room.name }}{% endblock %}
+
+{% block extra_css %}
+<!-- Biblioteca de Emojis -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.3/index.css">
+<link rel="stylesheet" href="{% static 'css/chat/chat.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="chat-card">
+                <!-- Cabeçalho do Chat -->
+                <div class="card-header d-flex justify-content-between align-items-center py-3">
+                    <div class="d-flex align-items-center">
+                        <a href="{% url 'chat:index' %}" class="me-3">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                        <div class="d-flex align-items-center">
+                            {% if other_participants.first.perfil.foto %}
+                                <img src="{{ other_participants.first.perfil.foto.url }}" alt="Avatar" class="avatar-sm me-2">
+                            {% else %}
+                                <img src="{% static 'images/profile-placeholder.png' %}" alt="Avatar" class="avatar-sm me-2">
+                            {% endif %}
+                            <div>
+                                <h6 class="mb-0">
+                                    {% if other_participants.count == 1 %}
+                                        {{ other_participants.first.get_full_name|default:other_participants.first.email }}
+                                    {% else %}
+                                        {{ room.name }}
+                                    {% endif %}
+                                </h6>
+                                <small id="online-status" style="color: white;">Offline</small>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative">
+                        <button class="btn chat-btn" type="button" id="chatOptionsDropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <!-- Menu de opções personalizado -->
+                        <div id="chat-options-menu">
+                            <a href="#" id="ver-perfil"><i class="bi bi-person-fill me-2"></i>Ver perfil</a>
+                            <a href="#" id="buscar-conversa"><i class="bi bi-search me-2"></i>Pesquisar na conversa</a>
+                            <hr>
+                            <a href="#" id="apagar-conversa" class="text-danger"><i class="bi bi-trash-fill me-2"></i>Apagar conversa</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Barra de Pesquisa -->
+                <div id="search-container">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="search-chat-input" placeholder="Pesquisar na conversa...">
+                        <button class="btn btn-sm btn-outline-secondary" id="search-prev-btn">
+                            <i class="bi bi-arrow-up"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary ms-1" id="search-next-btn">
+                            <i class="bi bi-arrow-down"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary ms-3" id="search-close-btn">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mensagens do Chat -->
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Mensagens serão adicionadas aqui dinamicamente -->
+                    </div>
+                    
+                    <!-- Indicador de Digitação -->
+                    <div class="typing-indicator ms-4 mb-2" id="typing-indicator" style="display: none;">
+                        <em>A escrever<span>.</span><span>.</span><span>.</span></em>
+                    </div>
+                    
+                    <!-- Entrada do Chat -->
+                    <div class="chat-input">
+                        <form id="chat-form" class="d-flex align-items-center position-relative">
+                            <!-- Contentor do Emoji Picker (posicionado aqui com posição absoluta) -->
+                            <div id="emoji-picker-container" class="emoji-picker-wrapper">
+                                <!-- O emoji-picker será inserido aqui via JavaScript -->
+                            </div>
+                            
+                            <div class="input-group">
+                                <button class="btn chat-btn emoji-btn" type="button" id="emoji-button">
+                                    <i class="bi bi-emoji-smile"></i>
+                                </button>
+                                <input type="text" id="chat-message-input" class="form-control" placeholder="Escreva a sua mensagem..." autocomplete="off">
+                                <button class="btn chat-btn" type="button" id="attachment-button">
+                                    <i class="bi bi-paperclip"></i>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary ms-2 send-btn" type="submit" id="chat-message-submit">
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </form>
+                        <!-- Input de ficheiro oculto -->
+                        <input type="file" id="file-input" style="display: none;" accept="image/jpeg,image/png,image/gif,application/pdf,text/plain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Perfil -->
+<div id="profile-modal">
+    <div class="profile-modal-content">
+        <span class="profile-modal-close">&times;</span>
+        <div class="text-center mb-4">
+            <img id="profile-avatar" src="{% static 'images/profile-placeholder.png' %}" alt="Foto de Perfil" class="profile-avatar">
+            <h5 id="profile-name" class="mb-1">Nome do Utilizador</h5>
+            <p id="profile-email" class="text-muted">email@exemplo.com</p>
+        </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col-sm-4 text-muted">Tipo de Conta</div>
+            <div id="profile-account-type" class="col-sm-8">Freelancer</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-4 text-muted">Contacto</div>
+            <div id="profile-contact" class="col-sm-8">--</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-4 text-muted">Localização</div>
+            <div id="profile-location" class="col-sm-8">--</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-4 text-muted">Membro desde</div>
+            <div id="profile-member-since" class="col-sm-8">--</div>
+        </div>
+        <div class="mb-3">
+            <div class="text-muted mb-2">Sobre</div>
+            <div id="profile-bio" class="p-3 rounded">Sem informações disponíveis.</div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" id="profile-view-full" class="btn btn-outline-primary btn-sm">Ver perfil completo</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Biblioteca de Emojis -->
+<script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.3/index.js" type="module"></script>
+
+<script>
+    // Dados do participante como objeto JSON 
+    const chatData = {
+        roomName: "{{room_name|escapejs}}",
+        currentUser: "{{request.user.id|escapejs}}",
+        currentUserName: "{{request.user.get_full_name|default:request.user.email|escapejs}}",
+        otherParticipant: {
+            id: "{{other_participants.first.id|default:''}}",
+            name: "{{other_participants.first.get_full_name|default:other_participants.first.email|escapejs}}",
+            email: "{{other_participants.first.email|escapejs}}",
+            type: "{{other_participants.first.user_type|default:''}}",
+            avatar: "{% if other_participants.first.perfil.foto %}{{other_participants.first.perfil.foto.url}}{% else %}{% static 'images/profile-placeholder.png' %}{% endif %}",
+            memberSince: "{% if other_participants.first.date_joined %}{{other_participants.first.date_joined|date:'d/m/Y'}}{% else %}--{% endif %}",
+            bio: "{% if other_participants.first.perfil.bio %}{{other_participants.first.perfil.bio|escapejs}}{% else %}Sem informações disponíveis.{% endif %}"
+        }
+    };
+    
+    // Usar as propriedades do objeto chatData em vez de variáveis globais
+    const roomName = chatData.roomName;
+    const currentUser = chatData.currentUser;
+    const currentUserName = chatData.currentUserName;
+    
+    // Função para formatar timestamp
+    function formatTimestamp(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    // Função para criar elemento de mensagem - VERSÃO CORRIGIDA
+    function createMessageElement(message, user, userId, timestamp, type = 'chat_message', fileData = null) {
+        if (type === 'notification') {
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = 'notification';
+            notificationDiv.textContent = message;
+            return notificationDiv;
+        }
+        
+        // Converte para string e remove espaços
+        const currentUserStr = String(currentUser).trim();
+        const userIdStr = String(userId).trim();
+        
+        const messageRow = document.createElement('div');
+        messageRow.className = 'd-flex mb-3';
+        
+        // Lógica de alinhamento baseada na comparação exata de strings
+        if (userIdStr === currentUserStr) {
+            messageRow.classList.add('justify-content-end');
+        } else {
+            messageRow.classList.add('justify-content-start');
+        }
+        
+        const messageBubble = document.createElement('div');
+        messageBubble.className = 'message-bubble';
+        
+        // Adiciona classe baseada em quem enviou a mensagem
+        if (userIdStr === currentUserStr) {
+            messageBubble.classList.add('message-sent');
+        } else {
+            messageBubble.classList.add('message-received');
+        }
+        
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        
+        // Verificar se é um ficheiro ou uma mensagem de texto
+        if (type === 'file' && fileData) {
+            let fileIcon = 'bi-file-earmark';
+            let fileType = fileData.file_type || '';
+            
+            if (fileType.startsWith('image/')) {
+                fileIcon = 'bi-file-earmark-image';
+            } else if (fileType === 'application/pdf') {
+                fileIcon = 'bi-file-earmark-pdf';
+            } else if (fileType.startsWith('text/')) {
+                fileIcon = 'bi-file-earmark-text';
+            }
+            
+            // Criar conteúdo para ficheiros
+            if (fileType.startsWith('image/')) {
+                const imgElement = document.createElement('img');
+                imgElement.src = fileData.file_url;
+                imgElement.alt = fileData.file_name;
+                imgElement.className = 'chat-image';
+                messageContent.appendChild(imgElement);
+            } else {
+                // Exibir anexos para outros tipos de ficheiro
+                messageContent.innerHTML = `
+                    <div class="file-attachment">
+                        <i class="bi ${fileIcon} file-icon"></i>
+                        <div class="file-info">
+                            <span class="file-name">${fileData.file_name}</span>
+                            <a href="${fileData.file_url}" target="_blank" class="file-download">
+                                <i class="bi bi-download"></i> Descarregar
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+        } else {
+            // Mensagem de texto normal
+            messageContent.textContent = message;
+        }
+        
+        const messageTime = document.createElement('div');
+        messageTime.className = 'message-time text-end';
+        messageTime.textContent = formatTimestamp(timestamp);
+        messageBubble.appendChild(messageContent);
+        messageBubble.appendChild(messageTime);
+        messageRow.appendChild(messageBubble);
+        
+        return messageRow;
+    }
+    
+    // Conectar ao WebSocket
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+    );
+    
+    // Receber mensagens
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const messagesContainer = document.getElementById('chat-messages');
+        
+        if (data.type === 'history') {
+            // Processar histórico de mensagens
+            data.messages.forEach(msg => {
+                let messageElement;
+                if (msg.type === 'file') {
+                    messageElement = createMessageElement(
+                        msg.file_name,
+                        msg.user,
+                        msg.user_id,
+                        msg.timestamp,
+                        'file',
+                        {
+                            file_name: msg.file_name,
+                            file_type: msg.file_type || '',
+                            file_url: msg.file_url
+                        }
+                    );
+                } else {
+                    messageElement = createMessageElement(msg.message, msg.user, msg.user_id, msg.timestamp, msg.type);
+                }
+                messagesContainer.appendChild(messageElement);
+            });
+        } else if (data.type === 'chat_message') {
+            // Processar nova mensagem de texto
+            const messageElement = createMessageElement(data.message, data.user, data.user_id, data.timestamp);
+            messagesContainer.appendChild(messageElement);
+        } else if (data.type === 'file') {
+            // Processar mensagem de ficheiro
+            const messageElement = createMessageElement(
+                data.file_name,
+                data.user,
+                data.user_id,
+                data.timestamp,
+                'file',
+                {
+                    file_name: data.file_name,
+                    file_type: data.file_type || '',
+                    file_url: data.file_url
+                }
+            );
+            messagesContainer.appendChild(messageElement);
+        } else if (data.type === 'notification') {
+            // Processar notificação
+            const notificationElement = createMessageElement(data.message, null, null, null, 'notification');
+            messagesContainer.appendChild(notificationElement);
+        }
+        
+        // Rolar para a última mensagem
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
+    
+    // Conexão aberta
+    chatSocket.onopen = function(e) {
+        console.log('Conexão WebSocket estabelecida');
+        document.getElementById('online-status').textContent = 'Online';
+    };
+    
+    // Erro na conexão
+    chatSocket.onerror = function(e) {
+        console.error('Erro na conexão WebSocket:', e);
+    };
+    
+    // Conexão fechada
+    chatSocket.onclose = function(e) {
+        console.log('Conexão WebSocket fechada');
+        document.getElementById('online-status').textContent = 'Offline';
+        
+      
+        setTimeout(function() {
+            console.log('Tentando reconectar...');
+            window.location.reload();
+        }, 3000);
+    };
+    
+    // Enviar mensagens
+    document.getElementById('chat-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const messageInputDom = document.getElementById('chat-message-input');
+        const message = messageInputDom.value.trim();
+        
+        if (message) {
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        }
+    });
+    
+    // Enviar mensagem ao pressionar Enter
+    document.getElementById('chat-message-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('chat-message-submit').click();
+        }
+    });
+    
+    // Inicialização quando o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', function() {
+        // ===== Inicialização do Menu de Opções =====
+        const chatOptionsButton = document.getElementById('chatOptionsDropdown');
+        const chatOptionsMenu = document.getElementById('chat-options-menu');
+        
+        // Alternar visibilidade do menu de opções
+        chatOptionsButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (chatOptionsMenu.style.display === 'block') {
+                chatOptionsMenu.style.display = 'none';
+            } else {
+                chatOptionsMenu.style.display = 'block';
+            }
+        });
+        
+        // Fechar o menu ao clicar fora dele
+        document.addEventListener('click', function(e) {
+            if (!chatOptionsButton.contains(e.target) && !chatOptionsMenu.contains(e.target)) {
+                chatOptionsMenu.style.display = 'none';
+            }
+        });
+        
+        // ===== Funcionalidade "Ver Perfil" =====
+        const profileModal = document.getElementById('profile-modal');
+        const modalClose = document.querySelector('.profile-modal-close');
+        
+        // Configurar ação do botão Ver Perfil
+        document.getElementById('ver-perfil').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Preencher informações do perfil
+            document.getElementById('profile-avatar').src = chatData.otherParticipant.avatar;
+            document.getElementById('profile-name').textContent = chatData.otherParticipant.name;
+            document.getElementById('profile-email').textContent = chatData.otherParticipant.email;
+            document.getElementById('profile-account-type').textContent = chatData.otherParticipant.type === 'freelancer' ? 'Freelancer' : (chatData.otherParticipant.type === 'cliente' ? 'Cliente' : 'Utilizador');
+            document.getElementById('profile-member-since').textContent = chatData.otherParticipant.memberSince;
+            document.getElementById('profile-bio').textContent = chatData.otherParticipant.bio;
+            // Exibir o modal
+            profileModal.style.display = 'flex';
+            chatOptionsMenu.style.display = 'none';
+        });
+        
+        // Fechar o modal ao clicar no X
+        modalClose.addEventListener('click', function() {
+            profileModal.style.display = 'none';
+        });
+        
+        // Fechar o modal ao clicar fora dele
+        profileModal.addEventListener('click', function(e) {
+            if (e.target === profileModal) {
+                profileModal.style.display = 'none';
+            }
+        });
+        
+        // Botão para ver perfil completo
+        document.getElementById('profile-view-full').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Redirecionar para a página completa do perfil
+            const userId = chatData.otherParticipant.id;
+            if (userId) {
+                window.location.href = `/perfil/${userId}/`;
+            } else {
+                alert('Não foi possível encontrar o perfil deste utilizador.');
+            }
+        });
+        
+        // ===== Funcionalidade "Pesquisar na Conversa" =====
+        const searchContainer = document.getElementById('search-container');
+        const searchInput = document.getElementById('search-chat-input');
+        const searchPrevBtn = document.getElementById('search-prev-btn');
+        const searchNextBtn = document.getElementById('search-next-btn');
+        const searchCloseBtn = document.getElementById('search-close-btn');
+        
+        let searchResults = [];
+        let currentResultIndex = -1;
+        
+        // Função para limpar destaques anteriores
+        function clearHighlights() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const highlights = messagesContainer.querySelectorAll('.search-result-highlight');
+            
+            highlights.forEach(highlight => {
+                const parent = highlight.parentNode;
+                parent.textContent = parent.textContent; // Remove destaques mantendo o texto
+            });
+        }
+        
+        // Função para destacar resultados da pesquisa
+        function highlightSearchResults(searchTerm) {
+            if (!searchTerm.trim()) return;
+            
+            searchResults = [];
+            currentResultIndex = -1;
+            
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageContents = messagesContainer.querySelectorAll('.message-content');
+            
+            messageContents.forEach(content => {
+                const text = content.textContent;
+                if (!text) return;
+                
+                const lowerText = text.toLowerCase();
+                const lowerSearchTerm = searchTerm.toLowerCase();
+                
+                if (lowerText.includes(lowerSearchTerm)) {
+                    searchResults.push(content);
+                    
+                    // Destacar o termo pesquisado
+                    let html = text;
+                    const regex = new RegExp(searchTerm, 'gi');
+                    html = html.replace(regex, match => `<span class="search-result-highlight">${match}</span>`);
+                    content.innerHTML = html;
+                }
+            });
+            
+            // Navegar para o primeiro resultado se houver algum
+            if (searchResults.length > 0) {
+                navigateToResult(0);
+            }
+        }
+        
+        // Função para navegar entre resultados
+        function navigateToResult(index) {
+            if (searchResults.length === 0) return;
+            
+            // Garantir que o índice esteja dentro dos limites
+            if (index < 0) index = searchResults.length - 1;
+            if (index >= searchResults.length) index = 0;
+            
+            currentResultIndex = index;
+            
+            // Rolar para o resultado
+            const result = searchResults[index];
+            result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // Configurar ação do botão Pesquisar na Conversa
+        document.getElementById('buscar-conversa').addEventListener('click', function(e) {
+            e.preventDefault();
+            searchContainer.style.display = 'block';
+            searchInput.focus();
+            chatOptionsMenu.style.display = 'none';
+        });
+        
+        // Pesquisar ao digitar no campo
+        searchInput.addEventListener('input', function() {
+            clearHighlights();
+            highlightSearchResults(this.value);
+        });
+        
+        // Botão Anterior
+        searchPrevBtn.addEventListener('click', function() {
+            navigateToResult(currentResultIndex - 1);
+        });
+        
+        // Botão Próximo
+        searchNextBtn.addEventListener('click', function() {
+            navigateToResult(currentResultIndex + 1);
+        });
+        
+        // Botão Fechar
+        searchCloseBtn.addEventListener('click', function() {
+            searchContainer.style.display = 'none';
+            clearHighlights();
+            searchInput.value = '';
+        });
+        
+        // ===== Funcionalidade "Apagar Conversa" =====
+        document.getElementById('apagar-conversa').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Tem a certeza de que deseja apagar esta conversa?')) {
+                // Implementação de apagar conversa
+                // Exemplo simples: limpar as mensagens na tela e mostrar uma notificação
+                document.getElementById('chat-messages').innerHTML = '';
+                
+                // Criar elemento de notificação
+                const notificationElement = document.createElement('div');
+                notificationElement.className = 'notification';
+                notificationElement.textContent = 'Conversa apagada.';
+                document.getElementById('chat-messages').appendChild(notificationElement);
+                
+                alert('Conversa apagada com sucesso!');
+            }
+            chatOptionsMenu.style.display = 'none';
+        });
+        
+        // ===== Inicialização do Emoji Picker =====
+        const emojiPickerContainer = document.getElementById('emoji-picker-container');
+        const emojiButton = document.getElementById('emoji-button');
+        
+        // Criar o elemento emoji-picker
+        const picker = document.createElement('emoji-picker');
+        emojiPickerContainer.appendChild(picker);
+        
+        // Configurar estilo para o emoji-picker
+        picker.style.zIndex = '1500';
+        picker.style.position = 'relative';
+        emojiPickerContainer.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.4)';
+        emojiPickerContainer.style.zIndex = '1500';
+        
+        // Alternar visibilidade do seletor de emojis
+        emojiButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (emojiPickerContainer.style.display === 'none' || !emojiPickerContainer.style.display) {
+                emojiPickerContainer.style.display = 'block';
+            } else {
+                emojiPickerContainer.style.display = 'none';
+            }
+        });
+        
+        // Fechar o seletor ao clicar fora dele
+        document.addEventListener('click', function(e) {
+            if (!emojiButton.contains(e.target) && !emojiPickerContainer.contains(e.target)) {
+                emojiPickerContainer.style.display = 'none';
+            }
+        });
+        
+        // Adicionar emoji ao input quando selecionado
+        picker.addEventListener('emoji-click', event => {
+            const messageInput = document.getElementById('chat-message-input');
+            messageInput.value += event.detail.unicode;
+            messageInput.focus();
+        });
+        
+        // Impedir que o input perca o foco ao clicar no emoji picker
+        picker.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // ===== Inicialização do Botão de Anexo =====
+        const attachmentButton = document.getElementById('attachment-button');
+        const fileInput = document.getElementById('file-input');
+        
+        // Abrir diálogo de seleção de ficheiro
+        attachmentButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            fileInput.click();
+        });
+        
+        // Processar ficheiro selecionado
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                handleFileUpload(this.files[0]);
+            }
+        });
+        
+        // Função para processar e enviar o ficheiro
+        function handleFileUpload(file) {
+            // Verificar tamanho do ficheiro (limite de 5MB)
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            if (file.size > maxSize) {
+                alert('O ficheiro é muito grande. O tamanho máximo é 5MB.');
+                return;
+            }
+            
+            // Verificar tipo de ficheiro
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf', 'text/plain'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Tipo de ficheiro não permitido. Tipos aceites: imagens, PDF e texto.');
+                return;
+            }
+            
+            // Ler o ficheiro como base64
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const fileData = event.target.result;
+                sendFileMessage(file.name, file.type, fileData);
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Função para enviar a mensagem com o ficheiro pelo WebSocket
+        function sendFileMessage(fileName, fileType, fileData) {
+            if (chatSocket && chatSocket.readyState === WebSocket.OPEN) {
+                const message = {
+                    type: 'file',
+                    file_name: fileName,
+                    file_type: fileType,
+                    file_data: fileData
+                };
+                
+                chatSocket.send(JSON.stringify(message));
+                
+                // Limpar o input de ficheiro para permitir selecionar o mesmo ficheiro novamente
+                fileInput.value = '';
+            } else {
+                alert('Erro na conexão. Por favor, tente novamente.');
+            }
+        }
+    });
+    
+    // Rolar para a parte inferior quando a página carrega
+    window.onload = function() {
+        const messagesContainer = document.getElementById('chat-messages');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
+</script>
+{% endblock %}
