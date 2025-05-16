@@ -191,6 +191,61 @@ Para implantação em ambiente de produção, considere:
 5. Configurar certificados SSL
 6. Atualizar as chaves API para produção
 
+## Problemas com Credenciais Git
+
+Ao fazer clone deste repositório, alguns ficheiros essenciais relacionados a credenciais podem estar em falta devido ao .gitignore. Estes são necessários para o correto funcionamento da aplicação.
+
+### Ficheiros de Credenciais Necessários
+
+Os seguintes ficheiros não estão incluídos no repositório por razões de segurança, mas são necessários para a execução:
+
+- `bizmanager/credentials.json`
+- `bizmanager/google-oauth-credentials.json`
+- `bizmanager/db.sqlite3`
+- Ficheiros na pasta `tokens/`
+
+### Como Resolver Problemas de Credenciais
+
+Se estiveres a ter erros relacionados com ficheiros de credenciais em falta, existem duas opções:
+
+#### Opção 1: Obter os Ficheiros de Credenciais
+
+Contacta um dos desenvolvedores do projeto para obter cópias dos ficheiros de credenciais necessários:
+- Email: [kikonunes.2004@hotmail.com] ou falar presencialmente, na aula de quarta feira
+
+Após receberes os ficheiros, coloca-os nos diretórios apropriados conforme a estrutura acima.
+
+#### Opção 2: Criar as Tuas Próprias Credenciais
+
+Se preferires criar as tuas próprias credenciais:
+
+1. **Para Google OAuth**:
+   - Cria um projeto no [Google Cloud Console](https://console.cloud.google.com/)
+   - Configura as credenciais OAuth 2.0
+   - Faz download do ficheiro JSON e renomeia para `google-oauth-credentials.json`
+   - Coloca na raiz do segundo diretório `bizmanager`
+
+2. **Para Base de Dados**:
+   - Executa as migrações para criar uma nova base de dados:
+     ```bash
+     python manage.py makemigrations
+     python manage.py migrate
+     ```
+   - Cria um superutilizador:
+     ```bash
+     python manage.py createsuperuser
+     ```
+
+3. **Para Stripe e PayPal**:
+   - Cria contas de teste nas respetivas plataformas
+   - Atualiza as chaves API no ficheiro `settings.py`
+
+### Notas Importantes
+
+- Se receberes erro ao executar o servidor, verifica se todos os ficheiros de credenciais estão nos locais corretos.
+- A base de dados (`db.sqlite3`) contém dados pré-configurados úteis para demonstração. Recomendamos obter uma cópia em vez de criar uma nova.
+- Se receberes erros específicos sobre tokens ou autenticação, verifica o ficheiro `debug.log` para detalhes.
+
 ---
 
 **Desenvolvido por:**
