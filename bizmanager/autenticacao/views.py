@@ -138,13 +138,9 @@ def registo_freelancer(request):
             try:
                 with transaction.atomic():
                     # Criar o utilizador
-                    user = User.objects.create_user(
-                        email=form.cleaned_data['email'],
-                        password=form.cleaned_data['password1'],  # Mudança aqui
-                        first_name=form.cleaned_data['first_name'],
-                        last_name=form.cleaned_data['last_name'],
-                        user_type='freelancer'
-                    )
+                    user = form.save(commit=False)
+                    user.user_type = 'freelancer'
+                    user.save()
                     
                     # Criar perfil
                     perfil = Perfil.objects.create(
@@ -165,7 +161,8 @@ def registo_freelancer(request):
                     if area:
                         freelancer_detalhe.areas_atuacao.add(area)
                     
-                    # Fazer login do utilizador
+                    # Fazer login do utilizador - CORREÇÃO AQUI
+                    user.backend = 'django.contrib.auth.backends.ModelBackend'
                     login(request, user)
                     
                     messages.success(request, "Conta criada com sucesso! Complete o seu perfil.")
@@ -199,21 +196,18 @@ def registo_cliente(request):
             try:
                 with transaction.atomic():
                     # Criar o utilizador
-                    user = User.objects.create_user(
-                        email=form.cleaned_data['email'],
-                        password=form.cleaned_data['password1'],  # Mudança aqui
-                        first_name=form.cleaned_data['first_name'],
-                        last_name=form.cleaned_data['last_name'],
-                        user_type='cliente'
-                    )
+                    user = form.save(commit=False)
+                    user.user_type = 'cliente'
+                    user.save()
                     
                     # Criar perfil
-                    Perfil.objects.create(user=user)
+                    perfil = Perfil.objects.create(user=user)
                     
                     # Criar detalhes de cliente
-                    ClienteDetalhe.objects.create(perfil=user.perfil)
+                    ClienteDetalhe.objects.create(perfil=perfil)
                     
-                    # Fazer login do utilizador
+                    # Fazer login do utilizador - CORREÇÃO AQUI TAMBÉM
+                    user.backend = 'django.contrib.auth.backends.ModelBackend'
                     login(request, user)
                     
                     messages.success(request, "Conta criada com sucesso! Complete o seu perfil.")
@@ -565,23 +559,20 @@ def servicos(request):
         area_id = request.GET.get('area', '')
         preco_max = request.GET.get('preco_max', '')
         ordem = request.GET.get('ordem', 'recentes')
-        
-        # Para clientes, mostrar todos os serviços ativos
+
         servicos_list = Servico.objects.filter(ativo=True)
         
-        # Aplicar busca textual se houver
         if query:
             servicos_list = servicos_list.filter(
                 Q(nome__icontains=query) | 
                 Q(descricao__icontains=query)
             )
-        
-        # Filtrar por área se especificado
+
         if area_id:
             try:
                 servicos_list = servicos_list.filter(area_id=int(area_id))
             except ValueError:
-                pass  # Ignora se o id não for um número válido
+                pass  
         
         # Filtrar por preço máximo se especificado
         if preco_max:
@@ -2696,6 +2687,44 @@ def responder_proposta(request, notificacao_id):
             
             messages.info(request, "Proposta recusada. O freelancer foi notificado.")
             return redirect('notificacoes')
-    
-    # Se não for POST ou ação inválida, redirecionar para a visualização da proposta
+
     return redirect('ver_notificacao_proposta', notificacao_id=notificacao_id)
+
+def iniciar_registo_google(request, tipo_conta):
+    """Iniciar o registo com Google com tipo de conta pré-definido."""
+    if tipo_conta in ['freelancer', 'cliente']:
+        request.session['tipo_conta_google'] = tipo_conta
+        return redirect('social:begin', 'google-oauth2')
+    else:
+        messages.error(request, "Tipo de conta inválido.")
+        return redirect('escolher_conta')
+
+
+@login_required
+def apagar_servico(request, servico_id):
+    """Apagar um serviço diretamente."""
+    user = request.user
+    servico = get_object_or_404(Servico, id=servico_id)
+    
+    # Verificar se o utilizador é o dono do serviço
+    if servico.freelancer != user:
+        messages.error(request, "Não tens autorização para apagar este serviço.")
+        return redirect('servicos')
+    
+    if request.method == 'POST':
+        nome_servico = servico.nome
+        
+        # Verificar se há pedidos ativos (opcional)
+        pedidos_ativos = Pedido.objects.filter(servico=servico, status__in=['pendente', 'aceite'])
+        
+        if pedidos_ativos.exists():
+            messages.error(request, f'Não podes apagar este serviço porque tem {pedidos_ativos.count()} pedidos ativos.')
+        else:
+            # Apagar o serviço
+            servico.delete()
+            messages.success(request, f'Serviço "{nome_servico}" foi apagado com sucesso!')
+        
+        return redirect('servicos')
+    
+    # Se não for POST, redirecionar
+    return redirect('ver_servico', servico_id=servico_id)

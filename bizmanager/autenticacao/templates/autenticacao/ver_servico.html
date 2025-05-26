@@ -37,6 +37,9 @@
           <a href="{% url 'servicos' %}" class="btn btn-success">Serviços</a>
           <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
           <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+          {% if user_type == 'freelancer' %}
+          <a href="{% url 'listar_clientes' %}" class="btn btn-outline-primary">Clientes</a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -167,12 +170,20 @@
                 </a>
                 <form method="post" action="{% url 'toggle_servico_status' servico.id %}" class="d-inline">
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-{% if servico.ativo %}danger{% else %}success{% endif %}">
+                  <button type="submit" class="btn btn-{% if servico.ativo %}warning{% else %}success{% endif %}">
                     {% if servico.ativo %}
                       <i class="bi bi-x-circle me-2"></i>Desativar
                     {% else %}
                       <i class="bi bi-check-circle me-2"></i>Ativar
                     {% endif %}
+                  </button>
+                </form>
+                <!-- BOTÃO DE APAGAR COM CONFIRMAÇÃO -->
+                <form method="post" action="{% url 'apagar_servico' servico.id %}" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger" 
+                          onclick="return confirm('Tens a certeza que queres apagar o serviço \'{{ servico.nome }}\'?\n\nEsta ação não pode ser desfeita!')">
+                    <i class="bi bi-trash me-2"></i>Apagar
                   </button>
                 </form>
               </div>

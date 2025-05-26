@@ -11,6 +11,7 @@ urlpatterns = [
     path('registo-cliente/', views.registo_cliente, name='registo_cliente'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('registo-google/<str:tipo_conta>/', views.iniciar_registo_google, name='iniciar_registo_google'),
     
     # Páginas principais
     path('dashboard/', views.dashboard, name='dashboard'),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('servicos/ver/<int:servico_id>/', views.ver_servico, name='ver_servico'),
     path('servicos/solicitar/<int:servico_id>/', views.solicitar_servico, name='solicitar_servico'),
     path('servicos/toggle-status/<int:servico_id>/', views.toggle_servico_status, name='toggle_servico_status'),
+    path('servico/<int:servico_id>/apagar/', views.apagar_servico, name='apagar_servico'),
     
     # Pedidos
     path('pedidos/', views.pedidos, name='pedidos'),

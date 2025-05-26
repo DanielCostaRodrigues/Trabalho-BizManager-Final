@@ -175,22 +175,78 @@
         {% if user.is_authenticated %}
         <div class="row mt-4">
           <div class="col-md-12">
-            <div class="card">
+            <div class="card comment-form">
               <div class="card-body">
                 <h5 class="card-title">Deixa a tua opinião sobre este serviço</h5>
-                <form method="POST">
-                  {% csrf_token %}
-                  {% if comentario_form.avaliacao %}
-                  <div class="mb-3">
-                    <label class="form-label">Avaliação</label>
-                    <div class="rating-input">
-                      {{ comentario_form.avaliacao }}
-                    </div>
+                
+                <!-- Mostrar erros do formulário -->
+                {% if comentario_form.errors %}
+                  <div class="alert alert-danger">
+                    {% for field, errors in comentario_form.errors.items %}
+                      {% for error in errors %}
+                        <p><strong>{{ error }}</strong></p>
+                      {% endfor %}
+                    {% endfor %}
                   </div>
-                  {% endif %}
-                  {{ comentario_form.texto }}
+                {% endif %}
+                
+                <form method="POST" id="commentForm">
+                  {% csrf_token %}
+                  
+                  <!-- Sistema de avaliação por estrelas -->
+                  <div class="star-rating-container">
+                    <label class="star-rating-label">
+                      Avaliação
+                      <span style="color: #ff6b6b; font-size: 0.9rem;">*</span>
+                    </label>
+                    
+                    <div class="d-flex align-items-center">
+                      <div class="star-rating" id="starRating">
+                        <!-- Inputs de rádio para as estrelas (ordem de 5 para 1) -->
+                        <input type="radio" id="star5" name="rating" value="5" 
+                               {% if comentario_form.avaliacao.value == 5 %}checked{% endif %}>
+                        <label for="star5" title="5 estrelas - Excelente" tabindex="0"></label>
+                        
+                        <input type="radio" id="star4" name="rating" value="4"
+                               {% if comentario_form.avaliacao.value == 4 %}checked{% endif %}>
+                        <label for="star4" title="4 estrelas - Muito bom" tabindex="0"></label>
+                        
+                        <input type="radio" id="star3" name="rating" value="3"
+                               {% if comentario_form.avaliacao.value == 3 %}checked{% endif %}>
+                        <label for="star3" title="3 estrelas - Bom" tabindex="0"></label>
+                        
+                        <input type="radio" id="star2" name="rating" value="2"
+                               {% if comentario_form.avaliacao.value == 2 %}checked{% endif %}>
+                        <label for="star2" title="2 estrelas - Regular" tabindex="0"></label>
+                        
+                        <input type="radio" id="star1" name="rating" value="1"
+                               {% if comentario_form.avaliacao.value == 1 %}checked{% endif %}>
+                        <label for="star1" title="1 estrela - Fraco" tabindex="0"></label>
+                      </div>
+                      
+                      <!-- Feedback da avaliação -->
+                      <div class="rating-feedback" id="ratingFeedback"></div>
+                    </div>
+                    
+                    <!-- Campo escondido para o Django -->
+                    {{ comentario_form.avaliacao }}
+                  </div>
+
+                  <!-- Campo de comentário -->
+                  <div class="mb-3">
+                    <label for="{{ comentario_form.texto.id_for_label }}" class="star-rating-label">
+                      Comentário
+                      <span style="color: #ff6b6b; font-size: 0.9rem;">*</span>
+                    </label>
+                    {{ comentario_form.texto }}
+                  </div>
+
+                  <!-- Botão de envio -->
                   <div class="mt-3">
-                    <button type="submit" class="btn btn-primary">Enviar comentário</button>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-send me-2"></i>
+                      Enviar comentário
+                    </button>
                   </div>
                 </form>
               </div>
@@ -350,5 +406,220 @@
       });
     });
   });
+</script>
+
+<!-- JavaScript do sistema de estrelas -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const starRating = document.querySelector('.star-rating');
+    const ratingFeedback = document.getElementById('ratingFeedback');
+    const hiddenInput = document.querySelector('input[name="avaliacao"]');
+    
+    if (!starRating) return;
+    
+    const ratingTexts = {
+        1: '⭐ Fraco',
+        2: '⭐⭐ Regular', 
+        3: '⭐⭐⭐ Bom',
+        4: '⭐⭐⭐⭐ Muito bom',
+        5: '⭐⭐⭐⭐⭐ Excelente'
+    };
+
+    function updateStarDisplay(rating) {
+        const stars = starRating.querySelectorAll('label');
+        stars.forEach((star, index) => {
+            const starNumber = 5 - index;
+            star.classList.remove('star-selected', 'star-hover');
+            
+            if (starNumber <= rating) {
+                star.classList.add('star-selected');
+            }
+        });
+    }
+
+    function highlightStars(rating) {
+        const stars = starRating.querySelectorAll('label');
+        stars.forEach((star, index) => {
+            const starNumber = 5 - index;
+            star.classList.remove('star-hover', 'star-selected');
+            
+            if (starNumber <= rating) {
+                star.classList.add('star-hover');
+            }
+        });
+    }
+
+    function resetStars() {
+        const stars = starRating.querySelectorAll('label');
+        stars.forEach(star => {
+            star.classList.remove('star-hover', 'star-selected');
+        });
+        
+        // Restaurar estrelas selecionadas se existirem
+        const checkedRating = document.querySelector('input[name="rating"]:checked');
+        if (checkedRating) {
+            updateStarDisplay(checkedRating.value);
+        }
+    }
+
+    function updateFeedback(rating) {
+        if (ratingFeedback) {
+            // Remover classes de cor anteriores
+            ratingFeedback.classList.remove('rating-1', 'rating-2', 'rating-3', 'rating-4', 'rating-5');
+            
+            // Adicionar nova classe de cor
+            ratingFeedback.classList.add('rating-' + rating);
+            
+            // Atualizar texto
+            ratingFeedback.textContent = ratingTexts[rating];
+            ratingFeedback.classList.add('show');
+        }
+    }
+
+    // Quando clica numa estrela
+    starRating.addEventListener('click', function(e) {
+        if (e.target.tagName === 'LABEL') {
+            const rating = parseInt(e.target.getAttribute('for').replace('star', ''));
+            
+            // Atualizar feedback com cor
+            updateFeedback(rating);
+            
+            // Marcar o input de rádio visual
+            const radioButton = document.getElementById('star' + rating);
+            if (radioButton) {
+                radioButton.checked = true;
+            }
+            
+            // Definir o valor no campo escondido do Django
+            if (hiddenInput) {
+                hiddenInput.value = rating;
+            }
+            
+            // Atualizar aspeto das estrelas
+            updateStarDisplay(rating);
+            
+            console.log('Avaliação selecionada:', rating + ' estrelas');
+            
+            // Adicionar pequena vibração visual
+            starRating.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                starRating.style.transform = 'scale(1)';
+            }, 150);
+        }
+    });
+
+    // Efeitos ao passar o rato
+    starRating.addEventListener('mouseover', function(e) {
+        if (e.target.tagName === 'LABEL') {
+            const rating = parseInt(e.target.getAttribute('for').replace('star', ''));
+            highlightStars(rating);
+            
+            // Mostrar pré-visualização do feedback
+            if (ratingFeedback && !ratingFeedback.classList.contains('show')) {
+                ratingFeedback.textContent = ratingTexts[rating];
+                ratingFeedback.style.opacity = '0.5';
+            }
+        }
+    });
+
+    starRating.addEventListener('mouseleave', function() {
+        resetStars();
+        
+        // Se não há avaliação selecionada, esconder a pré-visualização
+        const selectedRating = document.querySelector('input[name="rating"]:checked');
+        if (!selectedRating && ratingFeedback && !ratingFeedback.classList.contains('show')) {
+            ratingFeedback.style.opacity = '0';
+        }
+    });
+
+    // Se já existe uma avaliação selecionada (para edição)
+    const preSelected = document.querySelector('input[name="rating"]:checked');
+    if (preSelected) {
+        const rating = parseInt(preSelected.value);
+        updateStarDisplay(rating);
+        updateFeedback(rating);
+        
+        if (hiddenInput) {
+            hiddenInput.value = rating;
+        }
+    }
+
+    // Validação antes de enviar
+    const form = document.getElementById('commentForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const selectedRating = document.querySelector('input[name="rating"]:checked');
+            const hiddenRating = hiddenInput ? hiddenInput.value : null;
+            const commentText = document.querySelector('textarea[name="texto"]');
+            
+            if (!selectedRating && !hiddenRating) {
+                e.preventDefault();
+                alert('Por favor, seleciona uma avaliação de 1 a 5 estrelas!');
+                
+                // Destacar o sistema de estrelas
+                starRating.style.border = '2px solid #ff6b6b';
+                starRating.style.borderRadius = '8px';
+                starRating.style.padding = '10px';
+                
+                setTimeout(() => {
+                    starRating.style.border = 'none';
+                    starRating.style.padding = '10px 0';
+                }, 3000);
+                
+                return false;
+            }
+            
+            if (commentText && !commentText.value.trim()) {
+                e.preventDefault();
+                alert('Por favor, escreve um comentário!');
+                commentText.focus();
+                return false;
+            }
+            
+            // Garantir que o valor está no campo escondido
+            if (selectedRating && hiddenInput) {
+                hiddenInput.value = selectedRating.value;
+            }
+            
+            // Animação de envio
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>A enviar...';
+                submitBtn.disabled = true;
+            }
+        });
+    }
+
+    // Suporte para teclado (acessibilidade)
+    starRating.addEventListener('keydown', function(e) {
+        if (e.target.tagName === 'LABEL') {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.target.click();
+            }
+            
+            // Navegação com setas
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                const labels = [...starRating.querySelectorAll('label')];
+                const currentIndex = labels.indexOf(e.target);
+                let nextIndex;
+                
+                if (e.key === 'ArrowLeft') {
+                    nextIndex = currentIndex > 0 ? currentIndex - 1 : labels.length - 1;
+                } else {
+                    nextIndex = currentIndex < labels.length - 1 ? currentIndex + 1 : 0;
+                }
+                
+                labels[nextIndex].focus();
+            }
+        }
+    });
+
+    // Inicializar
+    resetStars();
+    
+    console.log('Sistema de estrelas BizManager inicializado com sucesso!');
+});
 </script>
 {% endblock %}

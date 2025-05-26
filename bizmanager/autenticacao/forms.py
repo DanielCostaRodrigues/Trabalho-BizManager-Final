@@ -303,20 +303,49 @@ class ComentarioForm(forms.ModelForm):
         widgets = {
             'texto': forms.Textarea(attrs={
                 'class': 'form-control', 
-                'rows': 3, 
-                'placeholder': 'Deixa aqui o teu comentário...'
+                'rows': 4, 
+                'placeholder': 'Deixa aqui o teu comentário sobre este serviço...',
+                'required': True
             }),
-            'avaliacao': forms.RadioSelect(attrs={'class': 'star-rating'})
+            'avaliacao': forms.HiddenInput()  # Campo escondido controlado pelo JavaScript
         }
     
-    def __init__(self, *args, tipo='testemunho', **kwargs):
+    def __init__(self, *args, tipo='servico', **kwargs):
         super().__init__(*args, **kwargs)
         self.tipo = tipo
         
-        
-        if tipo == 'testemunho':
+        # Para comentários de serviços, a avaliação é obrigatória
+        if tipo == 'servico':
+            self.fields['avaliacao'].required = True
+        elif tipo == 'testemunho':
+            # Para testemunhos, remover o campo avaliação
             self.fields.pop('avaliacao', None)
-
+    
+    def clean_avaliacao(self):
+        """Validar se a avaliação está entre 1 e 5"""
+        avaliacao = self.cleaned_data.get('avaliacao')
+        
+        if self.tipo == 'servico':
+            if not avaliacao:
+                raise ValidationError("Por favor, seleciona uma avaliação de 1 a 5 estrelas.")
+            
+            if avaliacao not in [1, 2, 3, 4, 5]:
+                raise ValidationError("A avaliação deve ser entre 1 e 5 estrelas.")
+        
+        return avaliacao
+    
+    def clean_texto(self):
+        """Validar se o texto não está vazio"""
+        texto = self.cleaned_data.get('texto')
+        
+        if not texto or not texto.strip():
+            raise ValidationError("Por favor, escreve um comentário.")
+        
+        if len(texto.strip()) < 10:
+            raise ValidationError("O comentário deve ter pelo menos 10 caracteres.")
+        
+        return texto.strip()
+    
 class ClienteFilterForm(forms.Form):
     """Formulário para filtrar clientes com base em diferentes critérios."""
     search = forms.CharField(

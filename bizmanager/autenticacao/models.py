@@ -195,7 +195,7 @@ class Pedido(models.Model):
     data_agendamento = models.DateField(null=True, blank=True)
     hora_agendamento = models.TimeField(null=True, blank=True)
     google_calendar_event_id = models.CharField(max_length=255, null=True, blank=True)
-    google_calendar_event_url = models.URLField(max_length=500, null=True, blank=True)  # Novo campo
+    google_calendar_event_url = models.URLField(max_length=500, null=True, blank=True) 
     
     def __str__(self):
         return f"Pedido de {self.cliente.get_full_name()} para {self.servico.nome}"

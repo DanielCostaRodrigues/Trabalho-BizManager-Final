@@ -30,7 +30,9 @@
           <a href="{% url 'servicos' %}" class="btn btn-outline-primary">Serviços</a>
           <a href="{% url 'pedidos' %}" class="btn btn-outline-primary">Pedidos</a>
           <a href="{% url 'faturas' %}" class="btn btn-outline-primary">Faturas</a>
+          {% if user_type == 'freelancer' %}
           <a href="{% url 'listar_clientes' %}" class="btn btn-success text-white">Clientes</a>
+          {% endif %}
         </div>
       </div>
     </div>
