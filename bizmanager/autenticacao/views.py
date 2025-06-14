@@ -761,13 +761,37 @@ def ver_servico(request, servico_id):
         'user_type': user.user_type,
     }
     
-    # Se o utilizador for cliente, verificar se já solicitou este serviço
+    # Se o utilizador for cliente, verificar estado dos pedidos
     if user.user_type == 'cliente':
-        pedido_existente = Pedido.objects.filter(
+        # Verificar se há pedido ativo
+        pedido_ativo = Pedido.objects.filter(
+            cliente=user,
+            servico=servico,
+            status__in=['pendente', 'aceite']
+        ).exists()
+        
+        # Verificar último pedido
+        ultimo_pedido = Pedido.objects.filter(
             cliente=user,
             servico=servico
-        ).exists()
-        context['pedido_existente'] = pedido_existente
+        ).order_by('-data_pedido').first()
+        
+        context['pedido_ativo'] = pedido_ativo
+        context['ultimo_pedido'] = ultimo_pedido
+        
+        # Determinar se pode solicitar o serviço
+        pode_solicitar = not pedido_ativo
+        
+        # Verificar limite de tempo se necessário (opcional)
+        if ultimo_pedido and ultimo_pedido.status == 'concluido':
+            from datetime import timedelta
+            from django.utils import timezone
+            tempo_limite = timezone.now() - timedelta(hours=24)
+            if ultimo_pedido.data_pedido > tempo_limite:
+                pode_solicitar = False
+                context['tempo_restante'] = True
+        
+        context['pode_solicitar'] = pode_solicitar
     
     return render(request, 'autenticacao/ver_servico.html', context)
 
@@ -783,16 +807,35 @@ def solicitar_servico(request, servico_id):
     
     servico = get_object_or_404(Servico, id=servico_id, ativo=True)
     
-    # Verificar se já existe um pedido para este serviço
-    pedido_existente = Pedido.objects.filter(
+    # MODIFICAÇÃO: Verificar apenas pedidos ativos (pendente ou aceite)
+    # Permite novos pedidos se o anterior foi concluído, cancelado ou rejeitado
+    pedido_ativo = Pedido.objects.filter(
         cliente=user,
         servico=servico,
-        status__in=['pendente', 'aceite']
+        status__in=['pendente', 'aceite']  # Apenas pedidos ativos
     ).exists()
     
-    if pedido_existente:
-        messages.warning(request, "Já solicitou este serviço e aguarda resposta.")
+    if pedido_ativo:
+        messages.warning(request, "Já tens um pedido ativo para este serviço. Aguarda a sua conclusão.")
         return redirect('ver_servico_publico', servico_id=servico.id)
+    
+    # Verificar se há um pedido recente concluído (opcional - limitar frequência)
+    # Exemplo: não permitir novo pedido se o último foi concluído há menos de 1 dia
+    from datetime import timedelta
+    from django.utils import timezone
+    
+    ultimo_pedido_concluido = Pedido.objects.filter(
+        cliente=user,
+        servico=servico,
+        status='concluido'
+    ).order_by('-data_pedido').first()
+    
+    if ultimo_pedido_concluido:
+        # Verificar se passou tempo suficiente (opcional)
+        tempo_limite = timezone.now() - timedelta(hours=24)  # 24 horas
+        if ultimo_pedido_concluido.data_pedido > tempo_limite:
+            messages.info(request, "Podes solicitar este serviço novamente após 24 horas da conclusão anterior.")
+            return redirect('ver_servico_publico', servico_id=servico.id)
     
     if request.method == 'POST':
         form = PedidoForm(request.POST)
@@ -814,15 +857,13 @@ def solicitar_servico(request, servico_id):
                         raise ValueError("Data e hora são obrigatórias para serviços agendados.")
                     
                     # Converter strings para objetos de data e hora
-                    from datetime import datetime
+                    from datetime import datetime, date, time
                     
                     # Converter a data de string para objeto date
-                    from datetime import datetime, date
                     year, month, day = map(int, data_str.split('-'))
                     pedido.data_agendamento = date(year, month, day)
                     
                     # Converter a hora de string para objeto time
-                    from datetime import time
                     hour, minute = map(int, hora_str.split(':'))
                     pedido.hora_agendamento = time(hour, minute)
                     
@@ -896,6 +937,7 @@ def solicitar_servico(request, servico_id):
     }
     
     return render(request, 'autenticacao/solicitar_servico.html', context)
+
 
 @login_required
 def toggle_servico_status(request, servico_id):
@@ -1000,13 +1042,37 @@ def ver_servico_publico(request, servico_id):
         'comentario_form': form
     }
     
-    # Se o utilizador estiver autenticado como cliente, verificar se já solicitou este serviço
+    # Se o utilizador estiver autenticado como cliente, verificar estado dos pedidos
     if request.user.is_authenticated and request.user.user_type == 'cliente':
-        pedido_existente = Pedido.objects.filter(
+        # Verificar se há pedido ativo
+        pedido_ativo = Pedido.objects.filter(
+            cliente=request.user,
+            servico=servico,
+            status__in=['pendente', 'aceite']
+        ).exists()
+        
+        # Verificar último pedido
+        ultimo_pedido = Pedido.objects.filter(
             cliente=request.user,
             servico=servico
-        ).exists()
-        context['pedido_existente'] = pedido_existente
+        ).order_by('-data_pedido').first()
+        
+        context['pedido_ativo'] = pedido_ativo
+        context['ultimo_pedido'] = ultimo_pedido
+        
+        # Determinar se pode solicitar o serviço
+        pode_solicitar = not pedido_ativo
+        
+        # Verificar limite de tempo se necessário (opcional)
+        if ultimo_pedido and ultimo_pedido.status == 'concluido':
+            from datetime import timedelta
+            from django.utils import timezone
+            tempo_limite = timezone.now() - timedelta(hours=24)
+            if ultimo_pedido.data_pedido > tempo_limite:
+                pode_solicitar = False
+                context['tempo_restante'] = True
+        
+        context['pode_solicitar'] = pode_solicitar
     
     # Obter serviços relacionados (mesma área, excluindo este)
     servicos_relacionados = Servico.objects.filter(

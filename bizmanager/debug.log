@@ -42678,3 +42678,1398 @@ WebSocket DISCONNECT /ws/chat/dm_1_2/ [127.0.0.1:51466]
 [mHTTP GET / 200 [0.05, 127.0.0.1:51552][0m
 [33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51552][0m
 [mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51553][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET / 200 [0.18, 127.0.0.1:51702][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51702][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51703][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51703][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.03, 127.0.0.1:51703][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.07, 127.0.0.1:51703][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51703][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51702][0m
+[mHTTP GET /servicos-disponiveis/ver/14/ 200 [0.12, 127.0.0.1:51702][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51702][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51703][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51818][0m
+[mHTTP GET /servicos-disponiveis/ver/14/ 200 [0.10, 127.0.0.1:51818][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51818][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51820][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51820][0m
+[mHTTP GET /chat/ 200 [0.05, 127.0.0.1:51820][0m
+[mHTTP GET /chat/unread-count/ 200 [0.04, 127.0.0.1:51820][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:51818][0m
+[mHTTP GET /chat/unread-count/ 200 [0.04, 127.0.0.1:51820][0m
+[mHTTP GET /chat/room/dm_1_2/ 200 [0.05, 127.0.0.1:51821][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51821][0m
+WebSocket HANDSHAKING /ws/chat/dm_1_2/ [127.0.0.1:51822]
+WebSocket CONNECT /ws/chat/dm_1_2/ [127.0.0.1:51822]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51821][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51821][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51821][0m
+WebSocket DISCONNECT /ws/chat/dm_1_2/ [127.0.0.1:51822]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51825][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51830][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51831][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51840][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51842][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51844][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51846][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51846][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51846][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51856][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51858][0m
+[mHTTP GET / 200 [0.05, 127.0.0.1:51858][0m
+[36mHTTP GET /static/css/style.css 304 [0.00, 127.0.0.1:51858][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51859][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51859][0m
+[32mHTTP GET /logout/ 302 [0.04, 127.0.0.1:51859][0m
+[mHTTP GET /login/ 200 [0.06, 127.0.0.1:51859][0m
+[mHTTP GET /static/images/google-icon1.png 200 [0.05, 127.0.0.1:51859][0m
+[mHTTP GET /escolher-conta/ 200 [0.02, 127.0.0.1:51859][0m
+Internal Server Error: /registo-cliente/
+Traceback (most recent call last):
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\kikon\bizmanager\bizmanager\autenticacao\views.py", line 225, in registo_cliente
+    return render(request, 'autenticacao/registo_cliente.html', {'form': form})
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'termos' not found. 'termos' is not a valid view function or pattern name.
+[35;1mHTTP GET /registo-cliente/ 500 [0.29, 127.0.0.1:51859][0m
+Internal Server Error: /registo-cliente/
+Traceback (most recent call last):
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\kikon\bizmanager\bizmanager\autenticacao\views.py", line 225, in registo_cliente
+    return render(request, 'autenticacao/registo_cliente.html', {'form': form})
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'termos' not found. 'termos' is not a valid view function or pattern name.
+[35;1mHTTP GET /registo-cliente/ 500 [0.03, 127.0.0.1:51859][0m
+Internal Server Error: /registo-cliente/
+Traceback (most recent call last):
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\kikon\bizmanager\bizmanager\autenticacao\views.py", line 225, in registo_cliente
+    return render(request, 'autenticacao/registo_cliente.html', {'form': form})
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 1008, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 969, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'termos' not found. 'termos' is not a valid view function or pattern name.
+[35;1mHTTP GET /registo-cliente/ 500 [0.03, 127.0.0.1:51859][0m
+[mHTTP GET /escolher-conta/ 200 [0.02, 127.0.0.1:51873][0m
+[mHTTP GET /escolher-conta/ 200 [0.02, 127.0.0.1:51873][0m
+[mHTTP GET /registo-cliente/ 200 [0.08, 127.0.0.1:51875][0m
+[33mHTTP GET /static/images/favicon.png 404 [0.01, 127.0.0.1:51875][0m
+[mHTTP GET /registo-cliente/ 200 [0.03, 127.0.0.1:51876][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51878][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51878][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:51878][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51878][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.05, 127.0.0.1:52734][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:52734][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.03, 127.0.0.1:52734][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52734][0m
+[mHTTP GET / 200 [0.11, 127.0.0.1:52734][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:52734][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.03, 127.0.0.1:52737][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:52737][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52737][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.03, 127.0.0.1:52734][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:52734][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52734][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.03, 127.0.0.1:52734][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52734][0m
+[mHTTP GET /login/ 200 [0.03, 127.0.0.1:52734][0m
+[mHTTP GET /escolher-conta/ 200 [0.04, 127.0.0.1:52734][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.05, 127.0.0.1:52734][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52734][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /servicos-disponiveis/?page=2 200 [0.03, 127.0.0.1:52738][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[32mHTTP GET /chat/ 302 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /login/?next=/chat/ 200 [0.02, 127.0.0.1:52738][0m
+[32mHTTP GET /notificacoes/recentes/ 302 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /login/?next=/notificacoes/recentes/ 200 [0.02, 127.0.0.1:52738][0m
+[32mHTTP GET /notificacoes/ 302 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /login/?next=/notificacoes/ 200 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.04, 127.0.0.1:52738][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52738][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.03, 127.0.0.1:52734][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52734][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:52734][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52734][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /escolher-conta/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /registo-cliente/ 200 [0.08, 127.0.0.1:52738][0m
+[mHTTP GET /login/ 200 [0.02, 127.0.0.1:52738][0m
+[32mHTTP POST /login/ 302 [0.58, 127.0.0.1:52738][0m
+[mHTTP GET /dashboard/ 200 [0.12, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /perfil/ 200 [0.07, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[32mHTTP GET /metodos-pagamento/ 302 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /faturas/?tab=payment-methods 200 [0.08, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52738][0m
+[32mHTTP POST /faturas/ 302 [0.04, 127.0.0.1:52738][0m
+[mHTTP GET /faturas/ 200 [0.04, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52738][0m
+[mHTTP POST /faturas/ 200 [0.83, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /clientes/ 200 [0.10, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET / 200 [0.05, 127.0.0.1:52738][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52741][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.05, 127.0.0.1:52741][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52741][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /servicos-disponiveis/ver/13/ 200 [0.08, 127.0.0.1:52738][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:52738][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:52738][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.03, 127.0.0.1:52738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:52744][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52744][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:52744][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52744][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52744][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52785][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52793][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52794][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52796][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52798][0m
+[mHTTP GET /ajuda/ 200 [0.04, 127.0.0.1:52798][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52798][0m
+[mHTTP GET /chat/ 200 [0.07, 127.0.0.1:52798][0m
+[mHTTP GET /chat/unread-count/ 200 [0.03, 127.0.0.1:52798][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:52799][0m
+[mHTTP GET /chat/unread-count/ 200 [0.06, 127.0.0.1:52798][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52798][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52798][0m
+[32mHTTP POST /enviar-suporte/ 302 [1.15, 127.0.0.1:52798][0m
+[mHTTP GET /ajuda/ 200 [0.02, 127.0.0.1:52798][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52798][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52822][0m
+[mHTTP GET / 200 [0.03, 127.0.0.1:52822][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52822][0m
+[mHTTP GET /dashboard/ 200 [0.05, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52822][0m
+[mHTTP GET /faturas/ver/5/ 200 [0.06, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52822][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:52822][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/recentes/ 200 [0.03, 127.0.0.1:52822][0m
+[32mHTTP GET /notificacoes/marcar-lida/50/ 302 [0.04, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/ 200 [0.04, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52822][0m
+[32mHTTP GET /notificacoes/marcar-lida/50/ 302 [0.04, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/ 200 [0.02, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52822][0m
+[32mHTTP GET /notificacoes/marcar-lida/49/ 302 [0.04, 127.0.0.1:52822][0m
+[mHTTP GET /chat/room/dm_1_2/ 200 [0.10, 127.0.0.1:52822][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52822][0m
+WebSocket HANDSHAKING /ws/chat/dm_1_2/ [127.0.0.1:52839]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52822][0m
+WebSocket CONNECT /ws/chat/dm_1_2/ [127.0.0.1:52839]
+[mHTTP GET /chat/ 200 [0.05, 127.0.0.1:52822][0m
+WebSocket DISCONNECT /ws/chat/dm_1_2/ [127.0.0.1:52839]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52843][0m
+[mHTTP GET /chat/unread-count/ 200 [0.06, 127.0.0.1:52822][0m
+[mHTTP GET /chat/unread-count/ 200 [0.03, 127.0.0.1:52822][0m
+[mHTTP GET / 200 [0.03, 127.0.0.1:52822][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52822][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52843][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET / 200 [0.17, 127.0.0.1:51672][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51672][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51673][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.01, 127.0.0.1:51676][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.02, 127.0.0.1:51675][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.04, 127.0.0.1:51674][0m
+[36mHTTP GET /static/images/background2.png 304 [0.00, 127.0.0.1:51674][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.00, 127.0.0.1:51674][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51674][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.01, 127.0.0.1:51674][0m
+[mHTTP GET /login/ 200 [0.01, 127.0.0.1:51674][0m
+[mHTTP GET /static/images/google-icon1.png 200 [0.11, 127.0.0.1:51676][0m
+[mHTTP GET /static/images/logo2.png 200 [0.12, 127.0.0.1:51675][0m
+[mHTTP GET /static/css/style.css 200 [0.12, 127.0.0.1:51674][0m
+[mHTTP GET /escolher-conta/ 200 [0.03, 127.0.0.1:51674][0m
+[mHTTP GET /registo-cliente/ 200 [0.10, 127.0.0.1:51674][0m
+[mHTTP POST /registo-cliente/ 200 [0.07, 127.0.0.1:51724][0m
+[mHTTP POST /registo-cliente/ 200 [0.02, 127.0.0.1:51724][0m
+[mHTTP GET /registo-cliente/ 200 [0.01, 127.0.0.1:51724][0m
+[32mHTTP GET /registo-google/cliente/ 302 [0.04, 127.0.0.1:51724][0m
+[32mHTTP GET /login/google-oauth2/ 302 [0.05, 127.0.0.1:51724][0m
+[32mHTTP GET /complete/google-oauth2/?state=5sbPeAyMb5XvyM1jxkrtq6FGf5ZJx4Ep&code=4%2F0AUJR-x7udLmHvZl3efylev0vCznAERTxmVHt7mHsizYkPirk-j2BiY07QuqLMOtQCPesnQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&authuser=2&prompt=none 302 [0.57, 127.0.0.1:51736][0m
+[mHTTP GET /dashboard/ 200 [0.16, 127.0.0.1:51736][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51739][0m
+[mHTTP GET /static/images/logo3.png 200 [0.02, 127.0.0.1:51736][0m
+[mHTTP GET /static/images/background2.png 200 [0.03, 127.0.0.1:51736][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51739][0m
+[32mHTTP GET /logout/ 302 [0.11, 127.0.0.1:51739][0m
+[mHTTP GET /login/ 200 [0.03, 127.0.0.1:51739][0m
+[32mHTTP POST /login/ 302 [1.06, 127.0.0.1:51739][0m
+[mHTTP GET /dashboard/ 200 [0.10, 127.0.0.1:51739][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 200 [0.09, 127.0.0.1:51739][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:51736][0m
+[mHTTP GET /perfil/ 200 [0.18, 127.0.0.1:51736][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51736][0m
+[32mHTTP GET /metodos-pagamento/ 302 [0.08, 127.0.0.1:51736][0m
+[mHTTP GET /faturas/?tab=payment-methods 200 [0.12, 127.0.0.1:51736][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51736][0m
+[32mHTTP POST /faturas/ 302 [0.06, 127.0.0.1:51736][0m
+[mHTTP GET /faturas/ 200 [0.08, 127.0.0.1:51736][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51736][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.11, 127.0.0.1:51736][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51747][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542.png 200 [0.10, 127.0.0.1:51736][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.10, 127.0.0.1:51748][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 200 [0.16, 127.0.0.1:51739][0m
+[32mHTTP GET /logout/ 302 [0.04, 127.0.0.1:51739][0m
+[mHTTP GET /login/ 200 [0.03, 127.0.0.1:51739][0m
+[32mHTTP POST /login/ 302 [0.88, 127.0.0.1:51739][0m
+[mHTTP GET /dashboard/ 200 [0.06, 127.0.0.1:51739][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:51748][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 200 [0.07, 127.0.0.1:51739][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.07, 127.0.0.1:51739][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.03, 127.0.0.1:51739][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:51748][0m
+[mHTTP GET /servicos-disponiveis/ver/12/ 200 [0.16, 127.0.0.1:51748][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51834][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 200 [0.09, 127.0.0.1:51748][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 200 [0.10, 127.0.0.1:51736][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 200 [0.13, 127.0.0.1:51833][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 200 [0.15, 127.0.0.1:51747][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 200 [0.16, 127.0.0.1:51739][0m
+[mHTTP GET /servicos/solicitar/12/ 200 [0.08, 127.0.0.1:51739][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51739][0m
+[32mHTTP GET /google-auth/?next=/servicos/solicitar/12/ 302 [0.04, 127.0.0.1:51739][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.04, 127.0.0.1:51739][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51739][0m
+[mHTTP GET /dashboard/ 200 [0.07, 127.0.0.1:51739][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.04, 127.0.0.1:51739][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51739][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET /chat/ 200 [0.20, 127.0.0.1:52016][0m
+[mHTTP GET /media/perfil/os-amores-de-eagle-22927806-030920212344.png 200 [0.14, 127.0.0.1:52016][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-09_%C3%A0s_23.27.00_3119b0b7.jpg 200 [0.16, 127.0.0.1:52017][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:52019][0m
+[mHTTP GET /chat/unread-count/ 200 [0.09, 127.0.0.1:52018][0m
+[mHTTP GET /chat/unread-count/ 200 [0.03, 127.0.0.1:52018][0m
+[mHTTP GET /chat/room/dm_1_2/ 200 [0.12, 127.0.0.1:52018][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:52019][0m
+[mHTTP GET /static/css/chat/chat.css 200 [0.04, 127.0.0.1:52018][0m
+WebSocket HANDSHAKING /ws/chat/dm_1_2/ [127.0.0.1:52020]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:52018][0m
+WebSocket CONNECT /ws/chat/dm_1_2/ [127.0.0.1:52020]
+[mHTTP GET /servicos-disponiveis/ 200 [0.15, 127.0.0.1:52018][0m
+WebSocket DISCONNECT /ws/chat/dm_1_2/ [127.0.0.1:52020]
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52018][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52019][0m
+[mHTTP GET / 200 [0.08, 127.0.0.1:52019][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:52019][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:52018][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET / 200 [0.28, 127.0.0.1:63657][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:63657][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:63657][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:63657][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.09, 127.0.0.1:63657][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.01, 127.0.0.1:63658][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:63657][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.01, 127.0.0.1:63657][0m
+[32mHTTP GET /chat/ 302 [0.01, 127.0.0.1:63657][0m
+[mHTTP GET /login/?next=/chat/ 200 [0.01, 127.0.0.1:63657][0m
+[32mHTTP GET /login/google-oauth2/ 302 [0.06, 127.0.0.1:63657][0m
+[32mHTTP GET /complete/google-oauth2/?state=2dav9ay3LHI0HtgKH2xFUUg3GBqGXugd&code=4%2F0AUJR-x67EzT29GIrp1_t8tUqkv4tkBGgSQIRhj-BcASdAvJ42T-JmZIzBdImr-dW2J4u3w&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=none 302 [0.53, 127.0.0.1:63657][0m
+[mHTTP GET /dashboard/ 200 [0.17, 127.0.0.1:63657][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:63657][0m
+[mHTTP GET /perfil/ 200 [0.12, 127.0.0.1:63657][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:63657][0m
+[mHTTP GET /dashboard/ 200 [0.14, 127.0.0.1:63657][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:63657][0m
+[mHTTP GET /servicos/ 200 [0.12, 127.0.0.1:63657][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:63657][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:63658][0m
+[mHTTP GET /pedidos/ 200 [0.11, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:63658][0m
+[mHTTP GET /faturas/ 200 [0.14, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:63658][0m
+[mHTTP GET /faturas/ver/6/ 200 [0.17, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:63658][0m
+[mHTTP GET /chat/ 200 [0.12, 127.0.0.1:63658][0m
+[mHTTP GET /chat/unread-count/ 200 [0.04, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:63657][0m
+[mHTTP GET /chat/unread-count/ 200 [0.06, 127.0.0.1:63658][0m
+[mHTTP GET /chat/room/dm_1_3/ 200 [0.11, 127.0.0.1:63658][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:63658][0m
+WebSocket HANDSHAKING /ws/chat/dm_1_3/ [127.0.0.1:63663]
+WebSocket CONNECT /ws/chat/dm_1_3/ [127.0.0.1:63663]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:63658][0m
+[mHTTP GET /ajuda/ 200 [0.11, 127.0.0.1:63658][0m
+WebSocket DISCONNECT /ws/chat/dm_1_3/ [127.0.0.1:63663]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:63658][0m
+[mHTTP GET / 200 [0.08, 127.0.0.1:63658][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:63658][0m
+[32mHTTP GET /logout/ 302 [0.11, 127.0.0.1:63658][0m
+[mHTTP GET /login/ 200 [0.03, 127.0.0.1:63658][0m
+[mHTTP POST /login/ 200 [1.00, 127.0.0.1:63658][0m
+[32mHTTP POST /login/ 302 [1.02, 127.0.0.1:63658][0m
+[mHTTP GET /dashboard/ 200 [0.08, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:63658][0m
+[mHTTP GET /clientes/ 200 [0.22, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:63658][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:63698][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.09, 127.0.0.1:63703][0m
+[mHTTP GET /clientes/ 200 [0.11, 127.0.0.1:63706][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.09, 127.0.0.1:63706][0m
+[mHTTP GET /notificacoes/recentes/ 200 [0.03, 127.0.0.1:63706][0m
+[32mHTTP GET /notificacoes/marcar-lida/50/ 302 [0.07, 127.0.0.1:63706][0m
+[mHTTP GET /notificacoes/ 200 [0.04, 127.0.0.1:63706][0m
+[mHTTP GET /static/css/notificacoes.css 200 [0.08, 127.0.0.1:63706][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.09, 127.0.0.1:63706][0m
+[mHTTP GET / 200 [0.06, 127.0.0.1:63706][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:63706][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:63706][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET / 200 [0.07, 127.0.0.1:51046][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51048][0m
+[mHTTP GET /static/css/style.css 200 [0.10, 127.0.0.1:51046][0m
+[mHTTP GET /static/images/logo3.png 200 [0.12, 127.0.0.1:51047][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 200 [0.12, 127.0.0.1:51050][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 200 [0.13, 127.0.0.1:51049][0m
+[mHTTP GET /static/images/background2.png 200 [0.02, 127.0.0.1:51057][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.01, 127.0.0.1:51057][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.01, 127.0.0.1:51057][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.01, 127.0.0.1:51057][0m
+[mHTTP GET / 200 [0.03, 127.0.0.1:51105][0m
+[mHTTP GET /static/css/style.css 200 [0.01, 127.0.0.1:51105][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51106][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.01, 127.0.0.1:51105][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.01, 127.0.0.1:51105][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.01, 127.0.0.1:51105][0m
+[mHTTP GET /login/ 200 [0.01, 127.0.0.1:51120][0m
+[mHTTP GET /static/images/google-icon1.png 200 [0.02, 127.0.0.1:51121][0m
+[mHTTP GET /static/images/logo2.png 200 [0.02, 127.0.0.1:51120][0m
+[32mHTTP POST /login/ 302 [0.74, 127.0.0.1:51123][0m
+[mHTTP GET /dashboard/ 200 [0.08, 127.0.0.1:51123][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51123][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51123][0m
+[36mHTTP GET /static/css/style.css 304 [0.00, 127.0.0.1:51123][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51125][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51125][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.00, 127.0.0.1:51057][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.00, 127.0.0.1:51057][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51127][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51127][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51127][0m
+[mHTTP GET /login/ 200 [0.01, 127.0.0.1:51057][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51057][0m
+[mHTTP GET /static/images/google-icon1.png 200 [0.01, 127.0.0.1:51129][0m
+[mHTTP GET /static/images/logo2.png 200 [0.01, 127.0.0.1:51128][0m
+[32mHTTP POST /login/ 302 [0.60, 127.0.0.1:51128][0m
+[mHTTP GET /dashboard/ 200 [0.07, 127.0.0.1:51128][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51128][0m
+[36mHTTP GET /static/images/background2.png 304 [0.00, 127.0.0.1:51128][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.03, 127.0.0.1:51129][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51129][0m
+[mHTTP GET /dashboard/ 200 [0.06, 127.0.0.1:51129][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51129][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51129][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51129][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51129][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.03, 127.0.0.1:51128][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51129][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51163][0m
+[mHTTP GET / 200 [0.06, 127.0.0.1:51129][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51129][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51128][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51128][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.04, 127.0.0.1:51057][0m
+[36mHTTP GET /static/images/background2.png 304 [0.02, 127.0.0.1:51248][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.05, 127.0.0.1:51129][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:51249][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51302][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51341][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51364][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51364][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51364][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51405][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.07, 127.0.0.1:51405][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51405][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51449][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51453][0m
+[36mHTTP GET /static/images/background2.png 304 [0.01, 127.0.0.1:51449][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.05, 127.0.0.1:51450][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 200 [0.08, 127.0.0.1:51452][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542.png 200 [0.09, 127.0.0.1:51451][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:51450][0m
+[mHTTP GET /servicos-disponiveis/ver/12/ 200 [0.10, 127.0.0.1:51450][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 200 [0.06, 127.0.0.1:51451][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 200 [0.06, 127.0.0.1:51452][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 200 [0.10, 127.0.0.1:51450][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 200 [0.09, 127.0.0.1:51453][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 200 [0.11, 127.0.0.1:51449][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.12, 127.0.0.1:51405][0m
+[32mHTTP GET /logout/ 302 [0.04, 127.0.0.1:51405][0m
+[mHTTP GET /login/ 200 [0.03, 127.0.0.1:51405][0m
+[36mHTTP GET /static/images/logo2.png 304 [0.00, 127.0.0.1:51405][0m
+[36mHTTP GET /static/images/google-icon1.png 304 [0.00, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51454][0m
+[32mHTTP POST /login/ 302 [0.61, 127.0.0.1:51405][0m
+[mHTTP GET /dashboard/ 200 [0.05, 127.0.0.1:51405][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.02, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51449][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.06, 127.0.0.1:51449][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51449][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51449][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51405][0m
+[mHTTP GET /servicos-disponiveis/ver/12/ 200 [0.05, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51405][0m
+[mHTTP GET /servicos-disponiveis/ver/11/ 200 [0.05, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51405][0m
+[mHTTP GET /servicos-disponiveis/ver/7/ 200 [0.04, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51405][0m
+[mHTTP GET /pedidos/ 200 [0.05, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51405][0m
+[mHTTP GET /pedidos/ 200 [0.08, 127.0.0.1:51405][0m
+[36mHTTP GET /static/css/style.css 304 [0.00, 127.0.0.1:51405][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51449][0m
+[36mHTTP GET /static/images/background2.png 304 [0.00, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51457][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51460][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51405][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51405][0m
+[mHTTP GET /pedidos/ver/18/ 200 [0.04, 127.0.0.1:51405][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51482][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51405][0m
+[36mHTTP GET /static/images/background2.png 304 [0.01, 127.0.0.1:51485][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.05, 127.0.0.1:51483][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.07, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.08, 127.0.0.1:51482][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51482][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51482][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51482][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51486][0m
+[mHTTP GET /servicos/?page=2 200 [0.04, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /servicos/ver/8/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /servicos/ver/5/ 200 [0.03, 127.0.0.1:51484][0m
+[36mHTTP GET /static/css/style.css 304 [0.00, 127.0.0.1:51484][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51484][0m
+[36mHTTP GET /static/images/background2.png 304 [0.01, 127.0.0.1:51483][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.04, 127.0.0.1:51482][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:51484][0m
+[mHTTP GET /servicos/ver/4/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51484][0m
+[mHTTP GET /servicos/ver/6/ 200 [0.03, 127.0.0.1:51484][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51484][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51484][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51484][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.03, 127.0.0.1:51482][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51483][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.05, 127.0.0.1:51483][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51483][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51484][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542.png 304 [0.03, 127.0.0.1:51482][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 304 [0.03, 127.0.0.1:51483][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:51485][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51485][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51485][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51485][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51483][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51490][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51483][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51483][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51483][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51485][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.05, 127.0.0.1:51485][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51485][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51485][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51483][0m
+[mHTTP GET /servicos/ 200 [0.04, 127.0.0.1:51483][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51483][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51483][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51485][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.03, 127.0.0.1:51485][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 304 [0.03, 127.0.0.1:51485][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 304 [0.04, 127.0.0.1:51483][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 304 [0.05, 127.0.0.1:51484][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 304 [0.07, 127.0.0.1:51482][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:51494][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 304 [0.11, 127.0.0.1:51493][0m
+[mHTTP GET /servicos/ver/11/ 200 [0.03, 127.0.0.1:51493][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51493][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.04, 127.0.0.1:51493][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51493][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51493][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51493][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51493][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51494][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51494][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51494][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51494][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51493][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51493][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51493][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51494][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51494][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.03, 127.0.0.1:51482][0m
+[36mHTTP GET /static/images/background2.png 304 [0.00, 127.0.0.1:51494][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51493][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51495][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51495][0m
+[36mHTTP GET /static/css/style.css 304 [0.00, 127.0.0.1:51495][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51495][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51495][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51514][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51514][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.02, 127.0.0.1:51515][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51515][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.03, 127.0.0.1:51515][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51525][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51525][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51525][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51526][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51527][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51617][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51620][0m
+[32mHTTP GET /admin/ 302 [0.04, 127.0.0.1:51620][0m
+[mHTTP GET /admin/login/?next=/admin/ 200 [0.20, 127.0.0.1:51620][0m
+[mHTTP GET /static/admin/css/dark_mode.css 200 [0.03, 127.0.0.1:51622][0m
+[mHTTP GET /static/admin/css/nav_sidebar.css 200 [0.03, 127.0.0.1:51623][0m
+[mHTTP GET /static/admin/css/login.css 200 [0.03, 127.0.0.1:51624][0m
+[mHTTP GET /static/admin/css/base.css 200 [0.03, 127.0.0.1:51620][0m
+[mHTTP GET /static/admin/css/responsive.css 200 [0.03, 127.0.0.1:51625][0m
+[mHTTP GET /static/admin/js/theme.js 200 [0.05, 127.0.0.1:51626][0m
+[mHTTP GET /static/admin/js/nav_sidebar.js 200 [0.03, 127.0.0.1:51620][0m
+[32mHTTP POST /admin/login/?next=/admin/ 302 [0.62, 127.0.0.1:51620][0m
+[mHTTP GET /admin/ 200 [0.08, 127.0.0.1:51620][0m
+[mHTTP GET /static/admin/css/dashboard.css 200 [0.01, 127.0.0.1:51620][0m
+[mHTTP GET /static/admin/img/icon-deletelink.svg 200 [0.02, 127.0.0.1:51625][0m
+[mHTTP GET /static/admin/img/icon-changelink.svg 200 [0.02, 127.0.0.1:51626][0m
+[mHTTP GET /static/admin/img/icon-addlink.svg 200 [0.02, 127.0.0.1:51620][0m
+[32mHTTP GET /admin/login/?next=/admin/ 302 [0.02, 127.0.0.1:51627][0m
+[mHTTP GET /admin/ 200 [0.03, 127.0.0.1:51627][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51627][0m
+[32mHTTP GET /logout/ 302 [0.04, 127.0.0.1:51627][0m
+[mHTTP GET /login/ 200 [0.02, 127.0.0.1:51627][0m
+[36mHTTP GET /static/css/style.css 304 [0.02, 127.0.0.1:51627][0m
+[36mHTTP GET /static/images/logo2.png 304 [0.01, 127.0.0.1:51628][0m
+[36mHTTP GET /static/images/google-icon1.png 304 [0.01, 127.0.0.1:51629][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51633][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51633][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.02, 127.0.0.1:51633][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51633][0m
+[mHTTP GET /login/ 200 [0.02, 127.0.0.1:51634][0m
+[32mHTTP GET /login/google-oauth2/ 302 [0.03, 127.0.0.1:51634][0m
+[32mHTTP GET /complete/google-oauth2/?state=8bjvlt5DnetkdPLo9S5moR5GUDmq9uxn&code=4%2F0AUJR-x7OMeW2kpzy_YLOeb2fTRtJUQ78SRMwDTcLdeHqLk--QLmdCYmQFC03FbdjjTUCRg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=2&prompt=none 302 [0.58, 127.0.0.1:51634][0m
+[mHTTP GET /dashboard/ 200 [0.04, 127.0.0.1:51634][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51634][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51634][0m
+[32mHTTP GET /logout/ 302 [0.04, 127.0.0.1:51644][0m
+[mHTTP GET /login/ 200 [0.03, 127.0.0.1:51644][0m
+Not Found: /admim
+[33mHTTP GET /admim 404 [0.03, 127.0.0.1:51644][0m
+[32mHTTP GET /admin/ 302 [0.02, 127.0.0.1:51645][0m
+[mHTTP GET /admin/login/?next=/admin/ 200 [0.03, 127.0.0.1:51645][0m
+[32mHTTP POST /admin/login/?next=/admin/ 302 [0.59, 127.0.0.1:51645][0m
+[mHTTP GET /admin/ 200 [0.03, 127.0.0.1:51645][0m
+[mHTTP GET /admin/autenticacao/user/ 200 [0.17, 127.0.0.1:51646][0m
+[mHTTP GET /static/admin/css/changelists.css 200 [0.02, 127.0.0.1:51646][0m
+[mHTTP GET /static/admin/js/jquery.init.js 200 [0.03, 127.0.0.1:51649][0m
+[mHTTP GET /static/admin/js/admin/RelatedObjectLookups.js 200 [0.05, 127.0.0.1:51651][0m
+[mHTTP GET /static/admin/js/core.js 200 [0.05, 127.0.0.1:51650][0m
+[mHTTP GET /static/admin/js/actions.js 200 [0.04, 127.0.0.1:51646][0m
+[mHTTP GET /static/admin/js/urlify.js 200 [0.04, 127.0.0.1:51649][0m
+[mHTTP GET /static/admin/js/prepopulate.js 200 [0.04, 127.0.0.1:51651][0m
+[mHTTP GET /static/admin/img/search.svg 200 [0.03, 127.0.0.1:51646][0m
+[mHTTP GET /admin/jsi18n/ 200 [0.10, 127.0.0.1:51647][0m
+[mHTTP GET /static/admin/img/icon-no.svg 200 [0.03, 127.0.0.1:51649][0m
+[mHTTP GET /static/admin/js/vendor/jquery/jquery.js 200 [0.12, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/js/filters.js 200 [0.03, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/img/icon-yes.svg 200 [0.01, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/js/vendor/xregexp/xregexp.js 200 [0.13, 127.0.0.1:51650][0m
+[mHTTP GET /static/admin/img/icon-viewlink.svg 200 [0.02, 127.0.0.1:51649][0m
+[mHTTP GET /static/admin/img/tooltag-add.svg 200 [0.02, 127.0.0.1:51650][0m
+[mHTTP GET /static/admin/img/sorting-icons.svg 200 [0.02, 127.0.0.1:51648][0m
+[mHTTP GET /admin/autenticacao/user/15/change/ 200 [0.19, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/css/forms.css 200 [0.02, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/js/SelectBox.js 200 [0.03, 127.0.0.1:51647][0m
+[mHTTP GET /admin/jsi18n/ 200 [0.04, 127.0.0.1:51651][0m
+[mHTTP GET /static/admin/js/admin/DateTimeShortcuts.js 200 [0.04, 127.0.0.1:51649][0m
+[mHTTP GET /static/admin/js/SelectFilter2.js 200 [0.04, 127.0.0.1:51646][0m
+[mHTTP GET /static/admin/js/calendar.js 200 [0.04, 127.0.0.1:51650][0m
+[mHTTP GET /static/admin/js/prepopulate_init.js 200 [0.03, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/css/widgets.css 200 [0.02, 127.0.0.1:51647][0m
+[mHTTP GET /static/admin/js/change_form.js 200 [0.02, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/img/icon-clock.svg 200 [0.02, 127.0.0.1:51649][0m
+[mHTTP GET /static/admin/img/icon-unknown-alt.svg 200 [0.03, 127.0.0.1:51646][0m
+[mHTTP GET /static/admin/img/icon-calendar.svg 200 [0.03, 127.0.0.1:51650][0m
+[mHTTP GET /static/admin/img/icon-unknown.svg 200 [0.03, 127.0.0.1:51648][0m
+[mHTTP GET /static/admin/img/selector-icons.svg 200 [0.04, 127.0.0.1:51647][0m
+[mHTTP GET /admin/autenticacao/user/15/delete/ 200 [0.08, 127.0.0.1:51653][0m
+[mHTTP GET /static/admin/js/cancel.js 200 [0.03, 127.0.0.1:51653][0m
+[32mHTTP POST /admin/autenticacao/user/15/delete/ 302 [0.05, 127.0.0.1:51653][0m
+[mHTTP GET /admin/autenticacao/user/ 200 [0.03, 127.0.0.1:51653][0m
+[mHTTP GET /admin/jsi18n/ 200 [0.02, 127.0.0.1:51653][0m
+[32mHTTP GET /admin/autenticacao/user/15/delete/ 302 [0.03, 127.0.0.1:51653][0m
+[mHTTP GET /admin/ 200 [0.03, 127.0.0.1:51653][0m
+[mHTTP GET /static/admin/img/icon-alert.svg 200 [0.01, 127.0.0.1:51653][0m
+[32mHTTP GET /admin/autenticacao/user/15/change/ 302 [0.02, 127.0.0.1:51653][0m
+[mHTTP GET /admin/ 200 [0.03, 127.0.0.1:51653][0m
+[mHTTP GET /admin/ 200 [0.03, 127.0.0.1:51653][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51653][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51653][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51654][0m
+[32mHTTP GET /logout/ 302 [0.04, 127.0.0.1:51655][0m
+[mHTTP GET /login/ 200 [0.02, 127.0.0.1:51655][0m
+[mHTTP GET /escolher-conta/ 200 [0.03, 127.0.0.1:51655][0m
+[mHTTP GET /registo-cliente/ 200 [0.03, 127.0.0.1:51655][0m
+[32mHTTP GET /registo-google/cliente/ 302 [0.02, 127.0.0.1:51655][0m
+[32mHTTP GET /login/google-oauth2/ 302 [0.02, 127.0.0.1:51655][0m
+[32mHTTP GET /complete/google-oauth2/?state=i2xTQeSs2y3EpEHFmWFFuxcw41uMGjV0&code=4%2F0AUJR-x4M9YzlRnjRL8FHsv6zw4RA-rGjpoFq2PRDSfSD7CnuE6YRd6m7Pjo1w-BRS83pcA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=2&prompt=none 302 [0.57, 127.0.0.1:51656][0m
+[mHTTP GET /dashboard/ 200 [0.04, 127.0.0.1:51656][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51656][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51656][0m
+[32mHTTP GET /logout/ 302 [0.04, 127.0.0.1:51656][0m
+[mHTTP GET /login/ 200 [0.02, 127.0.0.1:51656][0m
+C:\Users\kikon\bizmanager\bizmanager\autenticacao\views.py changed, reloading.
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[32mHTTP POST /login/ 302 [0.60, 127.0.0.1:51732][0m
+[mHTTP GET /dashboard/ 200 [0.07, 127.0.0.1:51732][0m
+[36mHTTP GET /static/css/style.css 304 [0.00, 127.0.0.1:51732][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51732][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.05, 127.0.0.1:51732][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51732][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51735][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 200 [0.10, 127.0.0.1:51734][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542.png 200 [0.12, 127.0.0.1:51733][0m
+[mHTTP GET /servicos-disponiveis/ver/12/ 200 [0.14, 127.0.0.1:51733][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 200 [0.04, 127.0.0.1:51733][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:51737][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 200 [0.08, 127.0.0.1:51732][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 200 [0.09, 127.0.0.1:51736][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 200 [0.11, 127.0.0.1:51734][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 200 [0.12, 127.0.0.1:51735][0m
+[mHTTP GET /servicos-disponiveis/ver/11/ 200 [0.04, 127.0.0.1:51738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51738][0m
+[mHTTP GET /servicos-disponiveis/ver/10/ 200 [0.04, 127.0.0.1:51738][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51738][0m
+[mHTTP GET /servicos-disponiveis/ver/7/ 200 [0.04, 127.0.0.1:51741][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51741][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51746][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51746][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51746][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51754][0m
+[mHTTP GET /servicos-disponiveis/ver/7/ 200 [0.05, 127.0.0.1:51758][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51758][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51758][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51758][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51759][0m
+[mHTTP GET /servicos/ 200 [0.04, 127.0.0.1:51759][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51759][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51758][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.07, 127.0.0.1:51758][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51758][0m
+[mHTTP GET /servicos/ver/13/ 200 [0.03, 127.0.0.1:51760][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51760][0m
+[mHTTP GET /servicos/ 200 [0.04, 127.0.0.1:51760][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51760][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51761][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.04, 127.0.0.1:51761][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51761][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.04, 127.0.0.1:51764][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51764][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51767][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51767][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51768][0m
+[mHTTP GET / 200 [0.06, 127.0.0.1:51768][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51768][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51767][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.06, 127.0.0.1:51769][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51769][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51770][0m
+[mHTTP GET /servicos-disponiveis/ver/9/ 200 [0.05, 127.0.0.1:51770][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51770][0m
+[mHTTP GET /servicos-disponiveis/ver/11/ 200 [0.05, 127.0.0.1:51771][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51771][0m
+[mHTTP GET /servicos-disponiveis/ver/12/ 200 [0.05, 127.0.0.1:51771][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51771][0m
+[mHTTP GET /servicos-disponiveis/ver/13/ 200 [0.05, 127.0.0.1:51771][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51771][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51772][0m
+[mHTTP GET /servicos-disponiveis/ver/10/ 200 [0.05, 127.0.0.1:51773][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51773][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51775][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51775][0m
+[mHTTP GET /servicos-disponiveis/ver/7/ 200 [0.06, 127.0.0.1:51775][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51775][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51777][0m
+[mHTTP GET /servicos/ 200 [0.04, 127.0.0.1:51777][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51777][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51779][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.03, 127.0.0.1:51779][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51779][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51780][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51780][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51781][0m
+[mHTTP GET /servicos/ver/13/ 200 [0.03, 127.0.0.1:51781][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51781][0m
+[mHTTP GET /servicos/ 200 [0.04, 127.0.0.1:51781][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51781][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51780][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.04, 127.0.0.1:51780][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 304 [0.07, 127.0.0.1:51780][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 304 [0.08, 127.0.0.1:51781][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 304 [0.09, 127.0.0.1:51783][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 304 [0.11, 127.0.0.1:51784][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 304 [0.14, 127.0.0.1:51785][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.15, 127.0.0.1:51786][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51787][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51787][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51788][0m
+[mHTTP GET /servicos/ver/9/ 200 [0.03, 127.0.0.1:51788][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51788][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.04, 127.0.0.1:51789][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51789][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542.png 304 [0.04, 127.0.0.1:51790][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 304 [0.05, 127.0.0.1:51792][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:51791][0m
+[mHTTP GET /servicos-disponiveis/ver/12/ 200 [0.06, 127.0.0.1:51791][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51791][0m
+[mHTTP GET /servicos/solicitar/12/ 200 [0.03, 127.0.0.1:51791][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51791][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51791][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51791][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51792][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51796][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51796][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51796][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51796][0m
+[mHTTP GET /pedidos/ 200 [0.05, 127.0.0.1:51796][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51796][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51796][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51796][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51799][0m
+Internal Server Error: /servicos/ver/14/
+Traceback (most recent call last):
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\kikon\bizmanager\bizmanager\autenticacao\views.py", line 796, in ver_servico
+    return render(request, 'autenticacao/ver_servico.html', context)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 563, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 254: 'endblock', expected 'elif', 'else' or 'endif'. Did you forget to register or load this tag?
+[35;1mHTTP GET /servicos/ver/14/ 500 [0.40, 127.0.0.1:51799][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.06, 127.0.0.1:51801][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51801][0m
+Internal Server Error: /servicos/ver/14/
+Traceback (most recent call last):
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 518, in thread_handler
+    raise exc_info[1]
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+        request, *callback_args, **callback_kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 468, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\asgiref\sync.py", line 522, in thread_handler
+    return func(*args, **kwargs)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\kikon\bizmanager\bizmanager\autenticacao\views.py", line 796, in ver_servico
+    return render(request, 'autenticacao/ver_servico.html', context)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kikon\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\base.py", line 563, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 253: 'endblock', expected 'elif', 'else' or 'endif'. Did you forget to register or load this tag?
+[35;1mHTTP GET /servicos/ver/14/ 500 [0.08, 127.0.0.1:51801][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.08, 127.0.0.1:51807][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51807][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51807][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.03, 127.0.0.1:51807][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51807][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.03, 127.0.0.1:51807][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.03, 127.0.0.1:51815][0m
+[mHTTP GET /static/css/style.css 200 [0.02, 127.0.0.1:51816][0m
+[mHTTP GET /static/images/logo3.png 200 [0.02, 127.0.0.1:51817][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.05, 127.0.0.1:51815][0m
+[mHTTP GET /static/images/background2.png 200 [0.02, 127.0.0.1:51816][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 200 [0.05, 127.0.0.1:51818][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51816][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.04, 127.0.0.1:51816][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51816][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51816][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 200 [0.03, 127.0.0.1:51818][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51818][0m
+[mHTTP GET /servicos/ver/13/ 200 [0.03, 127.0.0.1:51818][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51818][0m
+[mHTTP GET /servicos/ver/14/ 200 [0.03, 127.0.0.1:51818][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51818][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.04, 127.0.0.1:51818][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 200 [0.06, 127.0.0.1:51818][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 200 [0.07, 127.0.0.1:51816][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 200 [0.08, 127.0.0.1:51817][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 200 [0.09, 127.0.0.1:51836][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.11, 127.0.0.1:51837][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 200 [0.15, 127.0.0.1:51815][0m
+[mHTTP GET /servicos/ver/11/ 200 [0.03, 127.0.0.1:51815][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 200 [0.03, 127.0.0.1:51815][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:51837][0m
+[mHTTP GET /servicos/ver/10/ 200 [0.03, 127.0.0.1:51837][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51837][0m
+[mHTTP GET /servicos/ver/9/ 200 [0.03, 127.0.0.1:51837][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51837][0m
+[mHTTP GET /servicos/?page=2 200 [0.05, 127.0.0.1:51840][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51840][0m
+[mHTTP GET /servicos/ver/8/ 200 [0.04, 127.0.0.1:51840][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51840][0m
+[mHTTP GET /servicos/ver/7/ 200 [0.03, 127.0.0.1:51840][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51840][0m
+[mHTTP GET /servicos/ver/6/ 200 [0.03, 127.0.0.1:51840][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51840][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51843][0m
+[mHTTP GET /servicos/?page=2 200 [0.04, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.06, 127.0.0.1:51843][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51851][0m
+[mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542.png 200 [0.04, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:51852][0m
+[mHTTP GET /servicos-disponiveis/ver/6/ 200 [0.08, 127.0.0.1:51852][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51852][0m
+[mHTTP GET /servicos/ 200 [0.04, 127.0.0.1:51852][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:51852][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:51843][0m
+[mHTTP GET /servicos/ver/11/ 200 [0.04, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /servicos/ver/10/ 200 [0.04, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51843][0m
+[mHTTP GET /servicos/ver/9/ 200 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51843][0m
+[mHTTP GET /servicos/?page=2 200 [0.04, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51843][0m
+[mHTTP GET /servicos/ver/5/ 200 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51843][0m
+[mHTTP GET /pedidos/ 200 [0.05, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51843][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /pedidos/?page=2 200 [0.04, 127.0.0.1:51843][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51843][0m
+[mHTTP GET /faturas/ 200 [0.05, 127.0.0.1:51862][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.04, 127.0.0.1:51862][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51862][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51862][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51864][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.04, 127.0.0.1:51862][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51862][0m
+[mHTTP GET /dashboard/ 200 [0.07, 127.0.0.1:51867][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.07, 127.0.0.1:51867][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51867][0m
+[mHTTP GET /perfil/ 200 [0.04, 127.0.0.1:51867][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.04, 127.0.0.1:51867][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51867][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51886][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51925][0m
+[mHTTP GET / 200 [0.04, 127.0.0.1:51935][0m
+[36mHTTP GET /static/css/style.css 304 [0.01, 127.0.0.1:51935][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:51936][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51938][0m
+[36mHTTP GET /static/images/background2.png 304 [0.00, 127.0.0.1:51938][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.03, 127.0.0.1:51937][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.05, 127.0.0.1:51939][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51939][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET / 200 [0.07, 127.0.0.1:51952][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51952][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51953][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.05, 127.0.0.1:51954][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51954][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 304 [0.03, 127.0.0.1:51956][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:51955][0m
+[mHTTP GET /servicos-disponiveis/ver/12/ 200 [0.14, 127.0.0.1:51955][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 304 [0.05, 127.0.0.1:51955][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 304 [0.07, 127.0.0.1:51959][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 304 [0.09, 127.0.0.1:51954][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 304 [0.10, 127.0.0.1:51958][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 304 [0.12, 127.0.0.1:51956][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.14, 127.0.0.1:51957][0m
+[mHTTP GET /servicos-disponiveis/ver/9/ 200 [0.05, 127.0.0.1:51957][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51957][0m
+[mHTTP GET /servicos/ 200 [0.05, 127.0.0.1:51960][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51960][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51961][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.06, 127.0.0.1:51961][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51961][0m
+[mHTTP GET /servicos/solicitar/12/ 200 [0.03, 127.0.0.1:51961][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51961][0m
+[mHTTP GET /servicos/ver/9/ 200 [0.03, 127.0.0.1:51961][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51961][0m
+[mHTTP GET /servicos/solicitar/9/ 200 [0.03, 127.0.0.1:51961][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.02, 127.0.0.1:51961][0m
+[mHTTP GET / 200 [0.03, 127.0.0.1:51961][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:51961][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:51960][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET / 200 [0.23, 127.0.0.1:49947][0m
+[36mHTTP GET /static/css/style.css 304 [0.02, 127.0.0.1:49947][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.02, 127.0.0.1:49948][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.03, 127.0.0.1:49951][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.03, 127.0.0.1:49950][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.06, 127.0.0.1:49949][0m
+[36mHTTP GET /static/images/background2.png 304 [0.01, 127.0.0.1:49950][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.01, 127.0.0.1:49950][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:49950][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.01, 127.0.0.1:49950][0m
+[mHTTP GET /login/ 200 [0.01, 127.0.0.1:49950][0m
+[mHTTP GET /static/images/google-icon1.png 200 [0.19, 127.0.0.1:49949][0m
+[mHTTP GET /static/images/logo2.png 200 [0.20, 127.0.0.1:49950][0m
+[mHTTP GET /login/ 200 [0.01, 127.0.0.1:49957][0m
+[32mHTTP POST /login/ 302 [1.16, 127.0.0.1:49957][0m
+[mHTTP GET /dashboard/ 200 [0.20, 127.0.0.1:49957][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:49957][0m
+[32mHTTP GET /logout/ 302 [0.10, 127.0.0.1:49957][0m
+[mHTTP GET /login/ 200 [0.03, 127.0.0.1:49957][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET / 200 [0.21, 127.0.0.1:50280][0m
+[36mHTTP GET /static/css/style.css 304 [0.02, 127.0.0.1:50280][0m
+[36mHTTP GET /static/images/logo3.png 304 [0.01, 127.0.0.1:50281][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.07.50_07f334ec.jpg 304 [0.02, 127.0.0.1:50283][0m
+[36mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-02_%C3%A0s_18.15.22_56feb78c.jpg 304 [0.02, 127.0.0.1:50284][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.05, 127.0.0.1:50282][0m
+[36mHTTP GET /static/images/background2.png 304 [0.00, 127.0.0.1:50284][0m
+[32mHTTP GET /notificacoes/contar-nao-lidas/ 302 [0.00, 127.0.0.1:50284][0m
+[mHTTP GET /login/?next=/notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50284][0m
+Not Found: /favicon.ico
+[33mHTTP GET /favicon.ico 404 [0.02, 127.0.0.1:50284][0m
+[mHTTP GET /login/ 200 [0.01, 127.0.0.1:50289][0m
+[36mHTTP GET /static/images/logo2.png 304 [0.01, 127.0.0.1:50289][0m
+[36mHTTP GET /static/images/google-icon1.png 304 [0.01, 127.0.0.1:50290][0m
+[32mHTTP POST /login/ 302 [1.03, 127.0.0.1:50300][0m
+[mHTTP GET /dashboard/ 200 [0.17, 127.0.0.1:50300][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50300][0m
+[mHTTP GET /servicos/ 200 [0.10, 127.0.0.1:50300][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:50300][0m
+[mHTTP GET /servicos/editar/12/ 200 [0.15, 127.0.0.1:50300][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542_5htKf61.png 304 [0.06, 127.0.0.1:50300][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.07, 127.0.0.1:50308][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_132649.png 304 [0.11, 127.0.0.1:50307][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131122.png 304 [0.13, 127.0.0.1:50305][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131406.png 304 [0.16, 127.0.0.1:50306][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_131045.png 304 [0.18, 127.0.0.1:50304][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.13, 127.0.0.1:50323][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:50323][0m
+[mHTTP GET /servicos/ 200 [0.04, 127.0.0.1:50329][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50329][0m
+[mHTTP GET /servicos/ver/12/ 200 [0.04, 127.0.0.1:50329][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50329][0m
+Watching for file changes with StatReloader
+Asynchronous handler adapted for middleware social_django.middleware.SocialAuthExceptionMiddleware.
+[mHTTP GET /servicos/ 200 [0.24, 127.0.0.1:50589][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50589][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.10, 127.0.0.1:50589][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.06, 127.0.0.1:50589][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112722.png 304 [0.06, 127.0.0.1:50590][0m
+[36mHTTP GET /media/servicos/Captura_de_ecr%C3%A3_2025-02-18_112542.png 304 [0.10, 127.0.0.1:50588][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.10, 127.0.0.1:50591][0m
+[mHTTP GET / 200 [0.13, 127.0.0.1:50591][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:50591][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:50591][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.14, 127.0.0.1:50596][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.03, 127.0.0.1:50596][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.06, 127.0.0.1:50597][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.13, 127.0.0.1:50597][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:50597][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50597][0m
+[mHTTP GET / 200 [0.06, 127.0.0.1:50597][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.03, 127.0.0.1:50597][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.05, 127.0.0.1:50596][0m
+[mHTTP GET /chat/ 200 [0.15, 127.0.0.1:50598][0m
+[mHTTP GET /chat/unread-count/ 200 [0.04, 127.0.0.1:50599][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.08, 127.0.0.1:50600][0m
+[mHTTP GET /chat/unread-count/ 200 [0.09, 127.0.0.1:50599][0m
+[mHTTP GET /media/perfil/Imagem_WhatsApp_2025-04-09_%C3%A0s_23.27.00_3119b0b7.jpg 200 [0.16, 127.0.0.1:50598][0m
+[mHTTP GET /chat/room/dm_1_2/ 200 [0.13, 127.0.0.1:50601][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:50602][0m
+[mHTTP GET /static/css/chat/chat.css 200 [0.02, 127.0.0.1:50601][0m
+WebSocket HANDSHAKING /ws/chat/dm_1_2/ [127.0.0.1:50608]
+WebSocket CONNECT /ws/chat/dm_1_2/ [127.0.0.1:50608]
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50601][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.04, 127.0.0.1:50617][0m
+[mHTTP GET /servicos-disponiveis/ 200 [0.13, 127.0.0.1:50621][0m
+WebSocket DISCONNECT /ws/chat/dm_1_2/ [127.0.0.1:50608]
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:50621][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:50621][0m
+[mHTTP GET / 200 [0.05, 127.0.0.1:50623][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.01, 127.0.0.1:50623][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:50623][0m
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[33mHTTP GET /.well-known/appspecific/com.chrome.devtools.json 404 [0.10, 127.0.0.1:50630][0m
+[mHTTP GET /notificacoes/recentes/ 200 [0.03, 127.0.0.1:50630][0m
+[mHTTP GET /faturas/ 200 [0.26, 127.0.0.1:50630][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.03, 127.0.0.1:50630][0m
+[mHTTP GET /clientes/ 200 [0.20, 127.0.0.1:50630][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:50630][0m
+[mHTTP GET / 200 [0.12, 127.0.0.1:50630][0m
+[33mHTTP GET /static/images/profile-placeholder.png 404 [0.02, 127.0.0.1:50630][0m
+[mHTTP GET /notificacoes/contar-nao-lidas/ 200 [0.04, 127.0.0.1:50630][0m

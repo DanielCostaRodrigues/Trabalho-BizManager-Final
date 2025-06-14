@@ -187,19 +187,49 @@
                   </button>
                 </form>
               </div>
-            {% elif user_type == 'cliente' and servico.ativo %}
-              <div class="d-grid">
-                {% if not pedido_existente %}
-                  <a href="{% url 'solicitar_servico' servico.id %}" class="btn btn-success btn-lg py-3">
-                    <i class="bi bi-clipboard-check me-2"></i>Solicitar Serviço
-                  </a>
-                {% else %}
-                  <button class="btn btn-secondary btn-lg py-3" disabled>
-                    <i class="bi bi-clipboard-check me-2"></i>Serviço Já Solicitado
-                  </button>
+              {% endif %}
+
+            {% if user_type == 'cliente' and servico.ativo %}
+            <div class="d-grid">
+              {% if pedido_ativo %}
+              <button class="btn btn-info btn-lg py-3" disabled>
+                 <i class="bi bi-clock me-2"></i>Pedido Ativo - Aguarda Resposta
+                </button>
+                <div class="mt-2">
+                  <small class="text-muted">Tens um pedido ativo para este serviço.</small>
+                </div>
+                {% elif not pode_solicitar and tempo_restante %}
+                <button class="btn btn-warning btn-lg py-3" disabled>
+                  <i class="bi bi-hourglass-half me-2"></i>Aguarda 24h para Repetir
+                </button>
+                {% elif ultimo_pedido and ultimo_pedido.status == 'concluido' %}
+                <a href="{% url 'solicitar_servico' servico.id %}" class="btn btn-success btn-lg py-3">
+                  <i class="bi bi-redo me-2"></i>Solicitar Novamente
+                </a>
+                <div class="mt-2">
+                  <small class="text-success">✅ Já utilizaste este serviço com sucesso!</small>
+                </div>
+              {% elif ultimo_pedido and ultimo_pedido.status == 'rejeitado' %}
+              <a href="{% url 'solicitar_servico' servico.id %}" class="btn btn-primary btn-lg py-3">
+                <i class="bi bi-arrow-clockwise me-2"></i>Tentar Novamente
+              </a>
+              <div class="mt-2">
+                <small class="text-warning">⚠️ Pedido anterior foi rejeitado</small>
+              </div>
+              {% elif ultimo_pedido and ultimo_pedido.status == 'cancelado' %}
+              <a href="{% url 'solicitar_servico' servico.id %}" class="btn btn-primary btn-lg py-3">
+                <i class="bi bi-clipboard-check me-2"></i>Solicitar Novamente
+              </a>
+              <div class="mt-2">
+                 <small class="text-muted">Pedido anterior foi cancelado</small>
+                </div>
+                 {% else %}
+                 <a href="{% url 'solicitar_servico' servico.id %}" class="btn btn-success btn-lg py-3">
+                  <i class="bi bi-clipboard-check me-2"></i>Solicitar Serviço
+                </a>
                 {% endif %}
               </div>
-            {% endif %}
+              {% endif %}
           </div>
         </div>
       </div>
